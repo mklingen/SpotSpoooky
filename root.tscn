@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bystdxnu5fbof"]
+
+[ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://background.tscn" id="1_vwse2"]
+[ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://npc.tscn" id="2_dq3q7"]
+[ext_resource type="PackedScene" uid="uid://e3pon000icpd" path="res://building.tscn" id="3_blgv8"]
+[ext_resource type="PackedScene" uid="uid://dobjhwbg0l1od" path="res://player.tscn" id="4_f44tj"]
+[ext_resource type="Script" path="res://Player.cs" id="5_vjy76"]
+
+[sub_resource type="Curve" id="Curve_ffooi"]
+_data = [Vector2(0, 0), 0.0, 0.0472727, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_6v82i"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.252, 0, 1.048, 0.252, 0, -1.048, 11.3781, 0, -0.314806, 0, 0, 0, 0, 0, 0, 10.5273, 0, -15.9629, 0, 0, 0, 0, 0, 0, 2.688, 0, -15.855, 0, 0, 0, 0, 0, 0, -7.88575, 0, -15.8717, 0, 0, 0, 0, 0, 0, -7.9769, 0, -7.88058, 0, 0, 0, 0, 0, 0, -7.9769, 0, -0.0109599, 0, 0, 0, 0, 0, 0, -4.17882, -0.0494693, 0.0194092, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[node name="Root" type="Node3D"]
+
+[node name="Background" parent="." instance=ExtResource("1_vwse2")]
+
+[node name="NPC" parent="." node_paths=PackedStringArray("pathToFollow") instance=ExtResource("2_dq3q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.981938, 0, -0.329945)
+pathToFollow = NodePath("../NPCPath1")
+pathFollowSpeed = 5.0
+
+[node name="NPC2" parent="." node_paths=PackedStringArray("pathToFollow") instance=ExtResource("2_dq3q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.958, 0, -15.8839)
+pathToFollow = NodePath("../NPCPath1")
+pathFollowSpeed = -1.0
+
+[node name="NPC3" parent="." node_paths=PackedStringArray("pathToFollow") instance=ExtResource("2_dq3q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.38841, 0, -24.1315)
+pathToFollow = NodePath("../NPCPath2")
+pathFollowSpeed = 3.0
+
+[node name="Building" parent="." instance=ExtResource("3_blgv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.32857)
+
+[node name="Building2" parent="." instance=ExtResource("3_blgv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9528, 0, -28.3518)
+
+[node name="Building3" parent="." instance=ExtResource("3_blgv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.7344, 0, -28.3518)
+
+[node name="PlayerCamera" parent="." instance=ExtResource("4_f44tj")]
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -28.6696, 39.8441, 31.4686)
+v_offset = 5.0
+far = 200.0
+script = ExtResource("5_vjy76")
+zoomCurve = SubResource("Curve_ffooi")
+zoomTime = 0.25
+collisionRayMask = 1
+
+[node name="NPCPath1" type="Path3D" parent="."]
+curve = SubResource("Curve3D_6v82i")
+
+[node name="NPCPath2" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.12448, 0, -23.7985)
+curve = SubResource("Curve3D_6v82i")
+
+[editable path="Background"]

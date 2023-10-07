@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dobjhwbg0l1od"]
+
+[ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://sights.png" id="1_gl7ge"]
+[ext_resource type="PackedScene" uid="uid://brdxpk1tpll2" path="res://bullet_particles.tscn" id="2_02mwu"]
+
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.700511, 0.713642, 0, -0.713642, 0.700511, 0, 22.3046, 153.852)
+projection = 1
+current = true
+size = 100.0
+near = 1.0
+far = 100.0
+
+[node name="Reticle" type="Sprite3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 7.62939e-06, -1.58621)
+no_depth_test = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("1_gl7ge")
+
+[node name="BulletParticles" parent="." instance=ExtResource("2_02mwu")]

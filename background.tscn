@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbh1woged6gth"]
+
+[sub_resource type="Environment" id="Environment_v1lvl"]
+ambient_light_source = 2
+ambient_light_color = Color(0.709804, 0.784314, 0.937255, 1)
+ssao_enabled = true
+sdfgi_y_scale = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aakof"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0b07"]
+albedo_color = Color(0.819608, 0.635294, 0.447059, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hgiuf"]
+
+[node name="Background" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.606516, -0.582972, 0.540632, 0, 0.679979, 0.733232, -0.795071, -0.444717, 0.412418, 0, 3.54935, 0)
+shadow_enabled = true
+shadow_normal_bias = 1.0
+shadow_opacity = 0.55
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v1lvl")
+
+[node name="GroundBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="GroundBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_aakof")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_m0b07")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundBody"]
+shape = SubResource("WorldBoundaryShape3D_hgiuf")

@@ -1,0 +1,11 @@
+res://player.tscn
+res://npc.tscn
+res://background.tscn
+res://building.tscn
+res://BulletParticles.cs
+res://bullet_particles.cs
+res://NPC.cs
+res://Player.cs
+res://Root.cs
+res://root.tscn
+res://bullet_particles.tscn
