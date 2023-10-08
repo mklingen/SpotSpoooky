@@ -14,6 +14,7 @@ public partial class BulletParticles : Node3D, Player.IShootHandler
         CpuParticles3D particles = GetChild<CpuParticles3D>(0);
         if (particles != null) {
             particles.Emitting = true;
+            particles.Restart();
         }
         Visible = true;
         GlobalPosition = shootTo;

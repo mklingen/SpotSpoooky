@@ -29,7 +29,6 @@ environment = SubResource("Environment_v1lvl")
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
 
 [node name="Ground" type="MeshInstance3D" parent="GroundBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_aakof")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_m0b07")

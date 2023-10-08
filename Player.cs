@@ -19,6 +19,7 @@ public partial class Player : Camera3D
 	private float zoomedScale;
 	private Vector3 startPosition;
 
+
 	private enum ZoomMode
 	{
 		UnZoomed = 0,
@@ -39,6 +40,26 @@ public partial class Player : Camera3D
     private uint collisionRayMask;
 
 	private Dictionary lastRayHit;
+
+	[ExportGroup("Screen Shake")]
+    [Export]
+    private Curve shakeCurve;
+	[Export]
+	private float shakeAmount = 0.1f;
+	[Export]
+	private float shakeTime = 0.1f;
+
+    struct ScreenShakeState
+	{
+		public float startedShakingAt;
+        public float totalShakeTime;
+        public Vector3 shakeStartPos;
+		public Vector3 shakeEndPos;
+		public bool isShaking;
+	}
+
+	ScreenShakeState shakeState;
+
 
 	// Called when the zoom changes.
 	[Signal]
@@ -93,6 +114,11 @@ public partial class Player : Camera3D
 
     }
 
+	public static float Timef()
+	{
+		return Time.GetTicksMsec() / 1000.0f;
+    }
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
@@ -107,7 +133,7 @@ public partial class Player : Camera3D
 				preZoomReticlePos = reticleStartPositon;
 			}
 			// Calculate zoom animation.
-            float t = Time.GetTicksMsec() / 1000.0f - timeStartedZooming;
+            float t = Timef() - timeStartedZooming;
 			if (t > zoomTime) {
 				isZooming = false;
 				Size = targetZoom;
@@ -128,9 +154,11 @@ public partial class Player : Camera3D
 				Input.MouseMode = Input.MouseModeEnum.Hidden;
             } else {
 				reticleNode.Position = reticleStartPositon;
-				Input.MouseMode = Input.MouseModeEnum.ConfinedHidden;
+				Input.MouseMode = Input.MouseModeEnum.Captured;
 			}
 		}
+
+		HandleShaking();
 	}
 
 	public void ToggleZoom(InputEventMouseButton mouseEvent)
@@ -159,7 +187,7 @@ public partial class Player : Camera3D
 				}
 		}
 		isZooming = true;
-		timeStartedZooming =Time.GetTicksMsec() / 1000.0f;
+		timeStartedZooming = Timef();
 
 	}
 
@@ -188,6 +216,21 @@ public partial class Player : Camera3D
 			GD.Print("No hit.");
 		}
 		EmitSignal(SignalName.OnShoot, start, end);
+		ShakeScreen();
+	}
+
+	private void HandleShaking()
+	{
+		if (!shakeState.isShaking) {
+			return;
+		}
+		float t = (Timef() - shakeState.startedShakingAt) / shakeState.totalShakeTime;
+		if (t > 1.0f) {
+			shakeState.isShaking = false;
+			return;
+		}
+		float alpha = shakeCurve.Sample(t);
+		GlobalPosition = (1.0f - alpha) * shakeState.shakeStartPos + alpha * shakeState.shakeEndPos;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -206,4 +249,13 @@ public partial class Player : Camera3D
             }
 		}
 	}
+
+	public void ShakeScreen()
+	{
+		shakeState.isShaking = true;
+		shakeState.startedShakingAt = Timef();
+		shakeState.totalShakeTime = shakeTime;
+		shakeState.shakeStartPos = GlobalPosition;
+		shakeState.shakeEndPos = GlobalPosition + Basis.X * ((GD.Randf() - 0.5f) * shakeAmount) + Basis.Y * (GD.Randf() - 0.5f) * shakeAmount;
+    }
 }

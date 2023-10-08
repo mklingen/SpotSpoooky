@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dobjhwbg0l1od"]
+[gd_scene load_steps=5 format=3 uid="uid://dobjhwbg0l1od"]
 
 [ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://sights.png" id="1_gl7ge"]
 [ext_resource type="PackedScene" uid="uid://brdxpk1tpll2" path="res://bullet_particles.tscn" id="2_02mwu"]
+[ext_resource type="Script" path="res://Reticle.cs" id="2_2upae"]
+
+[sub_resource type="Curve" id="Curve_27xeq"]
+_data = [Vector2(0.00184502, 0), 0.0, 0.0, 0, 0, Vector2(0.0387454, 1), 1.46707, 1.46707, 0, 0, Vector2(1, 0.0315789), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="Camera3D" type="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.700511, 0.713642, 0, -0.713642, 0.700511, 0, 22.3046, 153.852)
@@ -17,5 +22,9 @@ no_depth_test = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("1_gl7ge")
+script = ExtResource("2_2upae")
+shakeCurve = SubResource("Curve_27xeq")
+shakeAmount = 2.0
+shakeTime = 0.25
 
 [node name="BulletParticles" parent="." instance=ExtResource("2_02mwu")]

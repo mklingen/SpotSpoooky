@@ -9,17 +9,29 @@ public partial class NPC : Node3D
 	private Path3D pathToFollow;
 	[Export]
 	private float pathFollowSpeed;
+	[Export]
+	private Vector3 pathFollowOffset;
 	private float currDistAlongPath = 0.0f;
 	private float pathLength = 0.0f;
 	private float pathOffset = 0.0f;
+
+
+	public void SetPath(Path3D path, float speed, Vector3 offsetRTPath)
+	{
+		pathFollowOffset = offsetRTPath;
+		pathFollowSpeed = speed;
+		pathToFollow = path;
+        pathLength = pathToFollow.Curve.GetBakedLength();
+        pathOffset = pathToFollow.Curve.GetClosestOffset(pathToFollow.ToLocal(GlobalPosition));
+        currDistAlongPath = pathOffset;
+    }
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		character = GetChild<CharacterBody3D>(0);
 		if (pathToFollow != null) {
-			pathLength = pathToFollow.Curve.GetBakedLength();
-			pathOffset = pathToFollow.Curve.GetClosestOffset(pathToFollow.ToLocal(GlobalPosition));
-			currDistAlongPath = pathOffset;
+			SetPath(pathToFollow, pathFollowSpeed, pathFollowOffset);
 		}
 	}
 
@@ -36,7 +48,7 @@ public partial class NPC : Node3D
 				currDistAlongPath = pathLength - currDistAlongPath;
 			}
 			// Get the position of the object along the path.
-			GlobalPosition = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath));
+			GlobalPosition = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
 		}
 	}
 }
