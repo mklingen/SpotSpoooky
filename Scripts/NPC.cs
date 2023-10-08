@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class NPC : Node3D
 {
@@ -49,6 +50,9 @@ public partial class NPC : Node3D
 			}
 			// Get the position of the object along the path.
 			GlobalPosition = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
+		} else {
+			GlobalPosition = character.GlobalPosition;
+			character.Velocity = Vector3.Zero;
 		}
 	}
 }

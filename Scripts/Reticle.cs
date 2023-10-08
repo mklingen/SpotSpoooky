@@ -33,7 +33,7 @@ public partial class Reticle : Sprite3D, Player.IShootHandler
             return;
         }
 
-        float t = (Player.Timef() - timeStartedShaking) / shakeTime;
+        float t = (Root.Timef() - timeStartedShaking) / shakeTime;
         float alpha = shakeCurve.Sample(t);
         Scale = (1.0f - alpha) * scaleDefault + alpha * scaleShaking;
         if (t > 1.0f) {
@@ -45,7 +45,7 @@ public partial class Reticle : Sprite3D, Player.IShootHandler
 
     public void OnShoot(Vector3 shootFrom, Vector3 shootTo)
 	{
-        timeStartedShaking = Player.Timef();
+        timeStartedShaking = Root.Timef();
         isShaking = true;
 	}
 }

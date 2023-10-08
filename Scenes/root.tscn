@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bystdxnu5fbof"]
+[gd_scene load_steps=12 format=3 uid="uid://bystdxnu5fbof"]
 
-[ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://background.tscn" id="1_vwse2"]
-[ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://npc.tscn" id="2_dq3q7"]
-[ext_resource type="PackedScene" uid="uid://e3pon000icpd" path="res://building.tscn" id="3_blgv8"]
-[ext_resource type="PackedScene" uid="uid://dobjhwbg0l1od" path="res://player.tscn" id="4_f44tj"]
-[ext_resource type="Script" path="res://NPCManager.cs" id="5_lv3ow"]
-[ext_resource type="Script" path="res://Player.cs" id="5_vjy76"]
+[ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://Prefabs/background.tscn" id="1_shsoh"]
+[ext_resource type="PackedScene" uid="uid://e3pon000icpd" path="res://Prefabs/building.tscn" id="2_vplhw"]
+[ext_resource type="PackedScene" uid="uid://dobjhwbg0l1od" path="res://Prefabs/player.tscn" id="3_pck7h"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="4_6t8i6"]
+[ext_resource type="Script" path="res://Scripts/NPCManager.cs" id="5_ywodh"]
+[ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://Prefabs/npc.tscn" id="6_l0to2"]
+[ext_resource type="PackedScene" uid="uid://dedp74nucavoo" path="res://Prefabs/Waldo.tscn" id="7_5nog4"]
 
 [sub_resource type="Curve" id="Curve_ffooi"]
 _data = [Vector2(0, 0), 0.0, 0.0472727, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -22,27 +23,30 @@ _data = {
 }
 point_count = 9
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qoie2"]
+albedo_color = Color(0.635294, 0.6, 0.878431, 1)
+
 [node name="Root" type="Node3D"]
 
-[node name="Background" parent="." instance=ExtResource("1_vwse2")]
+[node name="Background" parent="." instance=ExtResource("1_shsoh")]
 
 [node name="Ground" parent="Background/GroundBody" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301328, 0, 0)
 
-[node name="Building" parent="." instance=ExtResource("3_blgv8")]
+[node name="Building" parent="." instance=ExtResource("2_vplhw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.107185)
 
-[node name="Building2" parent="." instance=ExtResource("3_blgv8")]
+[node name="Building2" parent="." instance=ExtResource("2_vplhw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9528, 0, -34.7762)
 
-[node name="Building3" parent="." instance=ExtResource("3_blgv8")]
+[node name="Building3" parent="." instance=ExtResource("2_vplhw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.273, 0, -28.3518)
 
-[node name="PlayerCamera" parent="." instance=ExtResource("4_f44tj")]
+[node name="PlayerCamera" parent="." instance=ExtResource("3_pck7h")]
 transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -28.6696, 39.8441, 31.4686)
 v_offset = 5.0
 far = 200.0
-script = ExtResource("5_vjy76")
+script = ExtResource("4_6t8i6")
 zoomCurve = SubResource("Curve_ffooi")
 zoomTime = 0.25
 collisionRayMask = 1
@@ -52,13 +56,21 @@ shakeTime = 0.15
 
 [node name="NPCs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65675, 0, -25.3101)
-script = ExtResource("5_lv3ow")
-numNPCs = 1000
-npcSpawnAABB = AABB(0, 0, 0, 50, 0, 50)
-npcPrefab = ExtResource("2_dq3q7")
+script = ExtResource("5_ywodh")
+numNPCs = 250
+npcSpawnAABB = AABB(0, 0, 0, 100, 0, 100)
+npcPrefab = ExtResource("6_l0to2")
 
 [node name="NPCPath1" type="Path3D" parent="NPCs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.74612, 0, 32.1723)
 curve = SubResource("Curve3D_6v82i")
+
+[node name="Waldo" parent="." instance=ExtResource("7_5nog4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34284, 0, -19.8333)
+materialForHiding = SubResource("StandardMaterial3D_qoie2")
+idleTime = 2.0
+moveSpeed = 0.1
+warmupTime = 0.5
+postHuntTime = 2.0
 
 [editable path="Background"]

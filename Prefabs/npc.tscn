@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://fsiebmyspll5"]
 
-[ext_resource type="Script" path="res://NPC.cs" id="1_g1qjy"]
+[ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_l5pwi"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_v5bdq"]
 
@@ -10,7 +10,7 @@ albedo_color = Color(0.592157, 0.705882, 1, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4qxmt"]
 
 [node name="NPC" type="Node3D"]
-script = ExtResource("1_g1qjy")
+script = ExtResource("1_l5pwi")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 

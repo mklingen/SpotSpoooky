@@ -60,6 +60,8 @@ public partial class Player : Camera3D
 
 	ScreenShakeState shakeState;
 
+	[ExportGroup("Events")]
+	private float reticleEventSizePct = 0.5f;
 
 	// Called when the zoom changes.
 	[Signal]
@@ -78,6 +80,26 @@ public partial class Player : Camera3D
 	{
 		abstract void OnShoot(Vector3 shootFrom, Vector3 shootTo);
 	}
+
+	public interface IGotShotHandler
+	{
+		abstract void GotShot();
+	}
+
+
+    [Signal]
+    public delegate void OnReticleNearEventHandler(Node3D reticleIsNearObject);
+    [Signal]
+    public delegate void OnReticleLeftEventHandler(Node3D reticleIsNearObject);
+    public interface IOnReticleNearHandler
+	{
+		public abstract bool WasNear();
+        public abstract Node3D GetThis();
+        public abstract void OnReticleNear(Node3D reticleIsNearObject);
+        public abstract void OnReticleLeft(Node3D reticleIsNearObject);
+	}
+	private List<IOnReticleNearHandler> onReticleNearHandlers = new List<IOnReticleNearHandler>();
+
 
 	public void AddCallbacksRecursive(Node child)
 	{
@@ -106,17 +128,17 @@ public partial class Player : Camera3D
 		foreach (var child in GetChildren()) {
 			AddCallbacksRecursive(child);
 		}
+		Root.GetRecursive<IOnReticleNearHandler>(GetTree().Root, onReticleNearHandlers);
+		foreach (var handler in onReticleNearHandlers) {
+			OnReticleNear += handler.OnReticleNear;
+			OnReticleLeft += handler.OnReticleLeft;
+		}
     }
 
 	public Vector3 GetCamOffset()
 	{
 		return new Vector3(HOffset, VOffset, 0.0f);
 
-    }
-
-	public static float Timef()
-	{
-		return Time.GetTicksMsec() / 1000.0f;
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -133,7 +155,7 @@ public partial class Player : Camera3D
 				preZoomReticlePos = reticleStartPositon;
 			}
 			// Calculate zoom animation.
-            float t = Timef() - timeStartedZooming;
+            float t = Root.Timef() - timeStartedZooming;
 			if (t > zoomTime) {
 				isZooming = false;
 				Size = targetZoom;
@@ -155,7 +177,20 @@ public partial class Player : Camera3D
             } else {
 				reticleNode.Position = reticleStartPositon;
 				Input.MouseMode = Input.MouseModeEnum.Captured;
-			}
+				var rect = GetViewport().GetVisibleRect();
+                // Determine what is near the center of the screen to trigger events on it.
+                foreach (var handler in onReticleNearHandlers) {
+                    Vector2 pos = this.UnprojectPosition(handler.GetThis().GlobalPosition);
+                    Vector2 center = rect.GetCenter();
+                    var isNear = pos.DistanceTo(center) / rect.Size.X < reticleEventSizePct;
+                    if (handler.WasNear() && !isNear) {
+                        EmitSignal(SignalName.OnReticleLeft, handler.GetThis());
+                    }
+                    else if (!handler.WasNear() && isNear) {
+                        EmitSignal(SignalName.OnReticleNear, handler.GetThis());
+                    }
+                }
+            }
 		}
 
 		HandleShaking();
@@ -183,11 +218,14 @@ public partial class Player : Camera3D
 					startZoom = Size;
                     preZoomPosition = Position;
 					EmitSignal(SignalName.OnZoomChange, false);
-                    break;
+					foreach (var handler in onReticleNearHandlers) {
+						EmitSignal(SignalName.OnReticleLeft, handler.GetThis());
+					}
+					break;
 				}
 		}
 		isZooming = true;
-		timeStartedZooming = Timef();
+		timeStartedZooming = Root.Timef();
 
 	}
 
@@ -209,12 +247,17 @@ public partial class Player : Camera3D
 		Vector3 start = GlobalPosition;
 		Vector3 end = GlobalPosition - GlobalTransform.Basis.Z * 100 + bulletOffset;
 
-        if (lastRayHit != null && lastRayHit.Count > 0) {
+		if (lastRayHit != null && lastRayHit.Count > 0) {
 			end = (Vector3)lastRayHit["position"];
-			GD.Print("Yes hit.");
-		} else {
-			GD.Print("No hit.");
-		}
+			var collider = (Node)lastRayHit["collider"];
+
+			// All colliders should be in null parents for this to work :(
+			var shotHandler = Root.FindNodeRecusive<IGotShotHandler>(collider.GetParent());
+			if (shotHandler != null) {
+                shotHandler.GotShot();
+			}
+
+        }
 		EmitSignal(SignalName.OnShoot, start, end);
 		ShakeScreen();
 	}
@@ -224,7 +267,7 @@ public partial class Player : Camera3D
 		if (!shakeState.isShaking) {
 			return;
 		}
-		float t = (Timef() - shakeState.startedShakingAt) / shakeState.totalShakeTime;
+		float t = (Root.Timef() - shakeState.startedShakingAt) / shakeState.totalShakeTime;
 		if (t > 1.0f) {
 			shakeState.isShaking = false;
 			return;
@@ -253,7 +296,7 @@ public partial class Player : Camera3D
 	public void ShakeScreen()
 	{
 		shakeState.isShaking = true;
-		shakeState.startedShakingAt = Timef();
+		shakeState.startedShakingAt = Root.Timef();
 		shakeState.totalShakeTime = shakeTime;
 		shakeState.shakeStartPos = GlobalPosition;
 		shakeState.shakeEndPos = GlobalPosition + Basis.X * ((GD.Randf() - 0.5f) * shakeAmount) + Basis.Y * (GD.Randf() - 0.5f) * shakeAmount;

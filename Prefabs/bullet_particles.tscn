@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://brdxpk1tpll2"]
+[gd_scene load_steps=6 format=3 uid="uid://cydqwoxor7kqu"]
 
-[ext_resource type="Script" path="res://BulletParticles.cs" id="1_dw3kn"]
-[ext_resource type="Material" uid="uid://v0ab2250if38" path="res://bullet_particles.tres" id="2_lyofx"]
+[ext_resource type="Script" path="res://Scripts/BulletParticles.cs" id="1_lc7ef"]
+[ext_resource type="Material" uid="uid://v0ab2250if38" path="res://Particles/bullet_particles.tres" id="2_bgcws"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_o2sjx"]
-material = ExtResource("2_lyofx")
+material = ExtResource("2_bgcws")
 
 [sub_resource type="Curve" id="Curve_s1btw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -13,7 +13,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_ydvfl"]
 
 [node name="BulletParticles" type="Node3D"]
-script = ExtResource("1_dw3kn")
+script = ExtResource("1_lc7ef")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999962, -0.00872657, 0, 0.00872657, 0.999962, 0, 0, 0)

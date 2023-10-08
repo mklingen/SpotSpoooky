@@ -16,16 +16,21 @@ public partial class NPCManager : Node3D
 	private List<Path3D> paths;
 	private List<NPCKeepoutZone> keepoutZones;
 
-	private void GetRecursive<T>(Node parent, List<T> outNodes) where T : class
+	public List<NPC> GetNPCS()
 	{
-		if (parent is T) {
-			outNodes.Add(parent as T);
-		}
-		foreach (var child in parent.GetChildren()) {
-			GetRecursive<T>(child, outNodes);
-		}
-
+		return npcs;
 	}
+
+	public List<Path3D> GetPaths()
+	{
+		return paths;
+	}
+
+	public List<NPCKeepoutZone> GetKeepoutZones()
+	{
+		return keepoutZones;
+	}
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -33,7 +38,7 @@ public partial class NPCManager : Node3D
 		npcs = new List<NPC>();
 		paths = new List<Path3D>();
 		keepoutZones = new List<NPCKeepoutZone>();
-		GetRecursive(GetTree().Root, keepoutZones);
+		Root.GetRecursive(GetTree().Root, keepoutZones);
 		foreach (var node in GetChildren()) {
 			if (node is Path3D) {
 				paths.Add(node as Path3D);
@@ -55,15 +60,28 @@ public partial class NPCManager : Node3D
 		} while (!spawned);
 	}
 
+	public Vector3 GetValidSpawnLocation()
+	{
+        return ToGlobal(-npcSpawnAABB.Size * 0.5f + new Vector3((float)GD.RandRange(npcSpawnAABB.Position.X, npcSpawnAABB.End.X),
+            (float)GD.RandRange(npcSpawnAABB.Position.Y, npcSpawnAABB.End.Y), (float)GD.RandRange(npcSpawnAABB.Position.Z, npcSpawnAABB.End.Z)));
+    }
+
+	public bool IsInKeepOutZone(Vector3 randPos)
+	{
+        foreach (var keepout in keepoutZones) {
+            if (keepout.Query(randPos)) {
+                return true;
+            }
+        }
+		return false;
+    }
+
 
     private bool TrySpawnNPC()
     {
-		Vector3 randPos = -npcSpawnAABB.Size * 0.5f + new Vector3((float)GD.RandRange(npcSpawnAABB.Position.X, npcSpawnAABB.End.X),
-			(float)GD.RandRange(npcSpawnAABB.Position.Y, npcSpawnAABB.End.Y), (float)GD.RandRange(npcSpawnAABB.Position.Z, npcSpawnAABB.End.Z));
-		foreach (var keepout in keepoutZones) {
-			if (keepout.Query(ToGlobal(randPos))) {
-				return false;
-			}
+		Vector3 randPos = ToLocal(GetValidSpawnLocation());
+		if (IsInKeepOutZone(ToGlobal(randPos))) {
+			return false;
 		}
 		NPC spawnedNPC = npcPrefab.Instantiate<NPC>();
 		AddChild(spawnedNPC);
@@ -75,6 +93,12 @@ public partial class NPCManager : Node3D
 			}
 		}
 		npcs.Add(spawnedNPC);
+		{
+			var character = Root.FindNodeRecusive<CharacterBody3D>(spawnedNPC);
+			if (character != null) {
+				character.MoveAndCollide(Vector3.Zero);
+			}
+		}
 		GD.Print("Spawn.");
 		return true;
     }
@@ -82,5 +106,12 @@ public partial class NPCManager : Node3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
+	}
+
+	public void EatNPC(NPC selected)
+	{
+		npcs.Remove(selected);
+		selected.QueueFree();
+		// TODO special effects, scoring, etc.
 	}
 }

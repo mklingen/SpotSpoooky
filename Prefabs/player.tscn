@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dobjhwbg0l1od"]
 
-[ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://sights.png" id="1_gl7ge"]
-[ext_resource type="PackedScene" uid="uid://brdxpk1tpll2" path="res://bullet_particles.tscn" id="2_02mwu"]
-[ext_resource type="Script" path="res://Reticle.cs" id="2_2upae"]
+[ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://Art/sights.png" id="1_gl7ge"]
+[ext_resource type="PackedScene" uid="uid://cydqwoxor7kqu" path="res://Prefabs/bullet_particles.tscn" id="2_02mwu"]
+[ext_resource type="Script" path="res://Scripts/Reticle.cs" id="2_2upae"]
 
 [sub_resource type="Curve" id="Curve_27xeq"]
 _data = [Vector2(0.00184502, 0), 0.0, 0.0, 0, 0, Vector2(0.0387454, 1), 1.46707, 1.46707, 0, 0, Vector2(1, 0.0315789), 0.0, 0.0, 0, 0]
