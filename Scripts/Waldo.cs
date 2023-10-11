@@ -1,14 +1,16 @@
 using Godot;
 using System;
 
-public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNearHandler
+public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IOnReticleNearHandler
 {
 	private NPCManager npcManager;
-	private CharacterBody3D characterBody3D;
 
 	private Material normalMaterial;
+	[ExportGroup("Special Effects")]
 	[Export]
 	private Material materialForHiding;
+	[Export]
+	private PackedScene teleportEffect;
 
 	public enum HuntState
 	{
@@ -18,6 +20,7 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 		PostHunt,
 		Hiding
 	}
+
 
 	[ExportGroup("Hunt Behavior")]
 	[Export]
@@ -36,15 +39,13 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 	float eatDist = 3.5f;
 
 	private NPC targetNPC;
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
 		npcManager = Root.FindNodeRecusive<NPCManager>(GetTree().Root);
 		stateChangeTime = Root.Timef();
-		TeleportToNewLocation();
+		TeleportToNewLocation(false);
 		TransitionState(HuntState.Idle);
-		characterBody3D = Root.FindNodeRecusive<CharacterBody3D>(this);
 		normalMaterial = Root.FindNodeRecusive<MeshInstance3D>(this).MaterialOverride;
     }
 
@@ -52,7 +53,7 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 	public override void _Process(double delta)
 	{
 		float t = Root.Timef() - stateChangeTime;
-		switch (huntState) {
+        switch (huntState) {
 			case HuntState.Idle:
 				if (t > idleTime) {
 					SelectTarget();
@@ -60,7 +61,8 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 				}
 				break;
 			case HuntState.MovingToTarget:
-				MoveToTarget();
+                this.ConstantLinearVelocity = Vector3.Zero;
+                MoveToTarget((float)delta);
 				if (CloseEnoughToEat()) {
 					TransitionState(HuntState.WarmingUp);
 				}
@@ -76,7 +78,7 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
                 break;
 			case HuntState.PostHunt:
                 if (t > postHuntTime) {
-                    TeleportToNewLocation();
+                    TeleportToNewLocation(true);
                     TransitionState(HuntState.Idle);
                 }
                 break;
@@ -90,11 +92,12 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 	private void OnHiding()
 	{
 		// Do something special.
+		GD.Print("WALDO HIDES");
 	}
 
 	private bool CloseEnoughToEat()
 	{
-		return targetNPC.GlobalPosition.DistanceTo(GlobalPosition) < eatDist;
+		return targetNPC.GlobalPosition.DistanceTo(this.GlobalPosition) < eatDist;
     }
 
 	private void SelectTarget()
@@ -103,7 +106,7 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 		float closestDist = float.MaxValue;
 		NPC closestNPC = null;
 		foreach (var npc in npcs) {
-			float dist = npc.GlobalPosition.DistanceSquaredTo(GlobalPosition);
+			float dist = npc.GlobalPosition.DistanceSquaredTo(this.GlobalPosition);
 			if (dist < closestDist) {
 				closestNPC = npc;
 				closestDist = dist;
@@ -118,24 +121,40 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 		npcManager.EatNPC(targetNPC);
 	}
 
-	private void TeleportToNewLocation()
+	private void MaybeCreateTeleportEffect()
 	{
+        if (teleportEffect != null) {
+            var instantiate = teleportEffect.Instantiate<Node3D>();
+            GetTree().Root.AddChild(instantiate);
+            instantiate.GlobalPosition = this.GlobalPosition;
+        }
+    }
+
+	private void TeleportToNewLocation(bool createEffect)
+	{
+		if (createEffect) {
+			MaybeCreateTeleportEffect();
+		}
 		bool isValid = false;
 		do {
 			GlobalPosition = npcManager.GetValidSpawnLocation();
-			isValid = !npcManager.IsInKeepOutZone(GlobalPosition);
+			isValid = !npcManager.IsInKeepOutZone(this.GlobalPosition);
 		} while (!isValid);
+
+		if (createEffect) {
+			MaybeCreateTeleportEffect();
+		}
 	}
 
-    private void MoveToTarget()
+	private void MoveToTarget(float dt)
     {
-		var diff = targetNPC.GlobalPosition - GlobalPosition;
+		var diff = targetNPC.GlobalPosition - this.GlobalPosition;
 		if (diff.Length() < 1e-3) {
 			return;
 		}
-        characterBody3D.Velocity = diff.Normalized() * moveSpeed;
-		characterBody3D.MoveAndSlide();
-		GlobalPosition = characterBody3D.GlobalPosition;
+		Vector3 targetVelocity = diff.Normalized() * moveSpeed;
+        this.GlobalPosition = this.GlobalPosition + targetVelocity * dt;
+		this.ConstantLinearVelocity = targetVelocity;
     }
 
     private void TransitionState(HuntState newState)
@@ -147,7 +166,8 @@ public partial class Waldo : Node3D, Player.IGotShotHandler, Player.IOnReticleNe
 	public void GotShot()
 	{
 		GD.Print("WALDO GOT SHOT!!");
-		TeleportToNewLocation();
+		TeleportToNewLocation(true);
+		SelectTarget();
 		TransitionState(HuntState.Idle);
 
     }

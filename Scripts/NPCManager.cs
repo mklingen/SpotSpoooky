@@ -85,8 +85,11 @@ public partial class NPCManager : Node3D
 		}
 		NPC spawnedNPC = npcPrefab.Instantiate<NPC>();
 		AddChild(spawnedNPC);
-		spawnedNPC.Position = randPos;
-		foreach (var path in paths) {
+		spawnedNPC.GlobalPosition = ToGlobal(randPos);
+		GD.Print(spawnedNPC.GlobalPosition);
+		GD.Print(randPos);
+
+        foreach (var path in paths) {
 			if (path.ToGlobal(path.Curve.GetClosestPoint(path.ToLocal(spawnedNPC.GlobalPosition))).DistanceTo(spawnedNPC.GlobalPosition) < 5) {
 				spawnedNPC.SetPath(path, (float)GD.RandRange(-10.0, 10.0), new Vector3((float)GD.RandRange(-2.0f, 2.0f), 0.0f, (float)GD.RandRange(-2.0f, 2.0f)));
 				break;
@@ -94,7 +97,7 @@ public partial class NPCManager : Node3D
 		}
 		npcs.Add(spawnedNPC);
 		{
-			var character = Root.FindNodeRecusive<CharacterBody3D>(spawnedNPC);
+			var character = Root.FindNodeRecusive<AnimatableBody3D>(spawnedNPC);
 			if (character != null) {
 				character.MoveAndCollide(Vector3.Zero);
 			}

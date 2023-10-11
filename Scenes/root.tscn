@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bystdxnu5fbof"]
+[gd_scene load_steps=11 format=3 uid="uid://bystdxnu5fbof"]
 
 [ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://Prefabs/background.tscn" id="1_shsoh"]
 [ext_resource type="PackedScene" uid="uid://e3pon000icpd" path="res://Prefabs/building.tscn" id="2_vplhw"]
@@ -22,9 +22,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 9
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qoie2"]
-albedo_color = Color(0.635294, 0.6, 0.878431, 1)
 
 [node name="Root" type="Node3D"]
 
@@ -67,10 +64,10 @@ curve = SubResource("Curve3D_6v82i")
 
 [node name="Waldo" parent="." instance=ExtResource("7_5nog4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34284, 0, -19.8333)
-materialForHiding = SubResource("StandardMaterial3D_qoie2")
 idleTime = 2.0
-moveSpeed = 0.1
+moveSpeed = 20.0
 warmupTime = 0.5
 postHuntTime = 2.0
+eatDist = 1.5
 
 [editable path="Background"]

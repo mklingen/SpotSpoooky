@@ -33,5 +33,5 @@ mesh = SubResource("PlaneMesh_aakof")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_m0b07")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundBody"]
+[node name="FloorCollision" type="CollisionShape3D" parent="GroundBody"]
 shape = SubResource("WorldBoundaryShape3D_hgiuf")

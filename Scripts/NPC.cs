@@ -2,9 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class NPC : Node3D
+public partial class NPC : AnimatableBody3D
 {
-	private CharacterBody3D character;
 	[ExportCategory("Path Following")]
 	[Export]
 	private Path3D pathToFollow;
@@ -30,7 +29,6 @@ public partial class NPC : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		character = GetChild<CharacterBody3D>(0);
 		if (pathToFollow != null) {
 			SetPath(pathToFollow, pathFollowSpeed, pathFollowOffset);
 		}
@@ -49,10 +47,9 @@ public partial class NPC : Node3D
 				currDistAlongPath = pathLength - currDistAlongPath;
 			}
 			// Get the position of the object along the path.
-			GlobalPosition = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
-		} else {
-			GlobalPosition = character.GlobalPosition;
-			character.Velocity = Vector3.Zero;
+			Vector3 nextPos = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
+			ConstantLinearVelocity = (nextPos - GlobalPosition) * (1.0f / (float)delta);
+			GlobalPosition = nextPos;
 		}
 	}
 }
