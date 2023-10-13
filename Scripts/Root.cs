@@ -34,7 +34,10 @@ public partial class Root : Node3D
     public static void Kill(Node node)
     {
         if (node is IDieHandler) {
-            (node as IDieHandler)?.OnDied();
+            var dieHandler = node as IDieHandler;
+            if (!dieHandler.IsDead()) {
+                dieHandler.OnDied();
+            }
         }
         else {
             node.QueueFree();

@@ -25,33 +25,36 @@ public partial class PopInAndOut : Control, Root.IDieHandler
 		startScale = Scale;
 		timeStartedPoppingIn = Root.Timef();
 		this.Scale = Vector2.Zero;
+		Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (isPoppingIn) {
-			float t = (Root.Timef() - timeStartedPoppingIn) / popInTime;
-			float alpha = popInCurve.Sample(t);
-			this.Scale = startScale * alpha;
-			if (alpha > 1.0f) {
-				isPoppingIn = false;
-			}
-		}
-		if (isPoppingOut) {
-            float t = (Root.Timef() - timeStartedPoppingOut) / popOutTime;
-            float alpha = popOutCurve.Sample(t);
-            this.Scale = startScale * alpha;
-            if (alpha > 1.0f) {
-                isPoppingOut = false;
-				QueueFree();
+        if (isPoppingIn) {
+            float t = (Root.Timef() - timeStartedPoppingIn) / popInTime;
+            float alpha = popInCurve.Sample(t);
+            Scale = startScale * alpha;
+            if (t > 1.0f) {
+                isPoppingIn = false;
             }
         }
+        if (isPoppingOut) {
+            float t = (Root.Timef() - timeStartedPoppingOut) / popOutTime;
+            float alpha = popOutCurve.Sample(t);
+            Scale = startScale * alpha;
+            if (t > 1.0f) {
+                isPoppingOut = false;
+                QueueFree();
+            }
+        }
+        Visible = true;
 	}
 
 	public void PopOut()
 	{
 		timeStartedPoppingOut = Root.Timef();
+		isPoppingOut = true;
 	}
 
 	public void OnDied()
