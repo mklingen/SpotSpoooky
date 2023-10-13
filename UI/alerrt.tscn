@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3cnx2766ae2k"]
+
+[ext_resource type="Script" path="res://UI/PopInAndOut.cs" id="1_yipqp"]
+[ext_resource type="Curve" uid="uid://k1rs8ggtfwfc" path="res://UI/pop_in.tres" id="2_vnm46"]
+[ext_resource type="Curve" uid="uid://rug0hlws0prh" path="res://UI/pop_out.tres" id="3_nqetx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3fe5"]
+font_size = 64
+font_color = Color(0.941176, 0, 0.227451, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 20
+shadow_color = Color(0.262745, 0.262745, 0.262745, 0.560784)
+shadow_offset = Vector2(1, 5)
+
+[node name="alert" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yipqp")
+popOutTime = 1.0
+popInCurve = ExtResource("2_vnm46")
+popOutCurve = ExtResource("3_nqetx")
+popOutImmediately = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = 25.0
+offset_right = 95.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ALERT"
+label_settings = SubResource("LabelSettings_l3fe5")
+horizontal_alignment = 1
+vertical_alignment = 1

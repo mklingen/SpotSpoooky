@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class MainUI : Control, Root.IScoreChangedHandler
+public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHandler
 {
 	private Control strikeContainer;
 	private Control heartContainer;
@@ -13,6 +13,9 @@ public partial class MainUI : Control, Root.IScoreChangedHandler
 
 	[Export]
 	private PackedScene heartPrefab;
+
+	[Export]
+	private PackedScene alertPrefab;
 
 	private List<Node> strikes = new List<Node>();
 	private List<Node> hearts = new List<Node>();
@@ -58,5 +61,20 @@ public partial class MainUI : Control, Root.IScoreChangedHandler
 	{
 		SetStrikes(numStrikes);
 		SetHearts(numHearts);
+	}
+
+	public void MakeAlert(string alert)
+	{
+		var obj = alertPrefab.Instantiate();
+		AddChild(obj);
+		var txt = Root.FindNodeRecusive<Label>(obj);
+		if (txt != null) {
+			txt.Text = alert;
+		}
+	}
+
+	public void OnAlert(string alert)
+	{
+		MakeAlert(alert);
 	}
 }

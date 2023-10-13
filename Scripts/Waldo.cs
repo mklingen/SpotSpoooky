@@ -78,7 +78,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 				if (!CloseEnoughToEat()) {
 					TransitionState(HuntState.MovingToTarget);
 				}
-                if (t > warmupTime) {
+                else if (t > warmupTime) {
                     EatNPC();
                     TransitionState(HuntState.PostHunt);
                 }

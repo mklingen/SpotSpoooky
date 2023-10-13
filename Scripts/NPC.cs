@@ -66,8 +66,8 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	{
 		if (eaten == this) {
             var root = GetTree().Root.GetChild(0) as Root;
-            root?.IncrementStrikes();
-			root?.IncrementHearts();
+			root?.OnNPCGotEaten();
+
 			Root.Kill(this);
 		}
 	}

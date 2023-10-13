@@ -11,6 +11,8 @@ public partial class PopInAndOut : Control, Root.IDieHandler
 	private Curve popInCurve;
 	[Export]
 	private Curve popOutCurve;
+	[Export]
+	private bool popOutImmediately = false;
 
 	private float timeStartedPoppingIn = 0;
 	private float timeStartedPoppingOut = 0;
@@ -37,6 +39,9 @@ public partial class PopInAndOut : Control, Root.IDieHandler
             Scale = startScale * alpha;
             if (t > 1.0f) {
                 isPoppingIn = false;
+				if (popOutImmediately) {
+					PopOut();
+				}
             }
         }
         if (isPoppingOut) {

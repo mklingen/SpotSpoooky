@@ -14,7 +14,13 @@ public partial class Root : Node3D
     [Export]
     private int maxHearts = 4;
 
+    [Signal]
+    public delegate void OnAlertEventHandler(string alert);
 
+    public interface IAlertHandler
+    {
+        abstract void OnAlert(string alert);
+    }
 
     [Signal]
     public delegate void OnScoreChangedEventHandler(int numStrikes, int numHearts, bool animate);
@@ -84,16 +90,32 @@ public partial class Root : Node3D
         }
         EmitSignal(SignalName.OnScoreChanged, numStrikes, numHearts, false);
 
+
+        List<IAlertHandler> alertHandlers = new List<IAlertHandler>();
+        GetRecursive<IAlertHandler>(this, alertHandlers);
+        foreach (var alertHandler in alertHandlers) {
+            OnAlert += (string alert) => alertHandler.OnAlert(alert);
+        }
+
     }
 
-	public override void _Process(double delta)
+    public override void _Process(double delta)
 	{
 
 	}
 
+    public void OnNPCGotEaten()
+    {
+        IncrementStrikes();
+        IncrementHearts();
+        EmitSignal(SignalName.OnAlert, "TOO SLOW!");
+    }
+
     public void OnNPCGotShot()
     {
         IncrementStrikes();
+        EmitSignal(SignalName.OnAlert, "FRIENDLY FIRE!");
+
     }
 
     public void IncrementStrikes()
@@ -122,5 +144,6 @@ public partial class Root : Node3D
             GD.Print("End game.");
         }
         EmitSignal(SignalName.OnScoreChanged, numStrikes, numHearts, true);
+        EmitSignal(SignalName.OnAlert, "GOT SPOOKY!");
     }
 }
