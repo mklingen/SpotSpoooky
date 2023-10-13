@@ -39,6 +39,13 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	float eatDist = 3.5f;
 
 	private NPC targetNPC;
+
+
+    public interface IEatHandler
+    {
+        abstract void GotEaten(NPC eaten);
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -91,8 +98,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private void OnHiding()
 	{
-		// Do something special.
-		GD.Print("WALDO HIDES");
+
 	}
 
 	private bool CloseEnoughToEat()
@@ -106,6 +112,10 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		float closestDist = float.MaxValue;
 		NPC closestNPC = null;
 		foreach (var npc in npcs) {
+			if (npc.NativeInstance == IntPtr.Zero) {
+				// Dead npc!
+				continue;
+			}
 			float dist = npc.GlobalPosition.DistanceSquaredTo(this.GlobalPosition);
 			if (dist < closestDist) {
 				closestNPC = npc;
@@ -165,7 +175,8 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	public void GotShot()
 	{
-		GD.Print("WALDO GOT SHOT!!");
+		var root = GetTree().Root.GetChild(0) as Root;
+		root?.DecrementHearts();
 		TeleportToNewLocation(true);
 		SelectTarget();
 		TransitionState(HuntState.Idle);

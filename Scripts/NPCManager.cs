@@ -114,7 +114,6 @@ public partial class NPCManager : Node3D
 	public void EatNPC(NPC selected)
 	{
 		npcs.Remove(selected);
-		selected.QueueFree();
-		// TODO special effects, scoring, etc.
+		selected.GotEaten(selected);
 	}
 }

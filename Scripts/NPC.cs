@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class NPC : AnimatableBody3D
+public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatHandler
 {
 	[ExportCategory("Path Following")]
 	[Export]
@@ -50,6 +50,25 @@ public partial class NPC : AnimatableBody3D
 			Vector3 nextPos = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
 			ConstantLinearVelocity = (nextPos - GlobalPosition) * (1.0f / (float)delta);
 			GlobalPosition = nextPos;
+		}
+	}
+
+	// Called when player shot NPC.
+	public void GotShot()
+	{
+		var root = GetTree().Root.GetChild(0) as Root;
+		root?.OnNPCGotShot();
+		QueueFree();
+	}
+
+	// Called when Waldo ate npc.
+	public void GotEaten(NPC eaten)
+	{
+		if (eaten == this) {
+            var root = GetTree().Root.GetChild(0) as Root;
+            root?.IncrementStrikes();
+			root?.IncrementHearts();
+			Root.Kill(this);
 		}
 	}
 }

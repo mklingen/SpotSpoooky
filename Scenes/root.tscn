@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bystdxnu5fbof"]
+[gd_scene load_steps=13 format=3 uid="uid://bystdxnu5fbof"]
 
+[ext_resource type="Script" path="res://Scripts/Root.cs" id="1_mug17"]
 [ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://Prefabs/background.tscn" id="1_shsoh"]
 [ext_resource type="PackedScene" uid="uid://e3pon000icpd" path="res://Prefabs/building.tscn" id="2_vplhw"]
 [ext_resource type="PackedScene" uid="uid://dobjhwbg0l1od" path="res://Prefabs/player.tscn" id="3_pck7h"]
@@ -7,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/NPCManager.cs" id="5_ywodh"]
 [ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://Prefabs/npc.tscn" id="6_l0to2"]
 [ext_resource type="PackedScene" uid="uid://dedp74nucavoo" path="res://Prefabs/Waldo.tscn" id="7_5nog4"]
+[ext_resource type="PackedScene" uid="uid://cfckxjuq6ycla" path="res://UI/MainUI.tscn" id="8_xr1hy"]
 
 [sub_resource type="Curve" id="Curve_ffooi"]
 _data = [Vector2(0, 0), 0.0, 0.0472727, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -24,6 +26,7 @@ _data = {
 point_count = 9
 
 [node name="Root" type="Node3D"]
+script = ExtResource("1_mug17")
 
 [node name="Background" parent="." instance=ExtResource("1_shsoh")]
 
@@ -69,5 +72,7 @@ moveSpeed = 20.0
 warmupTime = 0.5
 postHuntTime = 2.0
 eatDist = 1.5
+
+[node name="MainUI" parent="." instance=ExtResource("8_xr1hy")]
 
 [editable path="Background"]

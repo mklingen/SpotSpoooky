@@ -252,7 +252,7 @@ public partial class Player : Camera3D
 			var collider = (Node)lastRayHit["collider"];
 
 			// All colliders should be in null parents for this to work :(
-			var shotHandler = Root.FindNodeRecusive<IGotShotHandler>(collider.GetParent());
+			var shotHandler = Root.FindNodeRecusive<IGotShotHandler>(collider);
 			if (shotHandler != null) {
                 shotHandler.GotShot();
 			}
