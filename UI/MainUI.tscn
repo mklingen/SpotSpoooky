@@ -43,6 +43,7 @@ label_settings = ExtResource("1_622ki")
 
 [node name="Strikes" type="HBoxContainer" parent="MarginContainer/HSplitContainer/StrikesContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Hearts" type="HSplitContainer" parent="MarginContainer/HSplitContainer"]
 layout_mode = 2
@@ -50,6 +51,7 @@ size_flags_horizontal = 8
 
 [node name="SpookyHearts" type="HBoxContainer" parent="MarginContainer/HSplitContainer/Hearts"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="SpookyLabel" type="Label" parent="MarginContainer/HSplitContainer/Hearts"]
 layout_mode = 2

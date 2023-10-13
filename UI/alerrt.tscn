@@ -22,6 +22,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(0, 68)
 script = ExtResource("1_yipqp")
 popOutTime = 1.0
 popInCurve = ExtResource("2_vnm46")

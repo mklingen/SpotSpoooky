@@ -170,6 +170,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
     private void TransitionState(HuntState newState)
 	{
 		huntState = newState;
+		if (newState != HuntState.Hiding) {
+			huntStateBeforeHiding = newState;
+		}
 		stateChangeTime = Root.Timef();
 	}
 
@@ -180,7 +183,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		TeleportToNewLocation(true);
 		SelectTarget();
 		TransitionState(HuntState.Idle);
-
     }
 
 
