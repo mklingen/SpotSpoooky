@@ -207,7 +207,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		if (wasReticleNear) {
 			return;
 		}
-		GD.Print("Reticle near.");
 		wasReticleNear = true;
 		huntStateBeforeHiding = huntState;
 		TransitionState(HuntState.Hiding);
@@ -223,7 +222,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		if (!wasReticleNear) {
 			return;
 		}
-		GD.Print("Reticle left");
         wasReticleNear = false;
 		TransitionState(huntStateBeforeHiding);
         MeshInstance3D mesh = Root.FindNodeRecusive<MeshInstance3D>(this);

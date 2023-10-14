@@ -24,6 +24,12 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
         pathLength = pathToFollow.Curve.GetBakedLength();
         pathOffset = pathToFollow.Curve.GetClosestOffset(pathToFollow.ToLocal(GlobalPosition));
         currDistAlongPath = pathOffset;
+
+		var bobber = Root.FindNodeRecusive<NPCAnimator>(this);
+		if (bobber != null) {
+			bobber.SetBobSpeed(speed * 5);
+			bobber.SetBobAmount(speed * 0.01f);
+		}
     }
 
 	// Called when the node enters the scene tree for the first time.
@@ -32,6 +38,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 		if (pathToFollow != null) {
 			SetPath(pathToFollow, pathFollowSpeed, pathFollowOffset);
 		}
+		RotateY(GD.Randf() * Mathf.Pi * 2.0f);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,9 +55,12 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 			}
 			// Get the position of the object along the path.
 			Vector3 nextPos = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
-			ConstantLinearVelocity = (nextPos - GlobalPosition) * (1.0f / (float)delta);
-			GlobalPosition = nextPos;
-		}
+			Vector3 dPos = nextPos - GlobalPosition;
+
+            ConstantLinearVelocity = (dPos) * (1.0f / (float)delta);
+			LookAt(nextPos, Vector3.Up);
+            GlobalPosition = nextPos;
+        }
 	}
 
 	// Called when player shot NPC.

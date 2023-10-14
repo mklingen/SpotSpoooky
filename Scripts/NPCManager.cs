@@ -102,7 +102,6 @@ public partial class NPCManager : Node3D
 				character.MoveAndCollide(Vector3.Zero);
 			}
 		}
-		GD.Print("Spawn.");
 		return true;
     }
 

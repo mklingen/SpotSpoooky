@@ -30,6 +30,9 @@ script = ExtResource("1_mug17")
 
 [node name="Background" parent="." instance=ExtResource("1_shsoh")]
 
+[node name="DirectionalLight3D2" parent="Background" index="1"]
+light_energy = 1.0
+
 [node name="Ground" parent="Background/GroundBody" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301328, 0, 0)
 
@@ -57,7 +60,7 @@ shakeTime = 0.15
 [node name="NPCs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65675, 0, -25.3101)
 script = ExtResource("5_ywodh")
-numNPCs = 250
+numNPCs = 1000
 npcSpawnAABB = AABB(0, 0, 0, 100, 0, 100)
 npcPrefab = ExtResource("6_l0to2")
 

@@ -17,8 +17,18 @@ albedo_color = Color(0.819608, 0.635294, 0.447059, 1)
 [node name="Background" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.606516, -0.582972, 0.540632, 0, 0.679979, 0.733232, -0.795071, -0.444717, 0.412418, 0, 3.54935, 0)
+transform = Transform3D(0.606516, -0.582972, 0.540631, 0, 0.679979, 0.733232, -0.795071, -0.444717, 0.412418, 0, 3.54935, 0)
+light_energy = 1.25
 shadow_enabled = true
+shadow_normal_bias = 1.0
+shadow_opacity = 0.55
+directional_shadow_max_distance = 150.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.691928, 0.125326, 0.711005, 0.706717, 0.0837628, -0.70252, -0.1476, 0.988573, -0.030612, 0, 3.54935, 0)
+light_color = Color(0, 0.592157, 0.854902, 1)
+light_energy = 0.5
+light_indirect_energy = 2.0
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
 
