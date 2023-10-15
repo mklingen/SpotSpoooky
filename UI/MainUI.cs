@@ -5,26 +5,21 @@ using System.Linq;
 
 public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHandler
 {
-	private Control strikeContainer;
-	private Control heartContainer;
-
-	[Export]
-	private PackedScene strikePrefab;
-
-	[Export]
-	private PackedScene heartPrefab;
+	private Control spookyContainer;
 
 	[Export]
 	private PackedScene alertPrefab;
 
-	private List<Node> strikes = new List<Node>();
-	private List<Node> hearts = new List<Node>();
+    [Export]
+    private PackedScene blockPrefab;
+
+    private List<SpookyBlock> blocks = new List<SpookyBlock>();
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		strikeContainer = FindChild("Strikes") as Control;
-		heartContainer = FindChild("SpookyHearts") as Control;
+        spookyContainer = FindChild("SpookyBar") as Control;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +27,7 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 	{
 	}
 
-	private void SetElements(List<Node> elements, Control parent, int numElements, PackedScene prefab)
+	private void SetElements(List<SpookyBlock> elements, Control parent, int numElements, PackedScene prefab)
 	{
         int numDeletes = elements.Count - numElements;
         for (int k = 0; k < numDeletes; k++) {
@@ -43,24 +38,19 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 		for (int k = 0; k < numAdds; k++) {
 			var node = prefab.Instantiate();
 			parent.AddChild(node);
-			elements.Add(node);
+			elements.Add(node as SpookyBlock);
 		}
     }
 
-	public void SetStrikes(int numStrikes)
+	public void OnScoreChanged(int numSpooks, int maxSpooks)
 	{
-		SetElements(strikes, strikeContainer, numStrikes, strikePrefab);
-	}
-
-	public void SetHearts(int numHearts)
-	{
-		SetElements(hearts, heartContainer, numHearts, heartPrefab);
-	}
-
-	public void OnScoreChanged(int numStrikes, int numHearts, bool animate)
-	{
-		SetStrikes(numStrikes);
-		SetHearts(numHearts);
+		SetElements(blocks, spookyContainer, maxSpooks, blockPrefab);
+		for (int k = 0; k < numSpooks; k++) {
+			blocks[k].SetFillAmount(1);
+		}
+		for (int j = numSpooks; j < maxSpooks; j++) {
+			blocks[j].SetFillAmount(0);
+		}
 	}
 
 	public void MakeAlert(string alert)

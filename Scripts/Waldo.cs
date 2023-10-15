@@ -179,7 +179,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	public void GotShot()
 	{
 		var root = GetTree().Root.GetChild(0) as Root;
-		root?.DecrementHearts();
+		root?.OnWaldoShot();
 		TeleportToNewLocation(true);
 		SelectTarget();
 		TransitionState(HuntState.Idle);

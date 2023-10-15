@@ -86,8 +86,6 @@ public partial class NPCManager : Node3D
 		NPC spawnedNPC = npcPrefab.Instantiate<NPC>();
 		AddChild(spawnedNPC);
 		spawnedNPC.GlobalPosition = ToGlobal(randPos);
-		GD.Print(spawnedNPC.GlobalPosition);
-		GD.Print(randPos);
 
         foreach (var path in paths) {
 			if (path.ToGlobal(path.Curve.GetClosestPoint(path.ToLocal(spawnedNPC.GlobalPosition))).DistanceTo(spawnedNPC.GlobalPosition) < 5) {

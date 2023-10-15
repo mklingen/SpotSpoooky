@@ -6,13 +6,9 @@ public partial class Root : Node3D
 {
     [ExportGroup("Gameplay")]
     [Export]
-    private int numStrikes = 0;
+    private int numSpooks = 3;
     [Export]
-    private int maxStrikes = 3;
-    [Export]
-    private int numHearts = 3;
-    [Export]
-    private int maxHearts = 4;
+    private int maxSpooks = 6;
 
     [Signal]
     public delegate void OnAlertEventHandler(string alert);
@@ -23,11 +19,11 @@ public partial class Root : Node3D
     }
 
     [Signal]
-    public delegate void OnScoreChangedEventHandler(int numStrikes, int numHearts, bool animate);
+    public delegate void OnScoreChangedEventHandler(int numSpooks, int maxSppoks);
 
     public interface IScoreChangedHandler
     {
-        abstract void OnScoreChanged(int numStrikes, int numHearts, bool animate);
+        abstract void OnScoreChanged(int numSpooks, int maxSpooks);
     }
 
     public interface IDieHandler
@@ -86,9 +82,9 @@ public partial class Root : Node3D
         List<IScoreChangedHandler> scoreChangers = new List<IScoreChangedHandler>();
         GetRecursive<IScoreChangedHandler>(this, scoreChangers);
         foreach (var scoreChanger in scoreChangers) {
-            OnScoreChanged += (int a, int b, bool animate) => scoreChanger.OnScoreChanged(a, b, animate);
+            OnScoreChanged += (int a, int b) => scoreChanger.OnScoreChanged(a, b);
         }
-        EmitSignal(SignalName.OnScoreChanged, numStrikes, numHearts, false);
+        EmitSignal(SignalName.OnScoreChanged, numSpooks, maxSpooks);
 
 
         List<IAlertHandler> alertHandlers = new List<IAlertHandler>();
@@ -106,44 +102,33 @@ public partial class Root : Node3D
 
     public void OnNPCGotEaten()
     {
-        IncrementStrikes();
-        IncrementHearts();
+        AddSpooks(1);
         EmitSignal(SignalName.OnAlert, "TOO SLOW!");
     }
 
     public void OnNPCGotShot()
     {
-        IncrementStrikes();
+        AddSpooks(1);
         EmitSignal(SignalName.OnAlert, "FRIENDLY FIRE!");
 
     }
 
-    public void IncrementStrikes()
+    public void AddSpooks(int dSpooks)
     {
-        numStrikes++;
-        if (numStrikes > maxStrikes) {
-            GD.Print("TODO: end game.");
+        numSpooks += dSpooks;
+        if (numSpooks > maxSpooks) {
+            numSpooks = maxSpooks;
         }
-        EmitSignal(SignalName.OnScoreChanged, numStrikes, numHearts, true);
+        if (numSpooks < 0) {
+            numSpooks = 0;
+        }
+        EmitSignal(SignalName.OnScoreChanged, numSpooks, maxSpooks);
+
     }
 
-    public void IncrementHearts()
+    public void OnWaldoShot()
     {
-        numHearts++;
-        if (numHearts > maxHearts) {
-            numHearts = maxHearts;
-        }
-        EmitSignal(SignalName.OnScoreChanged, numStrikes, numHearts, true);
-    }
-
-    public void DecrementHearts()
-    {
-        numHearts--;
-        if (numHearts < 0) {
-            numHearts = 0;
-            GD.Print("End game.");
-        }
-        EmitSignal(SignalName.OnScoreChanged, numStrikes, numHearts, true);
+        AddSpooks(-1);
         EmitSignal(SignalName.OnAlert, "GOT SPOOKY!");
     }
 }

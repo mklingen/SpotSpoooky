@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://yp6nrtbimvdw"]
+
+[ext_resource type="Shader" path="res://UI/spooky_shader.gdshader" id="1_kh84p"]
+[ext_resource type="Texture2D" uid="uid://bfvhk4qm5d8xm" path="res://Art/bubbles.png" id="2_kpwjs"]
+
+[resource]
+shader = ExtResource("1_kh84p")
+shader_parameter/baseColor = Vector4(0.5, 1, 0.5, 1)
+shader_parameter/overlayScrollRate = Vector2(-1, 0)
+shader_parameter/overlayAlpha = 0.25
+shader_parameter/endFadeColor = Vector4(2, 1.5, 1, 1)
+shader_parameter/endFadeAlpha = 1.5
+shader_parameter/endFadeStart = 0.8
+shader_parameter/endFadeFinal = 0.95
+shader_parameter/filledAmount = 0.5
+shader_parameter/unfilledColor = Vector4(0, 0.25, 0.25, 1)
+shader_parameter/overlayTexture = ExtResource("2_kpwjs")

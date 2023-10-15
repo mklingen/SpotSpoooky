@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://4ih1chmp57tr"]
+
+[ext_resource type="Material" uid="uid://yp6nrtbimvdw" path="res://UI/spooky_shader.tres" id="1_2h1tc"]
+[ext_resource type="Texture2D" uid="uid://bii48aonh7t1y" path="res://Art/roundrect.png" id="1_gt3ul"]
+[ext_resource type="Script" path="res://UI/SpookyBlock.cs" id="3_40mmw"]
+
+[node name="Block" type="TextureRect"]
+material = ExtResource("1_2h1tc")
+custom_minimum_size = Vector2(64, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_gt3ul")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("3_40mmw")

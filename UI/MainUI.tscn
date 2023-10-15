@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfckxjuq6ycla"]
+[gd_scene load_steps=5 format=3 uid="uid://cfckxjuq6ycla"]
 
-[ext_resource type="LabelSettings" uid="uid://8fjj56d88bp7" path="res://UI/default_label.tres" id="1_622ki"]
 [ext_resource type="Script" path="res://UI/MainUI.cs" id="1_sl8ov"]
-[ext_resource type="PackedScene" uid="uid://b5gfnu6bv57lq" path="res://UI/strike_1.tscn" id="2_y3c0v"]
-[ext_resource type="PackedScene" uid="uid://l1hg8s3j35ry" path="res://UI/heart_1.tscn" id="3_eaeka"]
+[ext_resource type="LabelSettings" uid="uid://8fjj56d88bp7" path="res://UI/default_label.tres" id="4_nm6vm"]
 [ext_resource type="PackedScene" uid="uid://c3cnx2766ae2k" path="res://UI/alerrt.tscn" id="5_4iy7f"]
+[ext_resource type="PackedScene" uid="uid://4ih1chmp57tr" path="res://UI/spooky_block.tscn" id="8_ufqnk"]
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -14,47 +13,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sl8ov")
-strikePrefab = ExtResource("2_y3c0v")
-heartPrefab = ExtResource("3_eaeka")
 alertPrefab = ExtResource("5_4iy7f")
+blockPrefab = ExtResource("8_ufqnk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.099
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.2
 offset_left = 8.0
 offset_top = 5.0
 offset_right = -9.0
 offset_bottom = -0.152008
 grow_horizontal = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer"]
+[node name="SpookyBar" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="StrikesContainer" type="HSplitContainer" parent="MarginContainer/HSplitContainer"]
+[node name="Spookyness" type="Label" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="StrikesLabel" type="Label" parent="MarginContainer/HSplitContainer/StrikesContainer"]
-layout_mode = 2
-text = "Strikes"
-label_settings = ExtResource("1_622ki")
-
-[node name="Strikes" type="HBoxContainer" parent="MarginContainer/HSplitContainer/StrikesContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Hearts" type="HSplitContainer" parent="MarginContainer/HSplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="SpookyHearts" type="HBoxContainer" parent="MarginContainer/HSplitContainer/Hearts"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="SpookyLabel" type="Label" parent="MarginContainer/HSplitContainer/Hearts"]
-layout_mode = 2
-text = "Spooky"
-label_settings = ExtResource("1_622ki")
-vertical_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Spooky Energy"
+label_settings = ExtResource("4_nm6vm")
+horizontal_alignment = 1
+vertical_alignment = 2
