@@ -44,12 +44,6 @@ public partial class NPCManager : Node3D
 				paths.Add(node as Path3D);
 			}
 		}
-		GD.Print(String.Format("There are {0} paths.", paths.Count));
-
-		for (int i = 0; i < numNPCs; i++) {
-            SpawnNPC();
-		}
-		GD.Print(String.Format("There are {0} npcs.", npcs.Count));
 	}
 
 	private void SpawnNPC()
@@ -102,11 +96,26 @@ public partial class NPCManager : Node3D
 		}
 		return true;
     }
+	private bool spawnedAllNPCs = false;
+	private int frameCounter = 0;
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
-	}
+		if (!spawnedAllNPCs) {
+			frameCounter++;
+			if (frameCounter % 2 == 0) {
+				int numToSpawnPerFrame = 20;
+				int origCount = npcs.Count;
+				for (int i = npcs.Count; i < Math.Min(numNPCs, origCount + numToSpawnPerFrame); i++) {
+					SpawnNPC();
+				}
+				if (npcs.Count >= numNPCs) {
+					spawnedAllNPCs = true;
+				}
+			}
+		}
+    }
 
 	public void EatNPC(NPC selected)
 	{

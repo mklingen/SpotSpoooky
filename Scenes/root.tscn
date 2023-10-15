@@ -27,6 +27,8 @@ point_count = 9
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_mug17")
+gameOverScene = "res://UI/game_over.tscn"
+mainMenuScene = "res://UI/main_menu.tscn"
 
 [node name="Background" parent="." instance=ExtResource("1_shsoh")]
 

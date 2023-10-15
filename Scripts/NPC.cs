@@ -66,8 +66,8 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	// Called when player shot NPC.
 	public void GotShot()
 	{
-		var root = GetTree().Root.GetChild(0) as Root;
-		root?.OnNPCGotShot();
+        var root = Root.Get(GetTree());
+        root?.OnNPCGotShot();
 		QueueFree();
 	}
 
@@ -75,7 +75,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	public void GotEaten(NPC eaten)
 	{
 		if (eaten == this) {
-            var root = GetTree().Root.GetChild(0) as Root;
+			var root = Root.Get(GetTree());
 			root?.OnNPCGotEaten();
 
 			Root.Kill(this);

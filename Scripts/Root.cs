@@ -13,6 +13,15 @@ public partial class Root : Node3D
     [Signal]
     public delegate void OnAlertEventHandler(string alert);
 
+    [ExportGroup("State Management")]
+    [Export(PropertyHint.File, "*.tscn,")]
+    private string gameOverScene;
+
+    [Export(PropertyHint.File, "*.tscn,")]
+    private string mainMenuScene;
+
+    private Timer gameOverTimer;
+
     public interface IAlertHandler
     {
         abstract void OnAlert(string alert);
@@ -32,6 +41,15 @@ public partial class Root : Node3D
         abstract void OnDied();
     }
 
+    public static Root Get(SceneTree tree)
+    {
+        foreach (var child in tree.Root.GetChildren()) {
+            if (child is Root) {
+                return child as Root;
+            }
+        }
+        return null;
+    }
 
     public static void Kill(Node node)
     {
@@ -92,12 +110,13 @@ public partial class Root : Node3D
         foreach (var alertHandler in alertHandlers) {
             OnAlert += (string alert) => alertHandler.OnAlert(alert);
         }
-
     }
 
     public override void _Process(double delta)
 	{
-
+        if (Input.IsActionJustReleased("ui_cancel")) {
+            GetTree().ChangeSceneToFile(mainMenuScene);
+        }
 	}
 
     public void OnNPCGotEaten()
@@ -118,9 +137,11 @@ public partial class Root : Node3D
         numSpooks += dSpooks;
         if (numSpooks > maxSpooks) {
             numSpooks = maxSpooks;
+            DoAfterGameOverTimer(1.0f, LoseGame);
         }
         if (numSpooks < 0) {
             numSpooks = 0;
+            DoAfterGameOverTimer(1.0f, WinGame);
         }
         EmitSignal(SignalName.OnScoreChanged, numSpooks, maxSpooks);
 
@@ -130,5 +151,32 @@ public partial class Root : Node3D
     {
         AddSpooks(-1);
         EmitSignal(SignalName.OnAlert, "GOT SPOOKY!");
+    }
+
+    public void DoAfterGameOverTimer(float time, Action action)
+    {
+        gameOverTimer = new Timer();
+        gameOverTimer.Autostart = true;
+        gameOverTimer.OneShot = true;
+        gameOverTimer.Timeout += action;
+        AddChild(gameOverTimer);
+    }
+
+    public void LoseGame()
+    {
+        var gameStats = GetNode<GameStats>("/root/GameStats");
+        if (gameStats != null) {
+            gameStats.didPlayerWinLastGame = false;
+        }
+        GetTree().ChangeSceneToFile(gameOverScene);
+    }
+
+    public void WinGame()
+    {
+        var gameStats = GetNode<GameStats>("/root/GameStats");
+        if (gameStats != null) {
+            gameStats.didPlayerWinLastGame = true;
+        }
+        GetTree().ChangeSceneToFile(gameOverScene);
     }
 }
