@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3cnx2766ae2k"]
+[gd_scene load_steps=6 format=3 uid="uid://c3cnx2766ae2k"]
 
 [ext_resource type="Script" path="res://UI/PopInAndOut.cs" id="1_yipqp"]
 [ext_resource type="Curve" uid="uid://k1rs8ggtfwfc" path="res://UI/pop_in.tres" id="2_vnm46"]
 [ext_resource type="Curve" uid="uid://rug0hlws0prh" path="res://UI/pop_out.tres" id="3_nqetx"]
+[ext_resource type="FontFile" uid="uid://jdi2h2sr8g17" path="res://UI/GhoulFriAOE.ttf" id="4_lsrba"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l3fe5"]
+font = ExtResource("4_lsrba")
 font_size = 64
-font_color = Color(0.941176, 0, 0.227451, 1)
+font_color = Color(0.992157, 0.780392, 0, 1)
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 20

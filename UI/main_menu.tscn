@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://5yr2gkdn6au8"]
+[gd_scene load_steps=5 format=3 uid="uid://5yr2gkdn6au8"]
 
+[ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_co6hn"]
 [ext_resource type="Script" path="res://UI/MainMenu.cs" id="1_vdn2u"]
+[ext_resource type="FontFile" uid="uid://jdi2h2sr8g17" path="res://UI/GhoulFriAOE.ttf" id="2_mv3aj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_umenf"]
+font = ExtResource("2_mv3aj")
 font_size = 64
 
 [node name="MainMenu" type="Control"]
@@ -12,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_co6hn")
 script = ExtResource("1_vdn2u")
 mainScene = "res://Scenes/root.tscn"
 

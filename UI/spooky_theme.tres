@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cye7uu46jinkn"]
+
+[ext_resource type="FontFile" uid="uid://jdi2h2sr8g17" path="res://UI/GhoulFriAOE.ttf" id="1_66gim"]
+
+[resource]
+default_font = ExtResource("1_66gim")
+default_font_size = 16

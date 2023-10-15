@@ -96,6 +96,7 @@ public partial class NPCManager : Node3D
 		}
 		return true;
     }
+
 	private bool spawnedAllNPCs = false;
 	private int frameCounter = 0;
 
