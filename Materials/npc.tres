@@ -7,6 +7,7 @@ resource_name = "mat_test-colors"
 cull_mode = 2
 diffuse_mode = 3
 specular_mode = 1
+disable_ambient_light = true
 albedo_texture = ExtResource("1_fxo6u")
 roughness = 0.81
 rim_enabled = true

@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbh1woged6gth"]
+[gd_scene load_steps=6 format=3 uid="uid://dbh1woged6gth"]
+
+[ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://Prefabs/npc.tscn" id="1_wob7d"]
 
 [sub_resource type="Environment" id="Environment_v1lvl"]
 ambient_light_source = 2
@@ -14,6 +16,8 @@ glow_intensity = 0.77
 glow_bloom = 0.01
 glow_blend_mode = 0
 glow_hdr_threshold = 1.78
+fog_enabled = true
+fog_light_color = Color(0.188235, 0.105882, 0.286275, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aakof"]
 
@@ -27,19 +31,21 @@ albedo_color = Color(0.160784, 0.317647, 0.25098, 1)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.606516, -0.582972, 0.540631, 0, 0.679979, 0.733232, -0.795071, -0.444717, 0.412418, 0, 3.54935, 0)
 light_color = Color(0.909804, 0.929412, 0.976471, 1)
-light_energy = 2.0
+light_energy = 0.5
 shadow_enabled = true
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
 directional_shadow_max_distance = 150.0
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.420784, 0.904122, 0.0741867, 0.755981, 0.304282, 0.579573, 0.501431, 0.299959, -0.811536, 1.10306, 3.54935, -1.27444)
+transform = Transform3D(0.293417, 0.70356, -0.647232, 0.946726, -0.119851, 0.298908, 0.132728, -0.700456, -0.701245, 1.10306, 3.54935, -1.20835)
 light_color = Color(0.345098, 0.752941, 1, 1)
-light_energy = 1.5
+light_energy = 5.0
+light_indirect_energy = 2.0
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
 directional_shadow_mode = 0
+directional_shadow_fade_start = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v1lvl")
@@ -54,3 +60,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_m0b07")
 
 [node name="FloorCollision" type="CollisionShape3D" parent="GroundBody"]
 shape = SubResource("WorldBoundaryShape3D_hgiuf")
+
+[node name="NPC" parent="." instance=ExtResource("1_wob7d")]
+transform = Transform3D(-0.979248, 0, -0.202668, 0, 1, 0, 0.202668, 0, -0.979248, 0, 0, 0)
