@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://fsiebmyspll5"]
+[gd_scene load_steps=8 format=3 uid="uid://fsiebmyspll5"]
 
 [ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_l5pwi"]
 [ext_resource type="ArrayMesh" uid="uid://dqnsgbh8n1pue" path="res://Art/MeshExports/NPC/tmg_waldo_2023-10-12 2058 (prelim export)_Cube.res" id="2_pbb0d"]
 [ext_resource type="ArrayMesh" uid="uid://b5fg0sixlhmeu" path="res://Art/MeshExports/NPC/tmg_waldo_2023-10-12 2058 (prelim export)_Cube_011.res" id="3_sgvuq"]
 [ext_resource type="Script" path="res://Scripts/NPCAnimator.cs" id="3_tvlg8"]
 [ext_resource type="ArrayMesh" uid="uid://cyxn7xy22pd7g" path="res://Art/tmg_waldo_2023-10-12 2058 (prelim export)_Cylinder.res" id="4_edy15"]
+[ext_resource type="Material" uid="uid://dl1f8c3c2y2sq" path="res://Materials/npc.tres" id="5_yf63w"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4qxmt"]
 
@@ -22,9 +23,11 @@ bobAmount = 0.05
 [node name="Hair" type="MeshInstance3D" parent="Body"]
 cast_shadow = 0
 mesh = ExtResource("3_sgvuq")
+surface_material_override/0 = ExtResource("5_yf63w")
 
 [node name="Eyes?" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, -0.0115887, -0.999933, 0, 0.999933, -0.0115887, 0, 0.737753, 0.284855)
+material_override = ExtResource("5_yf63w")
 cast_shadow = 0
 mesh = ExtResource("4_edy15")
 

@@ -58,7 +58,9 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 			Vector3 dPos = nextPos - GlobalPosition;
 
             ConstantLinearVelocity = (dPos) * (1.0f / (float)delta);
-			LookAt(nextPos, Vector3.Up);
+			if (!nextPos.IsEqualApprox(GlobalPosition)) {
+				LookAt(nextPos, Vector3.Up);
+			}
             GlobalPosition = nextPos;
         }
 	}

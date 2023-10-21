@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dl1f8c3c2y2sq"]
+
+[ext_resource type="Texture2D" uid="uid://d0gcdyb41obbb" path="res://Art/tmg_waldo_2023-10-12 2058 (prelim export)_waldo-texture_edited.png" id="1_fxo6u"]
+
+[resource]
+resource_name = "mat_test-colors"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_fxo6u")
+roughness = 0.81
+rim_enabled = true
+rim = 0.45
+rim_tint = 0.0
+backlight = Color(0.6, 0.827451, 0.996078, 1)
+texture_filter = 2
+texture_repeat = false

@@ -6,7 +6,14 @@ ambient_light_color = Color(0.396078, 0.529412, 0.819608, 1)
 ssao_enabled = true
 sdfgi_y_scale = 2
 glow_enabled = true
-glow_bloom = 1.0
+glow_levels/1 = 1.28
+glow_levels/2 = 0.5
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 0.77
+glow_bloom = 0.01
+glow_blend_mode = 0
+glow_hdr_threshold = 1.78
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aakof"]
 
@@ -20,16 +27,16 @@ albedo_color = Color(0.160784, 0.317647, 0.25098, 1)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.606516, -0.582972, 0.540631, 0, 0.679979, 0.733232, -0.795071, -0.444717, 0.412418, 0, 3.54935, 0)
 light_color = Color(0.909804, 0.929412, 0.976471, 1)
+light_energy = 2.0
 shadow_enabled = true
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
 directional_shadow_max_distance = 150.0
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.846305, -0.412254, 0.337365, 0.335615, 0.0791766, 0.938666, -0.41368, 0.907622, 0.071351, 1.10306, 3.54935, -1.27444)
+transform = Transform3D(-0.420784, 0.904122, 0.0741867, 0.755981, 0.304282, 0.579573, 0.501431, 0.299959, -0.811536, 1.10306, 3.54935, -1.27444)
 light_color = Color(0.345098, 0.752941, 1, 1)
-light_energy = 2.0
-light_indirect_energy = 2.0
+light_energy = 1.5
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
 directional_shadow_mode = 0

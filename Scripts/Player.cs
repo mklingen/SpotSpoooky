@@ -116,11 +116,19 @@ public partial class Player : Camera3D
         }
     }
 
+	// Used to control the camera parameters for effects.
+	private WorldEnvironment worldEnvironment;
+	private float glowIntensityScale0;
+	private float glowIntensityScale1;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		worldEnvironment = Root.FindNodeRecusive<WorldEnvironment>(GetTree().Root);
 		unZoomedScale = this.Size;
 		zoomedScale = unZoomedScale * zoomFactor;
+		glowIntensityScale0 = worldEnvironment.Environment.GlowIntensity;
+		glowIntensityScale1 = (zoomedScale / unZoomedScale) * glowIntensityScale0;
 		startPosition = Position;
 		reticleNode = GetChild<Sprite3D>(0);
 		reticleStartPositon = reticleNode.Position + GetCamOffset();
@@ -208,6 +216,7 @@ public partial class Player : Camera3D
 					preZoomPosition = startPosition;
 					reticleNode.Position = reticleStartPositon;
 					EmitSignal(SignalName.OnZoomChange, true);
+					worldEnvironment.Environment.GlowIntensity = glowIntensityScale1;
                     break;
 				}
 			// Switch to unzoomed mode.
@@ -221,7 +230,8 @@ public partial class Player : Camera3D
 					foreach (var handler in onReticleNearHandlers) {
 						EmitSignal(SignalName.OnReticleLeft, handler.GetThis());
 					}
-					break;
+                    worldEnvironment.Environment.GlowIntensity = glowIntensityScale0;
+                    break;
 				}
 		}
 		isZooming = true;
