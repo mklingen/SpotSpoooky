@@ -33,7 +33,7 @@ mainMenuScene = "res://UI/main_menu.tscn"
 [node name="Background" parent="." instance=ExtResource("1_shsoh")]
 
 [node name="DirectionalLight3D2" parent="Background" index="1"]
-light_energy = 1.0
+transform = Transform3D(-0.775351, 0.530518, -0.34261, 0.21449, 0.731475, 0.647254, 0.593991, 0.428363, -0.680941, -11.6738, 25.8393, -0.70661)
 
 [node name="Ground" parent="Background/GroundBody" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301328, 0, 0)
@@ -42,10 +42,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301328, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.107185)
 
 [node name="Building2" parent="." instance=ExtResource("2_vplhw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9528, 0, -34.7762)
+transform = Transform3D(0.939208, 0, 0.343348, 0, 1, 0, -0.343348, 0, 0.939208, 11.9528, 0, -34.7762)
 
 [node name="Building3" parent="." instance=ExtResource("2_vplhw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.273, 0, -28.3518)
+transform = Transform3D(0.936868, 0, -0.349684, 0, 1, 0, 0.349684, 0, 0.936868, -20.273, 0, -28.3518)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_pck7h")]
 transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -28.6696, 39.8441, 31.4686)

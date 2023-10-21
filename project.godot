@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="OdlawSniper"
-run/main_scene="res://Scenes/root.tscn"
+config/name="SpotSpooky"
+run/main_scene="res://UI/main_menu.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

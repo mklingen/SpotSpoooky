@@ -2,15 +2,16 @@
 
 [sub_resource type="Environment" id="Environment_v1lvl"]
 ambient_light_source = 2
-ambient_light_color = Color(0.709804, 0.784314, 0.937255, 1)
+ambient_light_color = Color(0.396078, 0.529412, 0.819608, 1)
 ssao_enabled = true
 sdfgi_y_scale = 2
 glow_enabled = true
+glow_bloom = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aakof"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0b07"]
-albedo_color = Color(0.819608, 0.635294, 0.447059, 1)
+albedo_color = Color(0.160784, 0.317647, 0.25098, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hgiuf"]
 
@@ -18,19 +19,20 @@ albedo_color = Color(0.819608, 0.635294, 0.447059, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.606516, -0.582972, 0.540631, 0, 0.679979, 0.733232, -0.795071, -0.444717, 0.412418, 0, 3.54935, 0)
-light_energy = 1.25
+light_color = Color(0.909804, 0.929412, 0.976471, 1)
 shadow_enabled = true
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
 directional_shadow_max_distance = 150.0
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.691928, 0.125326, 0.711005, 0.706717, 0.0837628, -0.70252, -0.1476, 0.988573, -0.030612, 0, 3.54935, 0)
-light_color = Color(0, 0.592157, 0.854902, 1)
-light_energy = 0.5
+transform = Transform3D(-0.846305, -0.412254, 0.337365, 0.335615, 0.0791766, 0.938666, -0.41368, 0.907622, 0.071351, 1.10306, 3.54935, -1.27444)
+light_color = Color(0.345098, 0.752941, 1, 1)
+light_energy = 2.0
 light_indirect_energy = 2.0
 shadow_normal_bias = 1.0
 shadow_opacity = 0.55
+directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v1lvl")
