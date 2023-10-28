@@ -16,6 +16,10 @@ public partial class NPCManager : Node3D
 	private List<Path3D> paths;
 	private List<NPCKeepoutZone> keepoutZones;
 
+
+	[Export(PropertyHint.Layers3DPhysics)]
+	private uint buildingCollisionMask;
+
 	public List<NPC> GetNPCS()
 	{
 		return npcs;
@@ -31,6 +35,7 @@ public partial class NPCManager : Node3D
 		return keepoutZones;
 	}
 
+	private Player player;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -44,6 +49,7 @@ public partial class NPCManager : Node3D
 				paths.Add(node as Path3D);
 			}
 		}
+		player = Root.FindNodeRecusive<Player>(GetTree().Root);
 	}
 
 	private void SpawnNPC()
@@ -70,11 +76,19 @@ public partial class NPCManager : Node3D
 		return false;
     }
 
+	public bool CanPlayerSee(Vector3 globalPos)
+	{
+		return player.CanPlayerSee(globalPos, buildingCollisionMask);
+
+    }
 
     private bool TrySpawnNPC()
     {
 		Vector3 randPos = ToLocal(GetValidSpawnLocation());
 		if (IsInKeepOutZone(ToGlobal(randPos))) {
+			return false;
+		}
+		if (!CanPlayerSee(ToGlobal(randPos))) {
 			return false;
 		}
 		NPC spawnedNPC = npcPrefab.Instantiate<NPC>();

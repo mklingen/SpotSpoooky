@@ -23,6 +23,12 @@ GameStats="*res://Scripts/GameStats.cs"
 
 project/assembly_name="OdlawSniper"
 
+[layer_names]
+
+3d_physics/layer_1="NPC"
+3d_physics/layer_2="Background"
+3d_physics/layer_3="Waldo"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

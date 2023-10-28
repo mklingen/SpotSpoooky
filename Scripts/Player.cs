@@ -251,7 +251,16 @@ public partial class Player : Camera3D
         lastRayHit = spaceState.IntersectRay(query);
     }
 
-	private void Shoot()
+	public bool CanPlayerSee(Vector3 targetPoint, uint collisionMask)
+	{
+        var from = ProjectPosition(UnprojectPosition(targetPoint), 0.0f);
+		var to = targetPoint;
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var query = PhysicsRayQueryParameters3D.Create(from, to, collisionMask);
+		return !spaceState.IntersectRay(query).Keys.Contains("collider");
+    }
+
+    private void Shoot()
 	{
 		Vector3 bulletOffset = GetCamOffset();
 		Vector3 start = GlobalPosition;

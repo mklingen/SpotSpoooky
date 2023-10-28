@@ -197,7 +197,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		bool isValid = false;
 		do {
 			GlobalPosition = npcManager.GetValidSpawnLocation();
-			isValid = !npcManager.IsInKeepOutZone(this.GlobalPosition);
+			isValid = !npcManager.IsInKeepOutZone(this.GlobalPosition) && npcManager.CanPlayerSee(this.GlobalPosition);
 		} while (!isValid);
 
 		if (createEffect) {

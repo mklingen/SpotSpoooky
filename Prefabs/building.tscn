@@ -4,17 +4,20 @@
 [ext_resource type="Script" path="res://Scripts/NPCKeepoutZone.cs" id="1_qig43"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vbnkp"]
+size = Vector3(8, 10, 8)
 
 [node name="Building" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(-4, 0, -3.49691e-07, 0, 4, 0, 3.49691e-07, 0, -4, 0, 0.055783, 0)
 mesh = ExtResource("1_74e25")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.47097, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.07046, 0)
 shape = SubResource("BoxShape3D_vbnkp")
 
 [node name="KeepoutZone" type="Node3D" parent="StaticBody3D"]
