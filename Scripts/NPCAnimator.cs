@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class NPCAnimator : Node3D
 {
@@ -30,12 +31,20 @@ public partial class NPCAnimator : Node3D
 		bobOffset = GD.Randf() * Mathf.Pi * 2;
 		bobSpeed += initialBobRandomization * GD.Randf();
 		nominalPos = Position;
+		updateOnFrame = GD.RandRange(1, 5);
 	}
+	private int frameCount = 0;
+	private int updateOnFrame = 1;
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		float st = Mathf.Sin(Root.Timef() * bobSpeed + bobOffset);
-		Position = nominalPos + Vector3.Up * st * bobAmount;
+		frameCount++;
+		if (frameCount % updateOnFrame == 0) {
+			//float st = Root.RandomSinTable.GetNearest(bobSpeed, bobOffset);
+			float st = Mathf.Sin(Root.Timef() * bobSpeed + bobOffset);
+
+            Position = nominalPos + Vector3.Up * st * bobAmount;
+		}
 	}
 }

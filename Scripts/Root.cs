@@ -90,6 +90,48 @@ public partial class Root : Node3D
         return null;
     }
 
+    public class SineTable
+    {
+        float slowestSpeed = 0.5f;
+        float fastestSpeed = 4.0f;
+        float minOffset = 0.0f;
+        float maxOffset = 6.0f;
+        int numSpeedSamples = 4;
+        int numOffsetSamples = 4;
+
+        List<float> samples;
+        public SineTable()
+        {
+            samples = new List<float>(numSpeedSamples * numOffsetSamples);
+            for (int i = 0; i < numSpeedSamples * numOffsetSamples; i++) {
+                samples.Add(0.0f);
+            }
+        }
+
+        public void Sample(float time)
+        {
+            for (int speed = 0; speed < numSpeedSamples; speed++) {
+                float spd = ((float)(speed) / (float)(numSpeedSamples)) * (fastestSpeed - slowestSpeed);
+                for (int offset = 0; offset < numOffsetSamples; offset++) {
+                    float o = ((float)(offset) / (float)(numOffsetSamples)) * (maxOffset - minOffset);
+                    samples[speed * numOffsetSamples + offset] = Mathf.Sin(time * spd + o);
+                }
+            }
+        }
+
+        public float GetNearest(float speed, float offset)
+        {
+            int speedIdx = Math.Clamp((int)(numSpeedSamples * (speed - slowestSpeed) / (fastestSpeed - slowestSpeed)), 0, numSpeedSamples - 1);
+            int offsetIdx = Math.Clamp((int)(numOffsetSamples * (offset - minOffset) / (maxOffset - minOffset)), 0, numOffsetSamples - 1);
+            return samples[speedIdx * numOffsetSamples + offsetIdx];
+        }
+    }
+
+
+    public static float LastFrameStartTime = -1.0f;
+    public static float SinOfLastFrameTime = -1.0f;
+    public static SineTable RandomSinTable = new SineTable();
+
     public static float Timef()
     {
         return Time.GetTicksMsec() / 1000.0f;
@@ -114,6 +156,9 @@ public partial class Root : Node3D
 
     public override void _Process(double delta)
 	{
+        LastFrameStartTime = Timef();
+        SinOfLastFrameTime = Mathf.Sin(LastFrameStartTime);
+        RandomSinTable.Sample(LastFrameStartTime);
         if (Input.IsActionJustReleased("ui_cancel")) {
             GetTree().ChangeSceneToFile(mainMenuScene);
         }

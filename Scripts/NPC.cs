@@ -39,13 +39,18 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 			SetPath(pathToFollow, pathFollowSpeed, pathFollowOffset);
 		}
 		RotateY(GD.Randf() * Mathf.Pi * 2.0f);
+		updateEveryFrame = GD.RandRange(1, 10);
 	}
+
+	private int updateEveryFrame = 1;
+	private int frameCounter = 0;
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		frameCounter++;
 		// Move along the path.
-		if (pathToFollow != null) {
+		if (pathToFollow != null && frameCounter % updateEveryFrame == 0) {
 			currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta ;
 			// Wrap the path (it is supposed to circular, I guess.
 			if (currDistAlongPath > pathLength) {

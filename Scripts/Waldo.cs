@@ -176,7 +176,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private void EatNPC()
 	{
-		npcManager.EatNPC(targetNPC);
+		if (targetNPC != null) {
+			npcManager.EatNPC(targetNPC);
+		}
 		timeTurnEnded = Root.Timef();
 	}
 
@@ -207,6 +209,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private void MoveToTarget(float dt)
     {
+		if (targetNPC == null) {
+			return;
+		}
 		var diff = targetNPC.GlobalPosition - this.GlobalPosition;
 		if (diff.Length() < eatDist) {
 			return;
