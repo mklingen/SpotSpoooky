@@ -97,7 +97,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		TransitionState(HuntState.Idle);
 		normalMaterial = Root.FindNodeRecusive<MeshInstance3D>(this).MaterialOverride;
 		List<ITurnTimeChangedHandler> handlers = new List<ITurnTimeChangedHandler>();
-		Root.GetRecursive<ITurnTimeChangedHandler>(GetTree().Root, handlers);
+		Root.GetInterfaceRecursive<ITurnTimeChangedHandler>(GetTree().Root, handlers);
 		foreach (var handler in handlers) {
 			OnTurnTimeChanged += handler.OnTurnTimeChanged;
         }
@@ -160,7 +160,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		float closestDist = float.MaxValue;
 		NPC closestNPC = null;
 		foreach (var npc in npcs) {
-			if (npc.NativeInstance == IntPtr.Zero) {
+			if (npc.NativeInstance == IntPtr.Zero || npc.IsFrozen) {
 				// Dead npc!
 				continue;
 			}

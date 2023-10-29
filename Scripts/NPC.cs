@@ -15,6 +15,26 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	private float pathLength = 0.0f;
 	private float pathOffset = 0.0f;
 
+	[ExportCategory("Freezing")]
+	[Export]
+	private Material freezeMaterial;
+
+	public bool IsFrozen = false;
+
+	public void Freeze()
+	{
+		List<MeshInstance3D> meshes = new List<MeshInstance3D>();
+		Root.GetRecursive<MeshInstance3D>(this, meshes);
+		foreach (var mesh in meshes) {
+			mesh.MaterialOverride = freezeMaterial;
+		}
+		IsFrozen = true;
+
+        var bobber = Root.FindNodeRecusive<NPCAnimator>(this);
+        if (bobber != null) {
+			bobber.Active = false;
+        }
+    }
 
 	public void SetPath(Path3D path, float speed, Vector3 offsetRTPath)
 	{
@@ -48,6 +68,9 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (IsFrozen) {
+			return;
+		}
 		frameCounter++;
 		// Move along the path.
 		if (pathToFollow != null && frameCounter % updateEveryFrame == 0) {
@@ -75,7 +98,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	{
         var root = Root.Get(GetTree());
         root?.OnNPCGotShot();
-		QueueFree();
+		Freeze();
 	}
 
 	// Called when Waldo ate npc.
@@ -84,8 +107,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 		if (eaten == this) {
 			var root = Root.Get(GetTree());
 			root?.OnNPCGotEaten();
-
-			Root.Kill(this);
+			Freeze();
 		}
 	}
 }

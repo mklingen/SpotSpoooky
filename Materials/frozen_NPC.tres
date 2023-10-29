@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d25deheq2ldga"]
+
+[ext_resource type="Shader" path="res://Materials/frozen_NPC.gdshader" id="1_ydhel"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ydhel")
+shader_parameter/baseColor = Vector3(1, 1, 1)

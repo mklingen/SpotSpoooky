@@ -64,11 +64,35 @@ public partial class Root : Node3D
         }
     }
 
-
-    public static void GetRecursive<T>(Node parent, List<T> outNodes) where T : class
+    public static void GetInterfaceRecursive<T>(Node parent, List<T> outNodes) where T : class
     {
         if (parent is T) {
             outNodes.Add(parent as T);
+        }
+        foreach (var child in parent.GetChildren()) {
+            GetInterfaceRecursive<T>(child, outNodes);
+        }
+
+    }
+
+    public static T FindNodeInterfaceRecusive<T>(Node parent) where T : class
+    {
+        if (parent is T) {
+            return parent as T;
+        }
+        foreach (var child in parent.GetChildren()) {
+            T node = FindNodeInterfaceRecusive<T>(child);
+            if (node != null) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public static void GetRecursive<T>(Node parent, List<T> outNodes) where T : Node
+    {
+        if (parent is T || parent.IsClass(typeof(T).Name)) {
+            outNodes.Add((T)parent);
         }
         foreach (var child in parent.GetChildren()) {
             GetRecursive<T>(child, outNodes);
@@ -76,10 +100,10 @@ public partial class Root : Node3D
 
     }
 
-    public static T FindNodeRecusive<T>(Node parent) where T : class
+    public static T FindNodeRecusive<T>(Node parent) where T : Node
     {
-        if (parent is T) {
-            return parent as T;
+        if (parent is T || parent.IsClass(typeof(T).Name)) {
+            return (T)parent;
         }
         foreach (var child in parent.GetChildren()) {
             T node = FindNodeRecusive<T>(child);
@@ -140,7 +164,7 @@ public partial class Root : Node3D
     public override void _Ready()
 	{
         List<IScoreChangedHandler> scoreChangers = new List<IScoreChangedHandler>();
-        GetRecursive<IScoreChangedHandler>(this, scoreChangers);
+        GetInterfaceRecursive<IScoreChangedHandler>(this, scoreChangers);
         foreach (var scoreChanger in scoreChangers) {
             OnScoreChanged += (int a, int b) => scoreChanger.OnScoreChanged(a, b);
         }
@@ -148,7 +172,7 @@ public partial class Root : Node3D
 
 
         List<IAlertHandler> alertHandlers = new List<IAlertHandler>();
-        GetRecursive<IAlertHandler>(this, alertHandlers);
+        GetInterfaceRecursive<IAlertHandler>(this, alertHandlers);
         foreach (var alertHandler in alertHandlers) {
             OnAlert += (string alert) => alertHandler.OnAlert(alert);
         }

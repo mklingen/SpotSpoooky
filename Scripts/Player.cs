@@ -138,7 +138,7 @@ public partial class Player : Camera3D
 		foreach (var child in GetChildren()) {
 			AddCallbacksRecursive(child);
 		}
-		Root.GetRecursive<IOnReticleNearHandler>(GetTree().Root, onReticleNearHandlers);
+		Root.GetInterfaceRecursive<IOnReticleNearHandler>(GetTree().Root, onReticleNearHandlers);
 		foreach (var handler in onReticleNearHandlers) {
 			OnReticleNear += handler.OnReticleNear;
 			OnReticleLeft += handler.OnReticleLeft;
@@ -273,7 +273,7 @@ public partial class Player : Camera3D
 			var collider = (Node)lastRayHit["collider"];
 
 			// All colliders should be in null parents for this to work :(
-			var shotHandler = Root.FindNodeRecusive<IGotShotHandler>(collider);
+			var shotHandler = Root.FindNodeInterfaceRecusive<IGotShotHandler>(collider);
 			if (shotHandler != null) {
                 shotHandler.GotShot();
 			}

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class NPCAnimator : Node3D
+public partial class NPCAnimator : MeshInstance3D
 {
 	[ExportGroup("Bobbing")]
 	[Export]
@@ -12,6 +12,9 @@ public partial class NPCAnimator : Node3D
 	private float bobOffset = 0.01f;
 	[Export]
 	private float initialBobRandomization = 0.1f;
+
+
+	public bool Active = true;
 
 	public void SetBobSpeed(float speed)
 	{
@@ -39,6 +42,9 @@ public partial class NPCAnimator : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (!Active) {
+			return;
+		}
 		frameCount++;
 		if (frameCount % updateOnFrame == 0) {
 			//float st = Root.RandomSinTable.GetNearest(bobSpeed, bobOffset);
