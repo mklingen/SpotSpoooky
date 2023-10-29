@@ -42,7 +42,7 @@ public partial class NPCAnimator : Node3D
 		frameCount++;
 		if (frameCount % updateOnFrame == 0) {
 			//float st = Root.RandomSinTable.GetNearest(bobSpeed, bobOffset);
-			float st = Mathf.Sin(Root.Timef() * bobSpeed + bobOffset);
+			float st = Mathf.Sin(Root.LastFrameStartTime * bobSpeed + bobOffset);
 
             Position = nominalPos + Vector3.Up * st * bobAmount;
 		}

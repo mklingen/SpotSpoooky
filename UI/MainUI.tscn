@@ -29,12 +29,17 @@ offset_top = 5.0
 offset_right = -9.0
 offset_bottom = -0.152008
 grow_horizontal = 2
+grow_vertical = 0
 
-[node name="SpookyBar" type="HBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="SpookyBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
 alignment = 1
 
-[node name="Spookyness" type="Label" parent="MarginContainer"]
+[node name="Spookyness" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

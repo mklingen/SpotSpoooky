@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbh1woged6gth"]
+[gd_scene load_steps=4 format=3 uid="uid://dbh1woged6gth"]
 
-[ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://Prefabs/npc.tscn" id="1_wob7d"]
+[ext_resource type="ArrayMesh" uid="uid://cs44fx2si1nw0" path="res://Art/MeshExports/ground.res" id="1_tdket"]
 
 [sub_resource type="Environment" id="Environment_v1lvl"]
 ambient_light_source = 2
@@ -18,11 +18,6 @@ glow_blend_mode = 0
 glow_hdr_threshold = 1.78
 fog_enabled = true
 fog_light_color = Color(0.188235, 0.105882, 0.286275, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_aakof"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0b07"]
-albedo_color = Color(0.160784, 0.317647, 0.25098, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hgiuf"]
 
@@ -51,15 +46,11 @@ directional_shadow_fade_start = 0.0
 environment = SubResource("Environment_v1lvl")
 
 [node name="GroundBody" type="StaticBody3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 0, 0, -43.3672)
 
 [node name="Ground" type="MeshInstance3D" parent="GroundBody"]
-mesh = SubResource("PlaneMesh_aakof")
+mesh = ExtResource("1_tdket")
 skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m0b07")
 
 [node name="FloorCollision" type="CollisionShape3D" parent="GroundBody"]
 shape = SubResource("WorldBoundaryShape3D_hgiuf")
-
-[node name="NPC" parent="." instance=ExtResource("1_wob7d")]
-transform = Transform3D(-0.979248, 0, -0.202668, 0, 1, 0, 0.202668, 0, -0.979248, 0, 0, 0)

@@ -121,6 +121,8 @@ public partial class Player : Camera3D
 	private float glowIntensityScale0;
 	private float glowIntensityScale1;
 
+	private Vector2 lastMousePosition;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -204,13 +206,13 @@ public partial class Player : Camera3D
 		HandleShaking();
 	}
 
-	public void ToggleZoom(InputEventMouseButton mouseEvent)
+	public void ToggleZoom()
 	{
 		switch (Mode) {
 			// Switch to zoomed mode.
 			case ZoomMode.UnZoomed: {
 					Mode = ZoomMode.Zoomed;
-					targetPosition = ProjectPosition(mouseEvent.GlobalPosition, 0.0f) - GetCamOffset();
+					targetPosition = ProjectPosition(lastMousePosition, 0.0f) - GetCamOffset();
 					targetZoom = zoomedScale;
 					startZoom = unZoomedScale;
 					preZoomPosition = startPosition;
@@ -299,16 +301,15 @@ public partial class Player : Camera3D
 	{
 		base._Input(@event);
 
-		if (@event is InputEventMouseButton eventMouseButton) {
-			if (eventMouseButton.ButtonIndex == MouseButton.Right && !eventMouseButton.Pressed) {
-				ToggleZoom(eventMouseButton);
-			} else if (eventMouseButton.ButtonIndex == MouseButton.Left && !eventMouseButton.Pressed && Mode != ZoomMode.UnZoomed) {
-				Shoot();
-			}
+		if (@event.IsActionPressed("Zoom")) {
+			ToggleZoom();
+		} else if (@event.IsActionPressed("Shoot") && !isZooming && Mode == ZoomMode.Zoomed) {
+			Shoot();
 		} else if (@event is InputEventMouseMotion eventMouseMotion) {
+			lastMousePosition = eventMouseMotion.GlobalPosition;
 			if (Mode == ZoomMode.Zoomed && !isZooming) {
 				Position += GlobalTransform.Basis.Y * eventMouseMotion.Relative.Y * -1.0f * zoomedMouseSensitivity + GlobalTransform.Basis.X * eventMouseMotion.Relative.X * zoomedMouseSensitivity;
-            }
+			}
 		}
 	}
 
