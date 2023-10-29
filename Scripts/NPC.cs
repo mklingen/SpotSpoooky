@@ -18,8 +18,10 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	[ExportCategory("Freezing")]
 	[Export]
 	private Material freezeMaterial;
+    [Export]
+    private PackedScene freezeEffect;
 
-	public bool IsFrozen = false;
+    public bool IsFrozen = false;
 
 	public void Freeze()
 	{
@@ -29,14 +31,23 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 			mesh.MaterialOverride = freezeMaterial;
 		}
 		IsFrozen = true;
-
+		MaybeCreateFreezeEffect();
         var bobber = Root.FindNodeRecusive<NPCAnimator>(this);
         if (bobber != null) {
 			bobber.Active = false;
         }
     }
 
-	public void SetPath(Path3D path, float speed, Vector3 offsetRTPath)
+    private void MaybeCreateFreezeEffect()
+    {
+        if (freezeEffect != null) {
+            var instantiate = freezeEffect.Instantiate<Node3D>();
+            GetTree().Root.AddChild(instantiate);
+            instantiate.GlobalPosition = this.GlobalPosition;
+        }
+    }
+
+    public void SetPath(Path3D path, float speed, Vector3 offsetRTPath)
 	{
 		pathFollowOffset = offsetRTPath;
 		pathFollowSpeed = speed;
@@ -86,8 +97,9 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 			Vector3 dPos = nextPos - GlobalPosition;
 
             ConstantLinearVelocity = (dPos) * (1.0f / (float)delta);
-			if (!nextPos.IsEqualApprox(GlobalPosition)) {
-				LookAt(nextPos, Vector3.Up);
+			Vector3 lookTarget = GlobalPosition + dPos * 10;
+			if (lookTarget.DistanceSquaredTo(GlobalPosition) > 1e-3) {
+				LookAt(lookTarget, Vector3.Up);
 			}
             GlobalPosition = nextPos;
         }

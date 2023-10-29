@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://rm27dtm25cy6"]
+
+[ext_resource type="Script" path="res://Scripts/WaldoTeleportParticles.cs" id="1_lte47"]
+[ext_resource type="Curve" uid="uid://rug0hlws0prh" path="res://UI/pop_out.tres" id="1_p0rm8"]
+
+[sub_resource type="Curve" id="Curve_wj8wa"]
+_data = [Vector2(0.00143266, 0.263158), 0.0, 0.0, 0, 0, Vector2(0.202006, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6v3o"]
+shading_mode = 2
+emission_enabled = true
+emission = Color(0.439216, 1, 0.431373, 1)
+emission_energy_multiplier = 2.0
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_8coup"]
+material = SubResource("StandardMaterial3D_d6v3o")
+shape = 0
+sections = 128
+
+[node name="npc_frozen" type="Node3D"]
+script = ExtResource("1_lte47")
+lifeTime = 0.5
+lightCurve = SubResource("Curve_wj8wa")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+cast_shadow = 0
+emitting = false
+amount = 50
+lifetime = 0.25
+one_shot = true
+mesh = SubResource("RibbonTrailMesh_8coup")
+emission_shape = 3
+emission_box_extents = Vector3(1, 10, 1)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_curve = ExtResource("1_p0rm8")
+hue_variation_min = 0.24
+hue_variation_max = 0.24
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.76977, 0)
+light_color = Color(0.192157, 0.878431, 0.262745, 1)
+light_energy = 50.0
+shadow_enabled = true
+spot_range = 10.0

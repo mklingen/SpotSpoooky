@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Waldo.cs" id="1_7pq1h"]
 [ext_resource type="Material" uid="uid://c6bnn1i5vmivx" path="res://Materials/waldo_default.tres" id="2_j45ja"]
 [ext_resource type="Material" uid="uid://cyj8vjhrlycmy" path="res://Materials/npc_default.tres" id="2_ypaoq"]
-[ext_resource type="PackedScene" uid="uid://tf2p5xq3wpkn" path="res://Prefabs/waldo_teleport.tscn" id="3_cdin0"]
+[ext_resource type="PackedScene" uid="uid://tf2p5xq3wpkn" path="res://Particles/waldo_teleport.tscn" id="3_5n1xd"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2sns1"]
 
@@ -19,7 +19,7 @@ axis_lock_angular_z = true
 sync_to_physics = false
 script = ExtResource("1_7pq1h")
 materialForHiding = ExtResource("2_ypaoq")
-teleportEffect = ExtResource("3_cdin0")
+teleportEffect = ExtResource("3_5n1xd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997989, 0)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://fsiebmyspll5"]
+[gd_scene load_steps=10 format=3 uid="uid://fsiebmyspll5"]
 
 [ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_l5pwi"]
 [ext_resource type="ArrayMesh" uid="uid://dqnsgbh8n1pue" path="res://Art/MeshExports/NPC/tmg_waldo_2023-10-12 2058 (prelim export)_Cube.res" id="2_pbb0d"]
 [ext_resource type="Material" uid="uid://d25deheq2ldga" path="res://Materials/frozen_NPC.tres" id="2_tuyug"]
+[ext_resource type="PackedScene" uid="uid://rm27dtm25cy6" path="res://Particles/npc_frozen.tscn" id="3_6fx0q"]
 [ext_resource type="ArrayMesh" uid="uid://b5fg0sixlhmeu" path="res://Art/MeshExports/NPC/tmg_waldo_2023-10-12 2058 (prelim export)_Cube_011.res" id="3_sgvuq"]
 [ext_resource type="Script" path="res://Scripts/NPCAnimator.cs" id="3_tvlg8"]
 [ext_resource type="ArrayMesh" uid="uid://cyxn7xy22pd7g" path="res://Art/tmg_waldo_2023-10-12 2058 (prelim export)_Cylinder.res" id="4_edy15"]
@@ -15,6 +16,7 @@ collision_mask = 0
 sync_to_physics = false
 script = ExtResource("1_l5pwi")
 freezeMaterial = ExtResource("2_tuyug")
+freezeEffect = ExtResource("3_6fx0q")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, -0.0233136, 0)

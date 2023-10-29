@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dobjhwbg0l1od"]
 
 [ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://Art/sights.png" id="1_gl7ge"]
-[ext_resource type="PackedScene" uid="uid://cydqwoxor7kqu" path="res://Prefabs/bullet_particles.tscn" id="2_02mwu"]
+[ext_resource type="PackedScene" uid="uid://cydqwoxor7kqu" path="res://Particles/bullet_particles.tscn" id="2_02mwu"]
 [ext_resource type="Script" path="res://Scripts/Reticle.cs" id="2_2upae"]
 
 [sub_resource type="Curve" id="Curve_27xeq"]
