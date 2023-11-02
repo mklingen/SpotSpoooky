@@ -1,13 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://fsiebmyspll5"]
+[gd_scene load_steps=6 format=3 uid="uid://fsiebmyspll5"]
 
 [ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_l5pwi"]
-[ext_resource type="ArrayMesh" uid="uid://dqnsgbh8n1pue" path="res://Art/MeshExports/NPC/tmg_waldo_2023-10-12 2058 (prelim export)_Cube.res" id="2_pbb0d"]
 [ext_resource type="Material" uid="uid://d25deheq2ldga" path="res://Materials/frozen_NPC.tres" id="2_tuyug"]
 [ext_resource type="PackedScene" uid="uid://rm27dtm25cy6" path="res://Particles/npc_frozen.tscn" id="3_6fx0q"]
-[ext_resource type="ArrayMesh" uid="uid://b5fg0sixlhmeu" path="res://Art/MeshExports/NPC/tmg_waldo_2023-10-12 2058 (prelim export)_Cube_011.res" id="3_sgvuq"]
-[ext_resource type="Script" path="res://Scripts/NPCAnimator.cs" id="3_tvlg8"]
-[ext_resource type="ArrayMesh" uid="uid://cyxn7xy22pd7g" path="res://Art/tmg_waldo_2023-10-12 2058 (prelim export)_Cylinder.res" id="4_edy15"]
-[ext_resource type="Material" uid="uid://dl1f8c3c2y2sq" path="res://Materials/npc.tres" id="5_yf63w"]
+[ext_resource type="PackedScene" uid="uid://cp3dy1j6v5v14" path="res://Prefabs/npc_mesh.tscn" id="4_f6auh"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4qxmt"]
 
@@ -18,24 +14,9 @@ script = ExtResource("1_l5pwi")
 freezeMaterial = ExtResource("2_tuyug")
 freezeEffect = ExtResource("3_6fx0q")
 
-[node name="Body" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, -0.0233136, 0)
-mesh = ExtResource("2_pbb0d")
-skeleton = NodePath("../..")
-script = ExtResource("3_tvlg8")
-bobAmount = 0.05
-
-[node name="Hair" type="MeshInstance3D" parent="Body"]
-cast_shadow = 0
-mesh = ExtResource("3_sgvuq")
-surface_material_override/0 = ExtResource("5_yf63w")
-
-[node name="Eyes?" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, -0.0115887, -0.999933, 0, 0.999933, -0.0115887, 0, 0.737753, 0.284855)
-material_override = ExtResource("5_yf63w")
-cast_shadow = 0
-mesh = ExtResource("4_edy15")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00576, 0)
 shape = SubResource("CylinderShape3D_4qxmt")
+
+[node name="tmg_waldo_2023-10-30 0014 (npc walk animation)" parent="." instance=ExtResource("4_f6auh")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)

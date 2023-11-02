@@ -23,6 +23,8 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 
     public bool IsFrozen = false;
 
+	private AnimationPlayer animation;
+
 	public void Freeze()
 	{
 		List<MeshInstance3D> meshes = new List<MeshInstance3D>();
@@ -35,6 +37,9 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
         var bobber = Root.FindNodeRecusive<NPCAnimator>(this);
         if (bobber != null) {
 			bobber.Active = false;
+        }
+        if (animation != null) {
+			animation.Pause();
         }
     }
 
@@ -71,6 +76,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 		}
 		RotateY(GD.Randf() * Mathf.Pi * 2.0f);
 		updateEveryFrame = GD.RandRange(1, 10);
+		animation = Root.FindNodeRecusive<AnimationPlayer>(this);
 	}
 
 	private int updateEveryFrame = 1;
@@ -102,6 +108,14 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 				LookAt(lookTarget, Vector3.Up);
 			}
             GlobalPosition = nextPos;
+			if (animation != null && !animation.IsPlaying()) {
+				animation.Play("WalkCycle_npc");
+			}
+			if (animation != null) {
+				animation.SpeedScale = ConstantLinearVelocity.Length();
+				animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Manual;
+				animation.Advance(delta);
+			}
         }
 	}
 

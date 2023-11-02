@@ -6,10 +6,8 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 {
 	private NPCManager npcManager;
 
-	private Material normalMaterial;
+
 	[ExportGroup("Special Effects")]
-	[Export]
-	private Material materialForHiding;
 	[Export]
 	private PackedScene teleportEffect;
 
@@ -95,7 +93,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		stateChangeTime = Root.Timef();
 		TeleportToNewLocation(false);
 		TransitionState(HuntState.Idle);
-		normalMaterial = Root.FindNodeRecusive<MeshInstance3D>(this).MaterialOverride;
 		List<ITurnTimeChangedHandler> handlers = new List<ITurnTimeChangedHandler>();
 		Root.GetInterfaceRecursive<ITurnTimeChangedHandler>(GetTree().Root, handlers);
 		foreach (var handler in handlers) {
@@ -107,6 +104,12 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	public override void _Process(double delta)
 	{
 		UpdateNormalizedTurnTime((float)delta);
+		if (targetNPC != null) {
+			Vector3 t = targetNPC.GlobalPosition;
+			t.Y = GlobalPosition.Y;
+
+            LookAt(t);
+		}
         switch (huntState) {
 			case HuntState.Idle:
                 EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
@@ -271,8 +274,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		wasReticleNear = true;
 		huntStateBeforeHiding = huntState;
 		TransitionState(HuntState.Hiding);
-		MeshInstance3D mesh = Root.FindNodeRecusive<MeshInstance3D>(this);
-		mesh.MaterialOverride = materialForHiding;
 	}
 
 	public void OnReticleLeft(Node3D reticleIsNearObject)
@@ -285,7 +286,5 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
         wasReticleNear = false;
 		TransitionState(huntStateBeforeHiding);
-        MeshInstance3D mesh = Root.FindNodeRecusive<MeshInstance3D>(this);
-        mesh.MaterialOverride = normalMaterial;
     }
 }

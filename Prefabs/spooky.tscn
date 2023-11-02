@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwjwp3yhbyjjw"]
+
+[ext_resource type="PackedScene" uid="uid://d2pagb2xqhgi6" path="res://Art/tmg_waldo_2023-10-29 2300 (spooky walk animation).glb" id="1_gookw"]
+[ext_resource type="Material" uid="uid://dwqjc0lf30d6a" path="res://Materials/spooky_glow.tres" id="2_n8n4i"]
+[ext_resource type="Material" uid="uid://dl1f8c3c2y2sq" path="res://Materials/npc.tres" id="3_hjxjp"]
+
+[node name="tmg_waldo_2023-10-29 2300 (spooky walk animation)" instance=ExtResource("1_gookw")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(-0.104684, 0.00117756, -0.00646672)
+bones/2/position = Vector3(0.00621591, 0.0654067, 0.528844)
+bones/2/rotation = Quaternion(0.649646, 0.00216035, 0.00252809, 0.76023)
+bones/7/position = Vector3(0.103576, 0.0125459, 0.0317239)
+bones/8/rotation = Quaternion(0.662281, 0.00413177, -0.00413171, 0.749233)
+bones/8/scale = Vector3(0.972346, 1.05769, 0.972346)
+bones/9/position = Vector3(2.70845e-06, 0.258221, 0.00780945)
+bones/11/rotation = Quaternion(0.495456, -0.50436, 0.487116, 0.512701)
+bones/11/scale = Vector3(0.999008, 1.00208, 0.998938)
+bones/13/rotation = Quaternion(0.479408, -0.519998, 0.486216, 0.51319)
+bones/13/scale = Vector3(1.08205, 0.854441, 1.08168)
+bones/14/position = Vector3(2.70838e-06, 0.293425, 0.00780945)
+bones/14/rotation = Quaternion(2.65202e-05, 0.998124, -0.0612215, 0.00104668)
+bones/15/position = Vector3(0.00621591, 0.0654067, 0.528844)
+bones/16/position = Vector3(-0.30901, -0.00393159, -0.182898)
+bones/17/position = Vector3(0.309001, 0.00357499, -0.182898)
+bones/18/position = Vector3(6.36157e-17, 1, 0.381324)
+
+[node name="spooky_eye-holes_v2" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.999978, 0.00103693, 0.00656936, -1.3863e-08, 0.987771, -0.155911, -0.00665069, 0.155907, 0.987749, -0.00386438, 0.829787, 0.418975)
+bone_idx = 5
+
+[node name="spooky_eye-holes_v2" parent="Armature/Skeleton3D/spooky_eye-holes_v2" index="0"]
+surface_material_override/0 = ExtResource("2_n8n4i")
+
+[node name="spooky_jack-o-head" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.918668, 0.0011568, 0.0060352, -1.27358e-08, 1.10196, -0.143234, -0.00610991, 0.173931, 0.907434, -0.0061448, 0.770049, 0.079631)
+bone_idx = 6
+
+[node name="spooky_jack-o-head" parent="Armature/Skeleton3D/spooky_jack-o-head" index="0"]
+surface_material_override/0 = ExtResource("3_hjxjp")
+surface_material_override/1 = ExtResource("2_n8n4i")
+
+[node name="spooky_body" parent="Armature/Skeleton3D" index="2"]
+surface_material_override/0 = ExtResource("3_hjxjp")
+
+[node name="spooky_head-stem" parent="Armature/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("3_hjxjp")
