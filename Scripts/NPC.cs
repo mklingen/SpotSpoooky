@@ -75,14 +75,20 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 			SetPath(pathToFollow, pathFollowSpeed, pathFollowOffset);
 		}
 		RotateY(GD.Randf() * Mathf.Pi * 2.0f);
-		updateEveryFrame = GD.RandRange(1, 10);
 		animation = Root.FindNodeRecusive<AnimationPlayer>(this);
-	}
 
+		frameUpdateOffset = (int)GD.RandRange(0, 3);
+	}
+	private int frameUpdateOffset = 0;
 	private int updateEveryFrame = 1;
 	private int frameCounter = 0;
+	private bool wasOnScreen = true;
+	public void NotifyOnScreen(bool onScreen)
+	{
+		wasOnScreen = onScreen;
+	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	// Called every frame. 'delta' is theelapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (IsFrozen) {
@@ -90,8 +96,17 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 		}
 		frameCounter++;
 		// Move along the path.
-		if (pathToFollow != null && frameCounter % updateEveryFrame == 0) {
-			currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta ;
+		if (wasOnScreen && pathToFollow != null && frameCounter % updateEveryFrame == 0) {
+            if (Root.FPS() < 40) {
+                updateEveryFrame = 10 - frameUpdateOffset;
+            }
+            else if (Root.FPS() < 60) {
+                updateEveryFrame = 5 - frameUpdateOffset;
+            }
+            else {
+                updateEveryFrame = 1;
+            }
+            currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta ;
 			// Wrap the path (it is supposed to circular, I guess.
 			if (currDistAlongPath > pathLength) {
 				currDistAlongPath = (currDistAlongPath - pathLength);
@@ -122,6 +137,9 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	// Called when player shot NPC.
 	public void GotShot()
 	{
+		if (IsFrozen) {
+			return;
+		}
         var root = Root.Get(GetTree());
         root?.OnNPCGotShot();
 		Freeze();

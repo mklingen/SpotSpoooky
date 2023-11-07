@@ -3,12 +3,21 @@ using System;
 
 public partial class GameOver : Control
 {
-	[Export]
-	private PackedScene okScene;
+    [Export(PropertyHint.File, "*.tscn,")]
+    private string loseScene;
+    [Export(PropertyHint.File, "*.tscn,")]
+    private string winScene;
+    [Export(PropertyHint.File, "*.tscn,")]
+    private string nextLevelScene;
+
+	private string nextSceneToLoad;
+
 	[Export]
 	private string winText = "You win!\nYou spotted Spooky in time!";
 	[Export]
-	private string loseText = "You lose!\nMaybe next time!";
+	private string loseText = "You lost level {0}!\nMaybe next time!";
+	[Export]
+	private string nextLevelText = "You spotted spooky in time!\nLevel {0} is next.";
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -18,9 +27,20 @@ public partial class GameOver : Control
 			okButton.Pressed += OkButton_Pressed;
 			okButton.GrabFocus();
 		}
-        var gameStats = GetNode<GameStats>("/root/GameStats");
+        var gameStats = GameStats.Get(this);
         if (gameStats != null) {
-			SetText(gameStats.didPlayerWinLastGame ? winText : loseText);
+			if (gameStats.didPlayerWinLastGame && gameStats.currentLevel > gameStats.maxLevels) {
+				SetText(winText);
+				nextSceneToLoad = winScene;
+			}
+			else if (!gameStats.didPlayerWinLastGame) {
+				SetText(String.Format(loseText, gameStats.levelLost));
+				nextSceneToLoad = loseScene;
+			}
+			else {
+				SetText(String.Format(nextLevelText, gameStats.currentLevel));
+				nextSceneToLoad = nextLevelScene;
+			}
         }
     }
 
@@ -34,7 +54,7 @@ public partial class GameOver : Control
 
 	private void OkButton_Pressed()
 	{
-		GetTree().ChangeSceneToPacked(okScene);
+		GetTree().ChangeSceneToFile(nextSceneToLoad);
 	}
 
 }

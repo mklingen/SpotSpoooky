@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://fsiebmyspll5"]
 
 [ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_l5pwi"]
-[ext_resource type="Material" uid="uid://d25deheq2ldga" path="res://Materials/frozen_NPC.tres" id="2_tuyug"]
-[ext_resource type="PackedScene" uid="uid://rm27dtm25cy6" path="res://Particles/npc_frozen.tscn" id="3_6fx0q"]
-[ext_resource type="PackedScene" uid="uid://cp3dy1j6v5v14" path="res://Prefabs/npc_mesh.tscn" id="4_f6auh"]
+[ext_resource type="Material" path="res://Materials/frozen_NPC.tres" id="2_85kqq"]
+[ext_resource type="PackedScene" uid="uid://b2snap84cn0kk" path="res://Particles/npc_frozen.tscn" id="3_7ett7"]
+[ext_resource type="PackedScene" path="res://Prefabs/npc_mesh.tscn" id="4_f6auh"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4qxmt"]
 
@@ -11,8 +11,8 @@
 collision_mask = 0
 sync_to_physics = false
 script = ExtResource("1_l5pwi")
-freezeMaterial = ExtResource("2_tuyug")
-freezeEffect = ExtResource("3_6fx0q")
+freezeMaterial = ExtResource("2_85kqq")
+freezeEffect = ExtResource("3_7ett7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00576, 0)

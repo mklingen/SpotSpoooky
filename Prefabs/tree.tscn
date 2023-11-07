@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdfx7gcr3xulc"]
+
+[ext_resource type="ArrayMesh" uid="uid://8sa5u0mvud45" path="res://Art/MeshExports/tree.res" id="1_boufj"]
+[ext_resource type="Script" path="res://Scripts/NPCKeepoutZone.cs" id="2_ld533"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r3rys"]
+height = 8.43626
+radius = 0.735104
+
+[node name="Tree" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(-8, 0, -1.20797e-06, 0, 8, 0, 1.20797e-06, 0, -8, 0, 0.055783, 0)
+mesh = ExtResource("1_boufj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.61678, 0)
+shape = SubResource("CylinderShape3D_r3rys")
+
+[node name="KeepoutZone" type="Node3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+script = ExtResource("2_ld533")
+keepOutShape = AABB(-1, -1, -8, 2, 2, 16)

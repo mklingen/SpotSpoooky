@@ -23,7 +23,7 @@ shape = SubResource("BoxShape3D_vbnkp")
 [node name="KeepoutZone" type="Node3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 script = ExtResource("1_qig43")
-keepOutShape = AABB(-8, -2.5, -8, 16, 5, 16)
+keepOutShape = AABB(-1, -1, -8, 16, 5, 16)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0639227, 0.997955, 0, -0.997955, -0.0639227, 0, 5.83512, 6.80052)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://tf2p5xq3wpkn"]
+[gd_scene load_steps=7 format=3 uid="uid://4qfwm16ko1po"]
 
 [ext_resource type="Script" path="res://Scripts/WaldoTeleportParticles.cs" id="1_b4ltp"]
 [ext_resource type="Material" uid="uid://cymt12frxo1mt" path="res://Particles/waldo_teleport.tres" id="2_jqtwd"]

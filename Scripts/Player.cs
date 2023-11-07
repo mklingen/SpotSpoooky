@@ -253,6 +253,16 @@ public partial class Player : Camera3D
         lastRayHit = spaceState.IntersectRay(query);
     }
 
+	public bool IsZoomed()
+	{
+		return this.Mode == ZoomMode.Zoomed;
+	}
+
+	public bool IsZooming()
+	{
+		return isZooming;
+	}
+
 	public bool CanPlayerSee(Vector3 targetPoint, uint collisionMask)
 	{
         var from = ProjectPosition(UnprojectPosition(targetPoint), 0.0f);
@@ -260,6 +270,13 @@ public partial class Player : Camera3D
         var spaceState = GetWorld3D().DirectSpaceState;
         var query = PhysicsRayQueryParameters3D.Create(from, to, collisionMask);
 		return !spaceState.IntersectRay(query).Keys.Contains("collider");
+    }
+
+	public bool IsOnScreen(Vector3 targetPoint)
+	{
+		Vector2 screenPoint = UnprojectPosition(targetPoint);
+		return this.GetViewport().GetVisibleRect().HasPoint(screenPoint);
+
     }
 
     private void Shoot()

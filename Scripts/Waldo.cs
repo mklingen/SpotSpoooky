@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IOnReticleNearHandler
+public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IOnReticleNearHandler, NPCManager.IOnLoadedHandler
 {
 	private NPCManager npcManager;
 
@@ -35,8 +35,10 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	[Export] // Distance required for Waldo to be from an NPC to eat.
 	float eatDist = 3.5f;
 	[Export] // Total amount of time it takes Waldo to take a turn.
-	float totalTime = 10.0f;
-
+	float maxTotalTime = 30.0f;
+	[Export] // Minimum total amount of time it takes Waldo to take a turn.
+	float minTotalTime = 3.0f;
+	private float totalTime = 0.0f;
 	// Time the state last changed.
     float stateChangeTime = -1.0f;
 	// The time that the last turn started.
@@ -89,6 +91,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+		// Total time is scaled by the level inversely, such that the minimum total time is achieved
+		// at the very end of the game. This makes the game harder and harder!
+		totalTime = -GameStats.Get(this).GetLevelScaledValue(-maxTotalTime, -minTotalTime);
 		npcManager = Root.FindNodeRecusive<NPCManager>(GetTree().Root);
 		stateChangeTime = Root.Timef();
 		TeleportToNewLocation(false);
@@ -103,6 +108,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (!doneLoading) {
+			return;
+		}
 		UpdateNormalizedTurnTime((float)delta);
 		if (targetNPC != null) {
 			Vector3 t = targetNPC.GlobalPosition;
@@ -287,4 +295,11 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
         wasReticleNear = false;
 		TransitionState(huntStateBeforeHiding);
     }
+
+	private bool doneLoading = false;
+	public void OnLoaded()
+	{
+		doneLoading = true;
+		TransitionState(HuntState.Idle);
+	}
 }

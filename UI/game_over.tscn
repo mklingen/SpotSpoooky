@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwd7kcilp80db"]
+[gd_scene load_steps=4 format=3 uid="uid://dwd7kcilp80db"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_8o2td"]
 [ext_resource type="Script" path="res://UI/GameOver.cs" id="1_vaobm"]
-[ext_resource type="PackedScene" uid="uid://5yr2gkdn6au8" path="res://UI/main_menu.tscn" id="2_x1htt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oiu3y"]
 font_size = 45
@@ -16,7 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8o2td")
 script = ExtResource("1_vaobm")
-okScene = ExtResource("2_x1htt")
+loseScene = "res://UI/main_menu.tscn"
+winScene = "res://UI/main_menu.tscn"
+nextLevelScene = "res://Scenes/root.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

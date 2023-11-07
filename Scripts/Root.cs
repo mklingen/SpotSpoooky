@@ -156,6 +156,10 @@ public partial class Root : Node3D
     public static float SinOfLastFrameTime = -1.0f;
     public static SineTable RandomSinTable = new SineTable();
 
+    public static double FPS()
+    {
+        return Engine.GetFramesPerSecond();
+    }
     public static float Timef()
     {
         return Time.GetTicksMsec() / 1000.0f;
@@ -231,20 +235,25 @@ public partial class Root : Node3D
         AddChild(gameOverTimer);
     }
 
+
+
     public void LoseGame()
     {
-        var gameStats = GetNode<GameStats>("/root/GameStats");
+        var gameStats = GameStats.Get(this);
         if (gameStats != null) {
             gameStats.didPlayerWinLastGame = false;
+            gameStats.levelLost = gameStats.currentLevel;
+            gameStats.currentLevel = 1;
         }
         GetTree().ChangeSceneToFile(gameOverScene);
     }
 
     public void WinGame()
     {
-        var gameStats = GetNode<GameStats>("/root/GameStats");
+        var gameStats = GameStats.Get(this);
         if (gameStats != null) {
             gameStats.didPlayerWinLastGame = true;
+            gameStats.currentLevel++;
         }
         GetTree().ChangeSceneToFile(gameOverScene);
     }

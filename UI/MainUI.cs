@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHandler, Waldo.ITurnTimeChangedHandler
+public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHandler, Waldo.ITurnTimeChangedHandler, NPCManager.IOnLoadedHandler
 {
 	private Control spookyContainer;
+
+	private Node loadingScreen;
 
 	[Export]
 	private PackedScene alertPrefab;
@@ -22,6 +24,15 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 	public override void _Ready()
 	{
         spookyContainer = FindChild("SpookyBar") as Control;
+		loadingScreen = FindChild("LoadingScreen");
+
+		var gameStats = GameStats.Get(this);
+		if (gameStats != null) {
+			Label text = loadingScreen.FindChild("Label") as Label;
+			if (text != null) {
+				text.Text = String.Format(text.Text, gameStats.currentLevel);
+			}
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,5 +90,10 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 		if (targetSpook < currentMaxSpooks) {
 			blocks[targetSpook].SetFillAmount(normalizedTime);
 		}
+	}
+
+	public void OnLoaded()
+	{
+		loadingScreen.QueueFree();
 	}
 }

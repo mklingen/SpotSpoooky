@@ -4,9 +4,13 @@ using System.Collections.Generic;
 
 public partial class NPCManager : Node3D
 {
-    [ExportGroup("NPC Spawn")]
-    [Export]
-	private int numNPCs;
+	[ExportGroup("NPC Spawn")]
+	[Export]
+	private int maxNumNPCs = 1000;
+	[Export]
+	private int minNumNPCs = 100;
+
+	private int numNPCs = 1;
 	[Export]
 	private Aabb npcSpawnAABB;
 	[Export]
@@ -16,8 +20,16 @@ public partial class NPCManager : Node3D
 	private List<Path3D> paths;
 	private List<NPCKeepoutZone> keepoutZones;
 
+    // Called when all NPCs have been spawned.
+    [Signal]
+    public delegate void OnLoadedEventHandler();
 
-	[Export(PropertyHint.Layers3DPhysics)]
+    public interface IOnLoadedHandler
+    {
+        abstract void OnLoaded();
+    }
+
+    [Export(PropertyHint.Layers3DPhysics)]
 	private uint buildingCollisionMask;
 
 	public List<NPC> GetNPCS()
@@ -40,6 +52,7 @@ public partial class NPCManager : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		numNPCs = GameStats.Get(this).GetLevelScaledValue(minNumNPCs, maxNumNPCs);
 		npcs = new List<NPC>();
 		paths = new List<Path3D>();
 		keepoutZones = new List<NPCKeepoutZone>();
@@ -50,6 +63,11 @@ public partial class NPCManager : Node3D
 			}
 		}
 		player = Root.FindNodeRecusive<Player>(GetTree().Root);
+		List<IOnLoadedHandler> loadHandlers = new List<IOnLoadedHandler>();
+		Root.GetInterfaceRecursive(GetTree().Root, loadHandlers);
+		foreach (var handler in loadHandlers) {
+			this.OnLoaded += handler.OnLoaded;
+		}
 	}
 
 	private void SpawnNPC()
@@ -82,6 +100,13 @@ public partial class NPCManager : Node3D
 
     }
 
+    public bool IsOnscreen(Vector3 globalPos)
+    {
+		return player.IsOnScreen(globalPos);
+
+    }
+
+
     private bool TrySpawnNPC()
     {
 		Vector3 randPos = ToLocal(GetValidSpawnLocation());
@@ -97,7 +122,7 @@ public partial class NPCManager : Node3D
 
         foreach (var path in paths) {
 			if (path.ToGlobal(path.Curve.GetClosestPoint(path.ToLocal(spawnedNPC.GlobalPosition))).DistanceTo(spawnedNPC.GlobalPosition) < 5) {
-				spawnedNPC.SetPath(path, (float)GD.RandRange(-10.0, 10.0), new Vector3((float)GD.RandRange(-2.0f, 2.0f), 0.0f, (float)GD.RandRange(-2.0f, 2.0f)));
+				spawnedNPC.SetPath(path, (float)GD.RandRange(-5.0, 5.0), new Vector3((float)GD.RandRange(-2.0f, 2.0f), 0.0f, (float)GD.RandRange(-2.0f, 2.0f)));
 				break;
 			}
 		}
@@ -127,7 +152,13 @@ public partial class NPCManager : Node3D
 				}
 				if (npcs.Count >= numNPCs) {
 					spawnedAllNPCs = true;
+					EmitSignal(SignalName.OnLoaded);
 				}
+			}
+		}
+		if (player != null) {
+			foreach (var npc in npcs) {
+				npc.NotifyOnScreen(!player.IsZooming() && ((!player.IsZoomed()) || IsOnscreen(npc.GlobalPosition)));
 			}
 		}
     }

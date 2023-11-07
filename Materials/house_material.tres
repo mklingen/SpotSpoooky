@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dh1hjm6m5mw7g"]
+
+[ext_resource type="Texture2D" uid="uid://cg7ag8yurkioa" path="res://Art/haunted_house_sheltzy32-32x.png" id="1_30umd"]
+[ext_resource type="Texture2D" uid="uid://cx5r6r43ohkms" path="res://Art/sheltzy_glow.png" id="2_45p61"]
+
+[resource]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_30umd")
+roughness = 0.86
+emission_enabled = true
+emission = Color(1, 1, 0.0117647, 1)
+emission_energy_multiplier = 6.59
+emission_operator = 1
+emission_texture = ExtResource("2_45p61")
+rim_enabled = true
+rim_tint = 1.0
+backlight = Color(0.301961, 0.509804, 1, 1)
+grow_amount = 1.16

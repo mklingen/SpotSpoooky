@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://djs5lkugcyp8a"]
+
+[ext_resource type="ArrayMesh" uid="uid://nrujgpset3qr" path="res://Art/MeshExports/house2.res" id="1_a0msa"]
+[ext_resource type="Material" uid="uid://dh1hjm6m5mw7g" path="res://Materials/house_material.tres" id="2_4cbtp"]
+[ext_resource type="Script" path="res://Scripts/NPCKeepoutZone.cs" id="2_bhe2i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vbnkp"]
+size = Vector3(8, 8.085, 10.4897)
+
+[node name="Building" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0, 1)
+mesh = ExtResource("1_a0msa")
+surface_material_override/0 = ExtResource("2_4cbtp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.24175, -0.781349)
+shape = SubResource("BoxShape3D_vbnkp")
+
+[node name="KeepoutZone" type="Node3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+script = ExtResource("2_bhe2i")
+keepOutShape = AABB(-8, -2.5, -8, 16, 5, 16)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0639227, 0.997955, 0, -0.997955, -0.0639227, -6, 6.83512, 0.80052)
+light_color = Color(0.996078, 0.72549, 0, 1)
+light_energy = 50.0
+light_specular = 5.0
+shadow_enabled = true
+spot_range = 7.9455
+spot_angle = 41.6312
