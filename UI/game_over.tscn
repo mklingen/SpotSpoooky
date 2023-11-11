@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwd7kcilp80db"]
 
-[ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_8o2td"]
-[ext_resource type="Script" path="res://UI/GameOver.cs" id="1_vaobm"]
+[ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_tlxma"]
+[ext_resource type="Script" path="res://UI/GameOver.cs" id="2_snyt0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oiu3y"]
 font_size = 45
@@ -13,8 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_8o2td")
-script = ExtResource("1_vaobm")
+theme = ExtResource("1_tlxma")
+script = ExtResource("2_snyt0")
 loseScene = "res://UI/main_menu.tscn"
 winScene = "res://UI/main_menu.tscn"
 nextLevelScene = "res://Scenes/root.tscn"

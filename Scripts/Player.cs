@@ -60,7 +60,9 @@ public partial class Player : Camera3D
 
 	ScreenShakeState shakeState;
 
-	[ExportGroup("Events")]
+    private Settings settings;
+
+    [ExportGroup("Events")]
 	private float reticleEventSizePct = 0.5f;
 
 	// Called when the zoom changes.
@@ -126,6 +128,8 @@ public partial class Player : Camera3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		settings = new Settings();
+		settings.LoadSettings();
 		worldEnvironment = Root.FindNodeRecusive<WorldEnvironment>(GetTree().Root);
 		unZoomedScale = this.Size;
 		zoomedScale = unZoomedScale * zoomFactor;
@@ -325,7 +329,8 @@ public partial class Player : Camera3D
 		} else if (@event is InputEventMouseMotion eventMouseMotion) {
 			lastMousePosition = eventMouseMotion.GlobalPosition;
 			if (Mode == ZoomMode.Zoomed && !isZooming) {
-				Position += GlobalTransform.Basis.Y * eventMouseMotion.Relative.Y * -1.0f * zoomedMouseSensitivity + GlobalTransform.Basis.X * eventMouseMotion.Relative.X * zoomedMouseSensitivity;
+				float multiplier = settings.InvertVerticalAxis ? 1.0f : -1.0f;
+				Position += GlobalTransform.Basis.Y * eventMouseMotion.Relative.Y * multiplier * zoomedMouseSensitivity + GlobalTransform.Basis.X * eventMouseMotion.Relative.X * zoomedMouseSensitivity;
 			}
 		}
 	}

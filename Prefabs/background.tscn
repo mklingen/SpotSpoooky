@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dbh1woged6gth"]
 
-[ext_resource type="ArrayMesh" uid="uid://cs44fx2si1nw0" path="res://Art/MeshExports/ground.res" id="1_tdket"]
+[ext_resource type="ArrayMesh" uid="uid://cnh864pb0ni36" path="res://Art/MeshExports/ground.res" id="1_tdket"]
 
 [sub_resource type="Environment" id="Environment_v1lvl"]
 ambient_light_source = 2

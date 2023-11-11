@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dedp74nucavoo"]
 
 [ext_resource type="Script" path="res://Scripts/Waldo.cs" id="1_7pq1h"]
-[ext_resource type="PackedScene" uid="uid://tf2p5xq3wpkn" path="res://Particles/waldo_teleport.tscn" id="3_5n1xd"]
+[ext_resource type="PackedScene" uid="uid://4qfwm16ko1po" path="res://Particles/waldo_teleport.tscn" id="3_5n1xd"]
 [ext_resource type="PackedScene" uid="uid://bwjwp3yhbyjjw" path="res://Prefabs/spooky.tscn" id="3_ttp6v"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_spa4w"]

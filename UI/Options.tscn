@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://bweaacxbamfpc"]
+
+[ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_gkpkp"]
+[ext_resource type="Script" path="res://UI/Options.cs" id="1_vts51"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gkpkp")
+script = ExtResource("1_vts51")
+mainMenuScene = "res://UI/main_menu.tscn"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Options"
+horizontal_alignment = 1
+
+[node name="GraphicsHeader" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Graphics"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Full Screen"
+
+[node name="VSyncCheckBox" type="CheckBox" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "VSync"
+
+[node name="AntialiasingCheckBox" type="CheckBox" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Anti-Aliasing"
+
+[node name="GameplayHeader" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Gameplay"
+
+[node name="InvertVerticalAxisCheckbox" type="CheckBox" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Invert Vertical Axis While Aiming"
+
+[node name="SaveButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Save"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]

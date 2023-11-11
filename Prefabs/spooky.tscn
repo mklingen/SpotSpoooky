@@ -26,14 +26,14 @@ bones/17/position = Vector3(0.309001, 0.00357499, -0.182898)
 bones/18/position = Vector3(6.36157e-17, 1, 0.381324)
 
 [node name="spooky_eye-holes_v2" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.999978, 0.00103693, 0.00656936, -1.3863e-08, 0.987771, -0.155911, -0.00665069, 0.155907, 0.987749, -0.00386438, 0.829787, 0.418975)
+transform = Transform3D(0.999978, 0.00103693, 0.00656936, -1.526e-08, 0.987771, -0.155911, -0.0066507, 0.155908, 0.987749, -0.00386438, 0.829786, 0.418975)
 bone_idx = 5
 
 [node name="spooky_eye-holes_v2" parent="Armature/Skeleton3D/spooky_eye-holes_v2" index="0"]
 surface_material_override/0 = ExtResource("2_n8n4i")
 
 [node name="spooky_jack-o-head" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.918668, 0.0011568, 0.0060352, -1.27358e-08, 1.10196, -0.143234, -0.00610991, 0.173931, 0.907434, -0.0061448, 0.770049, 0.079631)
+transform = Transform3D(0.918668, 0.00115681, 0.0060352, -1.40192e-08, 1.10196, -0.143234, -0.00610992, 0.173931, 0.907434, -0.0061448, 0.770049, 0.0796311)
 bone_idx = 6
 
 [node name="spooky_jack-o-head" parent="Armature/Skeleton3D/spooky_jack-o-head" index="0"]

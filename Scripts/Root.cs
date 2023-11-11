@@ -155,6 +155,13 @@ public partial class Root : Node3D
     public static float LastFrameStartTime = -1.0f;
     public static float SinOfLastFrameTime = -1.0f;
     public static SineTable RandomSinTable = new SineTable();
+    private static double lastSmoothedFPS = 0.0;
+    private Settings settings;
+
+    public static double SmoothedFPS()
+    {
+        return lastSmoothedFPS;
+    }
 
     public static double FPS()
     {
@@ -167,6 +174,13 @@ public partial class Root : Node3D
 
     public override void _Ready()
 	{
+        settings = new Settings();
+        settings.LoadSettings();
+
+        Viewport rootViewport = GetTree().Root;
+        rootViewport.ScreenSpaceAA = settings.Antialiasing ? Viewport.ScreenSpaceAAEnum.Fxaa : Viewport.ScreenSpaceAAEnum.Disabled;
+
+
         List<IScoreChangedHandler> scoreChangers = new List<IScoreChangedHandler>();
         GetInterfaceRecursive<IScoreChangedHandler>(this, scoreChangers);
         foreach (var scoreChanger in scoreChangers) {
@@ -190,6 +204,7 @@ public partial class Root : Node3D
         if (Input.IsActionJustReleased("ui_cancel")) {
             GetTree().ChangeSceneToFile(mainMenuScene);
         }
+        lastSmoothedFPS = lastSmoothedFPS * 0.99 + 0.01 * FPS();
 	}
 
     public void OnNPCGotEaten()
