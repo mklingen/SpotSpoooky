@@ -14,7 +14,7 @@ projection = 1
 current = true
 size = 100.0
 near = 1.0
-far = 100.0
+far = 500.0
 
 [node name="Reticle" type="Sprite3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 7.62939e-06, -1.58621)

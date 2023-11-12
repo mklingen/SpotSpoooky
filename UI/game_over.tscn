@@ -1,7 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwd7kcilp80db"]
+[gd_scene load_steps=9 format=3 uid="uid://dwd7kcilp80db"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_tlxma"]
 [ext_resource type="Script" path="res://UI/GameOver.cs" id="2_snyt0"]
+[ext_resource type="PackedScene" uid="uid://1hufbowypcgd" path="res://Prefabs/SpookyMeshOnly.tscn" id="3_v5ldx"]
+[ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://Art/sights.png" id="4_er2ew"]
+[ext_resource type="Script" path="res://UI/FakeReticle.cs" id="4_wiw46"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_nm7wt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68f0y"]
+transparency = 2
+alpha_scissor_threshold = 0.441
+alpha_antialiasing_mode = 0
+depth_draw_mode = 1
+no_depth_test = true
+shading_mode = 0
+disable_ambient_light = true
+albedo_color = Color(1, 1, 1, 0.564706)
+albedo_texture = ExtResource("4_er2ew")
+disable_receive_shadows = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_oiu3y"]
 font_size = 45
@@ -27,12 +44,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="WinOrLose" type="Label" parent="PanelContainer/VSplitContainer"]
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/VBoxContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 3
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(-1, -1.77636e-15, -8.74228e-08, -3.39213e-08, 0.921653, 0.388014, 8.05735e-08, 0.388014, -0.921653, 0, 2.6775, -3.23656)
+fov = 39.4921
+
+[node name="FakeReticle" type="MeshInstance3D" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(1.5, 5.32907e-15, 1.06581e-14, -5.32907e-15, 1.5, 0, -1.06581e-14, -3.78653e-29, 1.5, -2.84217e-14, 0, -2)
+mesh = SubResource("QuadMesh_nm7wt")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_68f0y")
+script = ExtResource("4_wiw46")
+
+[node name="Armature" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_v5ldx")]
+transform = Transform3D(-1.99911, 0, 0.0596466, 0, 2, 0, -0.0596466, 0, -1.99911, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.666181, -0.594146, -0.450769, 0, -0.604418, 0.796667, -0.74579, -0.530725, -0.402652, -2.17531, 3.56355, -2.30842)
+light_color = Color(0.654902, 0.721569, 0.992157, 1)
+light_energy = 2.0
+spot_range = 6.63668
+spot_angle = 34.4346
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.8793, -0.476269, 0, 0.476269, 0.8793, 0, 0, 2.91789)
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WinOrLose" type="Label" parent="PanelContainer/VBoxContainer/VSplitContainer"]
 layout_mode = 2
 text = "YOU LOSE!
 maybe next time."
@@ -40,6 +96,6 @@ label_settings = SubResource("LabelSettings_oiu3y")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OKButton" type="Button" parent="PanelContainer/VSplitContainer"]
+[node name="OKButton" type="Button" parent="PanelContainer/VBoxContainer/VSplitContainer"]
 layout_mode = 2
 text = "OK"

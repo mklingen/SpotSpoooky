@@ -63,10 +63,13 @@ transform = Transform3D(0.993297, 0, 0.115596, 0, 1, 0, -0.115596, 0, 0.993297, 
 [node name="Building4" parent="." instance=ExtResource("2_vplhw")]
 transform = Transform3D(-0.045555, 0, 0.998962, 0, 1, 0, -0.998962, 0, -0.045555, -23.4047, 0, -44.4195)
 
+[node name="Building8" parent="." instance=ExtResource("2_vplhw")]
+transform = Transform3D(0.0638706, 0, -0.997958, 0, 1, 0, 0.997958, 0, 0.0638706, 67.1875, 0, -31.8249)
+
 [node name="PlayerCamera" parent="." instance=ExtResource("3_pck7h")]
-transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -37.4426, 42.5049, 24.6296)
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -63.9675, 73.1333, 70.5721)
 v_offset = 5.0
-far = 200.0
+far = 250.0
 script = ExtResource("4_6t8i6")
 zoomCurve = SubResource("Curve_ffooi")
 zoomTime = 0.25
@@ -122,6 +125,12 @@ transform = Transform3D(1.1282, 0, -0.485001, 0, 0.749611, 0, 0.651368, 0, 0.840
 
 [node name="Tree5" parent="." instance=ExtResource("11_tobb2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -96)
+
+[node name="Tree9" parent="." instance=ExtResource("11_tobb2")]
+transform = Transform3D(2.51207, 0, -0.835302, 0, 1.61638, 0, 0.652801, 0, 3.21436, 69.5326, 0, -90.629)
+
+[node name="Tree10" parent="." instance=ExtResource("11_tobb2")]
+transform = Transform3D(1.26636, 0, 2.89899, 0, 1.61638, 0, -2.26561, 0, 1.62039, -70.2594, 0, -102.215)
 
 [node name="Tree6" parent="." instance=ExtResource("11_tobb2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -90)

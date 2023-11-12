@@ -11,12 +11,12 @@ public partial class BulletParticles : Node3D, Player.IShootHandler
 
 	public void OnShoot(Vector3 shootFrom, Vector3 shootTo)
 	{
+        Visible = true;
+        GlobalPosition = shootTo;
         CpuParticles3D particles = GetChild<CpuParticles3D>(0);
         if (particles != null) {
             particles.Emitting = true;
             particles.Restart();
         }
-        Visible = true;
-        GlobalPosition = shootTo;
     }
 }
