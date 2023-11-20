@@ -19,6 +19,7 @@ theme = ExtResource("1_co6hn")
 script = ExtResource("1_vdn2u")
 mainScene = "res://Scenes/root.tscn"
 optionsScene = "res://UI/Options.tscn"
+tutorialScene = "res://Scenes/tutorial.tscn"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="."]
 layout_mode = 1
@@ -47,6 +48,10 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "Start"
 
+[node name="Tutorial" type="Button" parent="VSplitContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial"
+
 [node name="Options" type="Button" parent="VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
@@ -57,5 +62,6 @@ text = "Quit
 "
 
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Start" to="." method="_OnStartPressed"]
+[connection signal="pressed" from="VSplitContainer/VBoxContainer/Tutorial" to="." method="_OnTutorialPressed"]
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Options" to="." method="_OnOptionsPressed"]
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Quit" to="." method="_OnQuitPressed"]

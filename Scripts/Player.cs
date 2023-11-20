@@ -125,15 +125,34 @@ public partial class Player : Camera3D
 
 	private Vector2 lastMousePosition;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    private class AudioManager
+    {
+        public RandomSFXPlayer ShootSound;
+        public RandomSFXPlayer ZoomInSound;
+        public RandomSFXPlayer ZoomOutSound;
+
+        public AudioManager(Node parent)
+        {
+            ShootSound = parent.FindChild("ShootSound") as RandomSFXPlayer;
+            ZoomInSound = parent.FindChild("ZoomInSound") as RandomSFXPlayer;
+            ZoomOutSound = parent.FindChild("ZoomOutSound") as RandomSFXPlayer;
+        }
+    }
+
+    private AudioManager audioManager;
+
+	[Export]
+	public bool IsShootingEnabled = true;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		settings = new Settings();
 		settings.LoadSettings();
 		worldEnvironment = Root.FindNodeRecusive<WorldEnvironment>(GetTree().Root);
 		unZoomedScale = this.Size;
 		zoomedScale = unZoomedScale * zoomFactor;
-		glowIntensityScale0 = worldEnvironment.Environment.GlowIntensity;
+		glowIntensityScale0 = worldEnvironment != null? worldEnvironment.Environment.GlowIntensity : 0.0f;
 		glowIntensityScale1 = (zoomedScale / unZoomedScale) * glowIntensityScale0;
 		startPosition = Position;
 		reticleNode = GetChild<Sprite3D>(0);
@@ -147,6 +166,7 @@ public partial class Player : Camera3D
 			OnReticleNear += handler.OnReticleNear;
 			OnReticleLeft += handler.OnReticleLeft;
 		}
+		audioManager = new AudioManager(this);
     }
 
 	public Vector3 GetCamOffset()
@@ -223,6 +243,7 @@ public partial class Player : Camera3D
 					reticleNode.Position = reticleStartPositon;
 					EmitSignal(SignalName.OnZoomChange, true);
 					worldEnvironment.Environment.GlowIntensity = glowIntensityScale1;
+					audioManager.ZoomInSound.PlayRandom((float)settings.SFXVolume);
                     break;
 				}
 			// Switch to unzoomed mode.
@@ -237,6 +258,7 @@ public partial class Player : Camera3D
 						EmitSignal(SignalName.OnReticleLeft, handler.GetThis());
 					}
                     worldEnvironment.Environment.GlowIntensity = glowIntensityScale0;
+                    audioManager.ZoomOutSound.PlayRandom((float)settings.SFXVolume);
                     break;
 				}
 		}
@@ -302,7 +324,8 @@ public partial class Player : Camera3D
         }
 		EmitSignal(SignalName.OnShoot, start, end);
 		ShakeScreen();
-	}
+        audioManager.ShootSound.PlayRandom((float)settings.SFXVolume);
+    }
 
 	private void HandleShaking()
 	{
@@ -324,7 +347,7 @@ public partial class Player : Camera3D
 
 		if (@event.IsActionPressed("Zoom")) {
 			ToggleZoom();
-		} else if (@event.IsActionPressed("Shoot") && !isZooming && Mode == ZoomMode.Zoomed) {
+		} else if (@event.IsActionPressed("Shoot") && !isZooming && Mode == ZoomMode.Zoomed && IsShootingEnabled) {
 			Shoot();
 		} else if (@event is InputEventMouseMotion eventMouseMotion) {
 			lastMousePosition = eventMouseMotion.GlobalPosition;

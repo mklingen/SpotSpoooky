@@ -11,6 +11,11 @@ public partial class SpookyBlock : TextureRect
 
     private float currentFillAmount;
 
+    public void SetColor(Color baseColor)
+    {
+        shaderMaterial.SetShaderParameter("baseColor", baseColor);
+    }
+
 	public override void _Ready()
 	{
 		base._Ready();

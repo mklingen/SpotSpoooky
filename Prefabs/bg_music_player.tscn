@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cifowkia66twp"]
+
+[ext_resource type="AudioStream" uid="uid://2rn31f56fc6o" path="res://Audio/Music/Find_Spooky_Music_4.mp3" id="1_6oop6"]
+[ext_resource type="Script" path="res://Scripts/BGMusicManager.cs" id="2_mide2"]
+
+[node name="BGMusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_6oop6")
+autoplay = true
+script = ExtResource("2_mide2")
+defaultBackgroundMusic = ExtResource("1_6oop6")

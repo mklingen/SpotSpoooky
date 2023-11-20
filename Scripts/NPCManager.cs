@@ -54,6 +54,7 @@ public partial class NPCManager : Node3D
 	{
 		numNPCs = GameStats.Get(this).GetLevelScaledValue(minNumNPCs, maxNumNPCs);
 		npcs = new List<NPC>();
+		Root.GetRecursive<NPC>(this, npcs);
 		paths = new List<Path3D>();
 		keepoutZones = new List<NPCKeepoutZone>();
 		Root.GetRecursive(GetTree().Root, keepoutZones);

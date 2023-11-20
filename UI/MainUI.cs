@@ -17,15 +17,31 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 
     private List<SpookyBlock> blocks = new List<SpookyBlock>();
 
+	[Export]
+	private Color normalColor;
+
+	[Export]
+	private Color alertColor;
+
 	int currentNumSpooks = -1;
 	int currentMaxSpooks = -1;
+
+	[Export]
+	float alertWhenTimeGreaterThan = 0.6f;
+
+	private Root root;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		root = Root.Get(GetTree());
+		targetColor = normalColor;
+		prevColor = normalColor;
         spookyContainer = FindChild("SpookyBar") as Control;
 		loadingScreen = FindChild("LoadingScreen");
-
+		if (loadingScreen != null && root.IsTutorial) {
+			OnLoaded();
+		}
 		var gameStats = GameStats.Get(this);
 		if (gameStats != null) {
 			Label text = loadingScreen.FindChild("Label") as Label;
@@ -57,12 +73,15 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 
 	public void OnScoreChanged(int numSpooks, int maxSpooks)
 	{
+		Flash();
 		SetElements(blocks, spookyContainer, maxSpooks, blockPrefab);
 		for (int k = 0; k < numSpooks; k++) {
 			blocks[k].SetFillAmount(1);
 		}
 		for (int j = numSpooks; j < maxSpooks; j++) {
-			blocks[j].SetFillAmount(0);
+			if (j > 0) {
+				blocks[j].SetFillAmount(0);
+			}
 		}
 		currentNumSpooks = numSpooks;
 		currentMaxSpooks = maxSpooks;
@@ -82,18 +101,56 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 	{
 		MakeAlert(alert);
 	}
+	private Color targetColor;
+	private Color prevColor;
+	private bool wasAlerting = false;
+	private float lastFlashTime = 0.0f;
+	private bool isFlashing = false;
+
+	[Export]
+	private Color flashColor;
+	[Export]
+	private float flashFor = 0.1f;
+	[Export]
+	private Curve flashCurve;
+	public void Flash()
+	{
+        isFlashing = true;
+        lastFlashTime = Root.Timef();
+    }
 
 	// Slowly fill up the next spooky block.
 	public void OnTurnTimeChanged(float normalizedTime)
 	{
 		int targetSpook = currentNumSpooks;
-		if (targetSpook < currentMaxSpooks) {
+		if (targetSpook < currentMaxSpooks && targetSpook >= 0) {
 			blocks[targetSpook].SetFillAmount(normalizedTime);
+		}
+		bool shouldAlert = normalizedTime > alertWhenTimeGreaterThan;
+        targetColor = shouldAlert ? alertColor : normalColor;
+		if (wasAlerting != shouldAlert) {
+			isFlashing = true;
+			lastFlashTime = Root.Timef();
+		}
+		wasAlerting = shouldAlert;
+		if (isFlashing) {
+			float alpha = (Root.Timef() - lastFlashTime) / flashFor;
+			if (alpha > 1.0f) {
+				isFlashing = false;
+			} else {
+				targetColor = targetColor.Lerp(flashColor, flashCurve.Sample(alpha));
+			}
+		}
+		prevColor = prevColor.Lerp(targetColor, 0.1f);
+        foreach (SpookyBlock block in blocks) {
+			block.SetColor(isFlashing ? targetColor : prevColor);
 		}
 	}
 
 	public void OnLoaded()
 	{
-		loadingScreen.QueueFree();
+		if (loadingScreen != null && loadingScreen.NativeInstance.ToInt64() > 0x0) {
+			loadingScreen.QueueFree();
+		}
 	}
 }

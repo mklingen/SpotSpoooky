@@ -25,6 +25,23 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 
 	private AnimationPlayer animation;
 
+	public void Unfreeze()
+	{
+        List<MeshInstance3D> meshes = new List<MeshInstance3D>();
+        Root.GetRecursive<MeshInstance3D>(this, meshes);
+        foreach (var mesh in meshes) {
+            mesh.MaterialOverride = null;
+        }
+        IsFrozen = false;
+        var bobber = Root.FindNodeRecusive<NPCAnimator>(this);
+        if (bobber != null) {
+            bobber.Active = true;
+        }
+        if (animation != null && animation.CurrentAnimation != "") {
+            animation.Play();
+        }
+    }
+
 	public void Freeze()
 	{
 		List<MeshInstance3D> meshes = new List<MeshInstance3D>();

@@ -55,6 +55,28 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
     [Signal]
     public delegate void OnTurnTimeChangedEventHandler(float normalizedTime);
 
+	private class AudioManager
+	{
+		public RandomSFXPlayer DieSound;
+        public RandomSFXPlayer ScareSound;
+
+		public AudioManager(Node parent)
+		{
+            DieSound = parent.FindChild("DieSound") as RandomSFXPlayer;
+            ScareSound = parent.FindChild("ScareSound") as RandomSFXPlayer;
+        }
+
+	}
+	private AudioManager audioManager;
+
+	private Settings settings;
+
+
+    [ExportGroup("Tutorial")]
+    // Controls whether Waldo is in tutorial mode.
+    [Export]
+	private bool isTutorial = false;
+
     public interface ITurnTimeChangedHandler
     {
         abstract void OnTurnTimeChanged(float normalizedTime);
@@ -70,6 +92,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private void UpdateNormalizedTurnTime(float dt)
 	{
+		if (isTutorial) {
+			return;
+		}
 		// We are paused.
 		if (huntState == HuntState.Hiding) {
 			timeOffset -= dt;
@@ -82,7 +107,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private NPC targetNPC;
 
-
     public interface IEatHandler
     {
         abstract void GotEaten(NPC eaten);
@@ -91,18 +115,24 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+		settings = new Settings();
+		settings.LoadSettings();
 		// Total time is scaled by the level inversely, such that the minimum total time is achieved
 		// at the very end of the game. This makes the game harder and harder!
 		totalTime = -GameStats.Get(this).GetLevelScaledValue(-maxTotalTime, -minTotalTime);
 		npcManager = Root.FindNodeRecusive<NPCManager>(GetTree().Root);
 		stateChangeTime = Root.Timef();
-		TeleportToNewLocation(false);
-		TransitionState(HuntState.Idle);
+		if (!isTutorial) {
+			TeleportToNewLocation(false);
+			TransitionState(HuntState.Idle);
+		}
 		List<ITurnTimeChangedHandler> handlers = new List<ITurnTimeChangedHandler>();
 		Root.GetInterfaceRecursive<ITurnTimeChangedHandler>(GetTree().Root, handlers);
 		foreach (var handler in handlers) {
 			OnTurnTimeChanged += handler.OnTurnTimeChanged;
         }
+		audioManager = new AudioManager(this);
+        globalPosBeforeMoving = GlobalPosition;
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -120,10 +150,12 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
         switch (huntState) {
 			case HuntState.Idle:
-                EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
-                if (lastNormalizedTurnTime >= proportionTimeIdle) {
-					SelectTarget();
-					TransitionState(HuntState.MovingToTarget);
+				if (!isTutorial) {
+					EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
+					if (lastNormalizedTurnTime >= proportionTimeIdle) {
+						SelectTarget();
+						TransitionState(HuntState.MovingToTarget);
+					}
 				}
 				break;
 			case HuntState.MovingToTarget:
@@ -167,6 +199,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private void SelectTarget()
 	{
+		if (isTutorial) {
+			return;
+		}
 		var npcs = npcManager.GetNPCS();
 		float closestDist = float.MaxValue;
 		NPC closestNPC = null;
@@ -185,15 +220,16 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
     }
 
-	private void EatNPC()
+	public void EatNPC()
 	{
 		if (targetNPC != null) {
 			npcManager.EatNPC(targetNPC);
 		}
 		timeTurnEnded = Root.Timef();
-	}
+		audioManager.ScareSound.PlayRandom((float)this.settings.SFXVolume);
+    }
 
-	private void MaybeCreateTeleportEffect()
+	public void MaybeCreateTeleportEffect()
 	{
         if (teleportEffect != null) {
             var instantiate = teleportEffect.Instantiate<Node3D>();
@@ -207,18 +243,29 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		if (createEffect) {
 			MaybeCreateTeleportEffect();
 		}
-		bool isValid = false;
-		do {
-			GlobalPosition = npcManager.GetValidSpawnLocation();
-			isValid = !npcManager.IsInKeepOutZone(this.GlobalPosition) && npcManager.CanPlayerSee(this.GlobalPosition);
-		} while (!isValid);
+		if (npcManager != null) {
+			bool isValid = false;
+			do {
+				GlobalPosition = npcManager.GetValidSpawnLocation();
+				isValid = !npcManager.IsInKeepOutZone(this.GlobalPosition) && npcManager.CanPlayerSee(this.GlobalPosition);
+			} while (!isValid);
+		}
 
 		if (createEffect) {
 			MaybeCreateTeleportEffect();
 		}
+		var root = Root.Get(GetTree());
+		if (root != null && (root.IsGameWon() || root.IsGameLost())) {
+			this.Hide();
+		}
 	}
 
-	private void MoveToTarget(float dt)
+	public void SetNormalizedTurnTime(float normalizedTime)
+	{
+		lastNormalizedTurnTime = normalizedTime;
+	}
+
+	public void MoveToTarget(float dt)
     {
 		if (targetNPC == null) {
 			return;
@@ -227,7 +274,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		if (diff.Length() < eatDist) {
 			return;
 		}
-		float alpha = (lastNormalizedTurnTime - proportionTimeIdle) / (proportionTimeMoving);
+		float alpha = Mathf.Clamp((lastNormalizedTurnTime - proportionTimeIdle) / (proportionTimeMoving), 0.0f, 1.0f);
 		Vector3 targetVelocity = diff.Normalized(); ;
 		this.GlobalPosition = globalPosBeforeMoving * (1.0f - alpha) + targetNPC.GlobalPosition * alpha;
 		this.ConstantLinearVelocity = targetVelocity;
@@ -250,6 +297,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	public void GotShot()
 	{
+        audioManager.DieSound.PlayRandom((float)this.settings.SFXVolume);
 		var root = Root.Get(GetTree());
         root?.OnWaldoShot();
 		TeleportToNewLocation(true);
@@ -257,8 +305,12 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		TransitionState(HuntState.Idle);
     }
 
+    public void SetTarget(NPC target)
+	{
+		targetNPC = target;
+	}
 
-	private bool wasReticleNear;
+    private bool wasReticleNear;
 	private HuntState huntStateBeforeHiding;
 	public bool WasNear()
 	{

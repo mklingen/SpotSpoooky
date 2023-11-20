@@ -10,6 +10,8 @@ public partial class Root : Node3D
     [Export]
     private int maxSpooks = 6;
 
+    public int NumSpooks {  get { return numSpooks; } }
+
     [Signal]
     public delegate void OnAlertEventHandler(string alert);
 
@@ -158,6 +160,13 @@ public partial class Root : Node3D
     private static double lastSmoothedFPS = 0.0;
     private Settings settings;
 
+    [ExportGroup("Tutorial")]
+    // Controls whether Waldo is in tutorial mode.
+    [Export]
+    private bool isTutorial = false;
+
+    public bool IsTutorial {  get { return isTutorial;  } }
+
     public static double SmoothedFPS()
     {
         return lastSmoothedFPS;
@@ -170,6 +179,16 @@ public partial class Root : Node3D
     public static float Timef()
     {
         return Time.GetTicksMsec() / 1000.0f;
+    }
+
+    public bool IsGameWon()
+    {
+        return numSpooks < 0;
+    }
+
+    public bool IsGameLost()
+    {
+        return numSpooks > maxSpooks;
     }
 
     public override void _Ready()
@@ -228,7 +247,7 @@ public partial class Root : Node3D
             DoAfterGameOverTimer(1.0f, LoseGame);
         }
         if (numSpooks < 0) {
-            numSpooks = 0;
+            numSpooks = -1;
             DoAfterGameOverTimer(1.0f, WinGame);
         }
         EmitSignal(SignalName.OnScoreChanged, numSpooks, maxSpooks);
