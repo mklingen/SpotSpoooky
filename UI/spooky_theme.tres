@@ -6,8 +6,8 @@
 
 [resource]
 default_font = ExtResource("1_66gim")
-default_font_size = 24
-Button/font_sizes/font_size = 24
-CheckBox/font_sizes/font_size = 24
-Label/font_sizes/font_size = 16
+default_font_size = 18
+Button/font_sizes/font_size = 18
+CheckBox/font_sizes/font_size = 18
+Label/font_sizes/font_size = 18
 Label/styles/normal = SubResource("StyleBoxEmpty_8rtr0")

@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="SpotSpooky"
+config/name="Spot Spooky"
+config/description="Spot Spooky video game."
 run/main_scene="res://UI/main_menu.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
@@ -27,10 +28,15 @@ settings/stdout/print_fps=true
 [display]
 
 window/vsync/vsync_mode=0
+mouse_cursor/custom_image="res://Art/sights.png"
 
 [dotnet]
 
 project/assembly_name="OdlawSniper"
+
+[gui]
+
+theme/default_theme_scale=2.0
 
 [input]
 

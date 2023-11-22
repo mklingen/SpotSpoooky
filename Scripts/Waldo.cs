@@ -17,8 +17,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		Idle,
 		MovingToTarget,
 		WarmingUp,
-		PostHunt,
-		Hiding
+		PostHunt
 	}
 
 
@@ -94,11 +93,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	private void UpdateNormalizedTurnTime(float dt)
 	{
 		if (isTutorial) {
-			return;
-		}
-		// We are paused.
-		if (huntState == HuntState.Hiding) {
-			timeOffset -= dt;
 			return;
 		}
 		ResetNormalizedTurnTime();
@@ -196,20 +190,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
                     TransitionState(HuntState.Idle);
                 }
                 break;
-			case HuntState.Hiding: {
-                    if (animationPlayer != null) {
-                        animationPlayer.CurrentAnimation = idleAnimation;
-                    }
-                    OnHiding();
-					break;
-			}
 		}
 	}
 
-	private void OnHiding()
-	{
-
-	}
 
 	private bool CloseEnoughToEat()
 	{
@@ -316,9 +299,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 			globalPosBeforeMoving = GlobalPosition;
         }
 		huntState = newState;
-		if (newState != HuntState.Hiding) {
-			huntStateBeforeHiding = newState;
-		}
 		stateChangeTime = Root.Timef();
 	}
 
@@ -360,7 +340,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
 		wasReticleNear = true;
 		huntStateBeforeHiding = huntState;
-		TransitionState(HuntState.Hiding);
 	}
 
 	public void OnReticleLeft(Node3D reticleIsNearObject)
@@ -372,7 +351,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 			return;
 		}
         wasReticleNear = false;
-		TransitionState(huntStateBeforeHiding);
+		//TransitionState(huntStateBeforeHiding);
     }
 
 	private bool doneLoading = false;

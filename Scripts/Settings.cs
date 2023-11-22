@@ -7,6 +7,7 @@ public partial class Settings : Resource
     public bool VSync { get; set; } = true;
     public bool Antialiasing { get; set; } = true;
     public bool InvertVerticalAxis { get; set; } = false;
+    public bool InstantZoom { get; set; } = false;
 
     public double MusicVolume { get; set; } = 0.0;
     public double SFXVolume { get; set; } = 0.0;
@@ -18,6 +19,7 @@ public partial class Settings : Resource
         config.SetValue("display", "vsync", VSync);
         config.SetValue("display", "antialiasing", Antialiasing);
         config.SetValue("input", "invert_vertical_axis", InvertVerticalAxis);
+        config.SetValue("input", "instant_zoom", InstantZoom);
         config.SetValue("audio", "sfx_volume", SFXVolume);
         config.SetValue("audio", "music_volume", MusicVolume);
 
@@ -36,6 +38,7 @@ public partial class Settings : Resource
             InvertVerticalAxis = (bool)config.GetValue("input", "invert_vertical_axis", InvertVerticalAxis);
             MusicVolume = (double)config.GetValue("audio", "music_volume", MusicVolume);
             SFXVolume = (double)config.GetValue("audio", "sfx_volume", SFXVolume);
+            InstantZoom = (bool)config.GetValue("input", "instant_zoom", InstantZoom);
         }
     }
 

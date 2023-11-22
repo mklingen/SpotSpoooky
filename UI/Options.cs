@@ -41,6 +41,7 @@ public partial class Options : Control
         GetCheckbox("VSyncCheckBox").SetPressedNoSignal(settings.VSync);
         GetCheckbox("AntialiasingCheckBox").SetPressedNoSignal(settings.Antialiasing);
         GetCheckbox("InvertVerticalAxisCheckbox").SetPressedNoSignal(settings.InvertVerticalAxis);
+        GetCheckbox("InstantZoomCheckbox").SetPressedNoSignal(settings.InstantZoom);
         GetSlider("SFXVolume").SetValueNoSignal(settings.SFXVolume);
         GetSlider("MusicVolume").SetValueNoSignal(settings.MusicVolume);
     }
@@ -53,6 +54,7 @@ public partial class Options : Control
         settings.VSync = GetCheckbox("VSyncCheckBox").ButtonPressed;
         settings.Antialiasing = GetCheckbox("AntialiasingCheckBox").ButtonPressed;
         settings.InvertVerticalAxis = GetCheckbox("InvertVerticalAxisCheckbox").ButtonPressed;
+        settings.InstantZoom = GetCheckbox("InstantZoomCheckbox").ButtonPressed;
         settings.SFXVolume = GetSlider("SFXVolume").Value;
         settings.MusicVolume = GetSlider("MusicVolume").Value;
         // Save settings

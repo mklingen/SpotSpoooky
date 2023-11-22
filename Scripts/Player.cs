@@ -14,6 +14,8 @@ public partial class Player : Camera3D
 	private float zoomTime = 0.5f;
 	[Export]
 	private float zoomedMouseSensitivity = 0.01f;
+	[Export]
+	private bool instantZoom = false;
 
 	private float unZoomedScale;
 	private float zoomedScale;
@@ -124,6 +126,7 @@ public partial class Player : Camera3D
 	private float glowIntensityScale1;
 
 	private Vector2 lastMousePosition;
+	private Vector2 mousePositionOnZoom;
 
     private class AudioManager
     {
@@ -149,6 +152,7 @@ public partial class Player : Camera3D
 	{
 		settings = new Settings();
 		settings.LoadSettings();
+		instantZoom = settings.InstantZoom;
 		worldEnvironment = Root.FindNodeRecusive<WorldEnvironment>(GetTree().Root);
 		unZoomedScale = this.Size;
 		zoomedScale = unZoomedScale * zoomFactor;
@@ -187,14 +191,22 @@ public partial class Player : Camera3D
 			if (Mode == ZoomMode.UnZoomed) {
 				postZoomReticlePos = preZoomReticlePos;
 				preZoomReticlePos = reticleStartPositon;
-			}
+                //postZoomReticlePos = reticleStartPositon;
+                //preZoomReticlePos = preZoomReticlePos;
+                Input.MouseMode = Input.MouseModeEnum.Hidden;
+                GetViewport().WarpMouse(mousePositionOnZoom);
+            }
 			// Calculate zoom animation.
             float t = Root.Timef() - timeStartedZooming;
-			if (t > zoomTime) {
+			if (t > zoomTime || instantZoom) {
 				isZooming = false;
 				Size = targetZoom;
 				Position = targetPosition;
                 reticleNode.Position = postZoomReticlePos;
+				if (Mode == ZoomMode.UnZoomed) {
+                    // Move the mouse back to its original position.
+                    Input.MouseMode = Input.MouseModeEnum.Hidden;
+                }
             } else {
 				// Everything is sampled from the same animation curve from 0-1
 				float alpha = zoomCurve.Sample(t / zoomTime);
@@ -236,7 +248,8 @@ public partial class Player : Camera3D
 			// Switch to zoomed mode.
 			case ZoomMode.UnZoomed: {
 					Mode = ZoomMode.Zoomed;
-					targetPosition = ProjectPosition(lastMousePosition, 0.0f) - GetCamOffset();
+					mousePositionOnZoom = lastMousePosition;
+                    targetPosition = ProjectPosition(lastMousePosition, 0.0f) - GetCamOffset();
 					targetZoom = zoomedScale;
 					startZoom = unZoomedScale;
 					preZoomPosition = startPosition;

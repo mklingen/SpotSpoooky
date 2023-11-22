@@ -88,6 +88,8 @@ transform = Transform3D(1, 0, 0, 0, 0.8793, -0.476269, 0, 0.476269, 0.8793, 0, 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+collapsed = true
+dragger_visibility = 1
 
 [node name="WinOrLose" type="Label" parent="PanelContainer/VBoxContainer/VSplitContainer"]
 layout_mode = 2

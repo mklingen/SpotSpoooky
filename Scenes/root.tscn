@@ -71,6 +71,7 @@ v_offset = 5.0
 far = 250.0
 zoomCurve = SubResource("Curve_ffooi")
 zoomTime = 0.25
+instantZoom = true
 collisionRayMask = 1
 shakeCurve = SubResource("Curve_sq3h4")
 shakeAmount = 5.0
