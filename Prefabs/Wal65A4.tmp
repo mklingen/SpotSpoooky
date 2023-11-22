@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://vyq0wreyrsqo" path="res://Audio/SFX/SFX_HitSpooky_3.wav" id="7_77v2n"]
 [ext_resource type="AudioStream" uid="uid://wkh68ghjj3ro" path="res://Audio/SFX/scare_1.wav" id="8_0i64v"]
 [ext_resource type="AudioStream" uid="uid://dh65fnfxg7wve" path="res://Audio/SFX/scare_2.wav" id="9_i8ewd"]
-[ext_resource type="PackedScene" uid="uid://bj5t3f7tue660" path="res://Art/spooky_mesh.tscn" id="10_j4g6f"]
+[ext_resource type="PackedScene" uid="uid://gbthraxf7ce8" path="res://Art/spooky_mesh.tscn" id="10_j4g6f"]
 [ext_resource type="AudioStream" uid="uid://ba3vjf23u35fr" path="res://Audio/SFX/scare_3.wav" id="10_pohdg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_spa4w"]

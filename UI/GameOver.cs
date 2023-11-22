@@ -18,9 +18,17 @@ public partial class GameOver : Control
 	private string loseText = "You lost level {0}!\nMaybe next time!";
 	[Export]
 	private string nextLevelText = "You spotted spooky in time!\nLevel {0} is next.";
+
+	private AnimationPlayer animationSpooky;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		animationSpooky = Root.FindNodeRecusive<AnimationPlayer>(this);
+		if (animationSpooky != null) {
+			animationSpooky.CurrentAnimation = animationSpooky.GetAnimationList()[0];
+			animationSpooky.Play();
+        }
         Input.MouseMode = Input.MouseModeEnum.Visible;
         var okButton = FindChild("OKButton") as Button;
 		if (okButton != null) {

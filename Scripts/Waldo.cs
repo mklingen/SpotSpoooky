@@ -172,9 +172,6 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 				}
 				break;
 			case HuntState.MovingToTarget:
-                if (animationPlayer != null) {
-                    animationPlayer.CurrentAnimation = walkAnimation;
-                }
                 EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
                 this.ConstantLinearVelocity = Vector3.Zero;
                 MoveToTarget((float)delta);
@@ -293,12 +290,16 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	public void MoveToTarget(float dt)
     {
-		if (targetNPC == null) {
+        if (animationPlayer != null) {
+            animationPlayer.CurrentAnimation = walkAnimation;
+        }
+        if (targetNPC == null) {
 			return;
 		}
 		var diff = targetNPC.GlobalPosition - this.GlobalPosition;
 		if (diff.Length() < eatDist) {
-			return;
+            animationPlayer.CurrentAnimation = preScareAnimation;
+            return;
 		}
 		float alpha = Mathf.Clamp((lastNormalizedTurnTime - proportionTimeIdle) / (proportionTimeMoving), 0.0f, 1.0f);
 		Vector3 targetVelocity = diff.Normalized(); ;
@@ -306,7 +307,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		this.ConstantLinearVelocity = targetVelocity;
     }
 
-    private void TransitionState(HuntState newState)
+    public void TransitionState(HuntState newState)
 	{
 		if (newState == HuntState.Idle) {
 			timeTurnStarted = Root.Timef();

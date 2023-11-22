@@ -276,6 +276,7 @@ public partial class TutorialManager : Node3D
             {
                 spotLight.Hide();
                 waldo.SetTarget(npc);
+                waldo.TransitionState(Waldo.HuntState.MovingToTarget);
                 timeSpookyStartedMoving = Root.Timef();
             },
             ()=>
@@ -289,6 +290,7 @@ public partial class TutorialManager : Node3D
             new SayThingForTime("Then scares the trick-or-treater!", 2.0f),
             new DoThing(() =>
             {
+                waldo.TransitionState(Waldo.HuntState.WarmingUp);
                 waldo.EatNPC();
             }),
             new SayThingForTime("Spooky must be stopped!", 2.0f),
@@ -297,6 +299,7 @@ public partial class TutorialManager : Node3D
                 npc.Unfreeze();
                 waldo.GlobalPosition = origWaldoPosition;
                 waldo.MaybeCreateTeleportEffect();
+                waldo.TransitionState(Waldo.HuntState.Idle);
                 player.IsShootingEnabled = true;
             }
             ),

@@ -60,11 +60,11 @@ size = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, -1.77636e-15, -8.74228e-08, -3.39213e-08, 0.921653, 0.388014, 8.05735e-08, 0.388014, -0.921653, 0, 2.6775, -3.23656)
+transform = Transform3D(-1, -2.11081e-14, -8.74228e-08, 1.81565e-10, 0.999998, -0.0020771, 8.74226e-08, -0.0020771, -0.999998, 0, 1.55314, -4.82002)
 fov = 39.4921
 
 [node name="FakeReticle" type="MeshInstance3D" parent="PanelContainer/VBoxContainer/SubViewportContainer/SubViewport/Camera3D"]
-transform = Transform3D(1.5, 5.32907e-15, 1.06581e-14, -5.32907e-15, 1.5, 0, -1.06581e-14, -3.78653e-29, 1.5, -2.84217e-14, 0, -2)
+transform = Transform3D(0.5, 1.76711e-15, 4.73695e-15, -1.76711e-15, 0.5, -1.6829e-29, -4.73695e-15, 8.76509e-32, 0.5, -2.84217e-14, 0, -2)
 mesh = SubResource("QuadMesh_nm7wt")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_68f0y")
