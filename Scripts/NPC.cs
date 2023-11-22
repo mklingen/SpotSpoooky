@@ -64,7 +64,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
     {
         if (freezeEffect != null) {
             var instantiate = freezeEffect.Instantiate<Node3D>();
-            GetTree().Root.AddChild(instantiate);
+			GetTree().CurrentScene.AddChild(instantiate);
             instantiate.GlobalPosition = this.GlobalPosition;
         }
     }

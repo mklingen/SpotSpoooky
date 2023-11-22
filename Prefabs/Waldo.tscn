@@ -12,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://ba3vjf23u35fr" path="res://Audio/SFX/scare_3.wav" id="10_pohdg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_spa4w"]
+height = 2.47129
+radius = 0.928358
 
 [node name="Waldo" type="AnimatableBody3D"]
 collision_layer = 4

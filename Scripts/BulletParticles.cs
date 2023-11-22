@@ -3,8 +3,12 @@ using System;
 
 public partial class BulletParticles : Node3D, Player.IShootHandler
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+    [ExportGroup("Special Effects")]
+    [Export]
+    private PackedScene bulletHole;
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 	}
 
@@ -17,6 +21,12 @@ public partial class BulletParticles : Node3D, Player.IShootHandler
         if (particles != null) {
             particles.Emitting = true;
             particles.Restart();
+        }
+        if (bulletHole != null) {
+            var instantiate = bulletHole.Instantiate<Node3D>();
+            GetTree().CurrentScene.AddChild(instantiate);
+            instantiate.GlobalPosition = this.GlobalPosition;
+            instantiate.LookAt(shootFrom);
         }
     }
 }

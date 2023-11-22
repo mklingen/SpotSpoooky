@@ -256,7 +256,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	{
         if (teleportEffect != null) {
             var instantiate = teleportEffect.Instantiate<Node3D>();
-            GetTree().Root.AddChild(instantiate);
+            GetTree().CurrentScene.AddChild(instantiate);
             instantiate.GlobalPosition = this.GlobalPosition;
         }
     }

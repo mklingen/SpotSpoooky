@@ -62,6 +62,7 @@ public partial class GameOver : Control
 
 	private void OkButton_Pressed()
 	{
+		GetTree().CurrentScene.QueueFree();
 		GetTree().ChangeSceneToFile(nextSceneToLoad);
 	}
 
