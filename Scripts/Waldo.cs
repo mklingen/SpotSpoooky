@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 
 public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IOnReticleNearHandler, NPCManager.IOnLoadedHandler
 {
@@ -107,6 +108,14 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private NPC targetNPC;
 
+	[ExportGroup("Animations")]
+	[Export] private string walkAnimation;
+    [Export] private string idleAnimation;
+    [Export] private string preScareAnimation;
+    [Export] private string scareAnimation;
+
+	private AnimationPlayer animationPlayer;
+
     public interface IEatHandler
     {
         abstract void GotEaten(NPC eaten);
@@ -121,6 +130,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		// at the very end of the game. This makes the game harder and harder!
 		totalTime = -GameStats.Get(this).GetLevelScaledValue(-maxTotalTime, -minTotalTime);
 		npcManager = Root.FindNodeRecusive<NPCManager>(GetTree().Root);
+		animationPlayer = Root.FindNodeRecusive<AnimationPlayer>(this);
 		stateChangeTime = Root.Timef();
 		if (!isTutorial) {
 			TeleportToNewLocation(false);
@@ -150,6 +160,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
         switch (huntState) {
 			case HuntState.Idle:
+				if (animationPlayer != null) {
+					animationPlayer.CurrentAnimation = idleAnimation;
+				}
 				if (!isTutorial) {
 					EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
 					if (lastNormalizedTurnTime >= proportionTimeIdle) {
@@ -159,6 +172,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 				}
 				break;
 			case HuntState.MovingToTarget:
+                if (animationPlayer != null) {
+                    animationPlayer.CurrentAnimation = walkAnimation;
+                }
                 EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
                 this.ConstantLinearVelocity = Vector3.Zero;
                 MoveToTarget((float)delta);
@@ -167,6 +183,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 				}
 				break;
 			case HuntState.WarmingUp:
+                if (animationPlayer != null) {
+                    animationPlayer.CurrentAnimation = preScareAnimation;
+                }
                 EmitSignal(SignalName.OnTurnTimeChanged, lastNormalizedTurnTime);
                 if (lastNormalizedTurnTime >= 0.9999f) {
                     EatNPC();
@@ -181,7 +200,10 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
                 }
                 break;
 			case HuntState.Hiding: {
-					OnHiding();
+                    if (animationPlayer != null) {
+                        animationPlayer.CurrentAnimation = idleAnimation;
+                    }
+                    OnHiding();
 					break;
 			}
 		}
@@ -222,7 +244,11 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	public void EatNPC()
 	{
-		if (targetNPC != null) {
+        if (animationPlayer != null) {
+            animationPlayer.CurrentAnimation = scareAnimation;
+			animationPlayer.Play();
+        }
+        if (targetNPC != null) {
 			npcManager.EatNPC(targetNPC);
 		}
 		timeTurnEnded = Root.Timef();
