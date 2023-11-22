@@ -1,7 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cye7uu46jinkn"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cye7uu46jinkn"]
 
 [ext_resource type="FontFile" uid="uid://jdi2h2sr8g17" path="res://UI/GhoulFriAOE.ttf" id="1_66gim"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rtr0"]
+
 [resource]
 default_font = ExtResource("1_66gim")
-default_font_size = 16
+default_font_size = 24
+Button/font_sizes/font_size = 24
+CheckBox/font_sizes/font_size = 24
+Label/font_sizes/font_size = 16
+Label/styles/normal = SubResource("StyleBoxEmpty_8rtr0")

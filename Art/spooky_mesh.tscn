@@ -20,13 +20,11 @@ bones/12/rotation = Quaternion(0.479022, -0.52027, 0.482855, 0.516437)
 bones/12/scale = Vector3(1.00108, 0.997872, 1.00106)
 bones/13/position = Vector3(2.22045e-16, 0.307879, 0.016634)
 bones/13/rotation = Quaternion(-5.57251e-09, 0.997272, -0.0738122, 7.52919e-08)
-bones/13/scale = Vector3(1, 1, 1)
 bones/14/position = Vector3(6.36157e-17, 0.0416209, 0.503843)
 bones/15/position = Vector3(-0.272952, -0.18588, -0.153214)
 bones/15/rotation = Quaternion(-2.47211e-06, 0.0408148, -1.3547e-06, 0.999167)
 bones/16/position = Vector3(0.270845, -0.18588, -0.150498)
 bones/16/rotation = Quaternion(-2.47805e-06, -0.0452338, 1.34434e-06, 0.998976)
-bones/16/scale = Vector3(1, 1, 1)
 bones/17/position = Vector3(6.36157e-17, 1, 0.170926)
 bones/26/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
 bones/28/position = Vector3(-2.20347e-08, 5.96046e-08, 1.18857e-09)
@@ -37,7 +35,7 @@ bones/34/position = Vector3(-2.20347e-08, 0, 1.18857e-09)
 bones/34/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
 
 [node name="spooky_jack-o-head" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.91869, 3.10719e-08, -3.51574e-09, -2.53243e-08, 1.05383, -0.301459, -5.07519e-09, 0.366074, 0.86782, -2.34903e-05, 0.738731, 0.0982782)
+transform = Transform3D(0.91869, 3.10719e-08, -3.51573e-09, -2.53243e-08, 1.05383, -0.301459, -5.07521e-09, 0.366075, 0.86782, -2.34903e-05, 0.738731, 0.0982783)
 bone_idx = 5
 
 [node name="spooky_jack-o-head" parent="Armature/Skeleton3D/spooky_jack-o-head" index="0"]

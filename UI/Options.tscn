@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bweaacxbamfpc"]
+[gd_scene load_steps=4 format=3 uid="uid://bweaacxbamfpc"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_gkpkp"]
 [ext_resource type="Script" path="res://UI/Options.cs" id="1_vts51"]
+[ext_resource type="LabelSettings" uid="uid://ou7j2mk7ly70" path="res://UI/spooky_biglabel.tres" id="3_0pmek"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -44,6 +45,7 @@ custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Options"
+label_settings = ExtResource("3_0pmek")
 horizontal_alignment = 1
 
 [node name="GraphicsHeader" type="Label" parent="Panel/MarginContainer/VBoxContainer"]

@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ou7j2mk7ly70"]
+
+[ext_resource type="FontFile" uid="uid://jdi2h2sr8g17" path="res://UI/GhoulFriAOE.ttf" id="1_5ohhq"]
+
+[resource]
+font = ExtResource("1_5ohhq")
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 24
+shadow_color = Color(0, 0, 0, 0.741176)

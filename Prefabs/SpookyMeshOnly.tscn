@@ -24,20 +24,18 @@ bones/12/rotation = Quaternion(0.478423, -0.520914, 0.485176, 0.514161)
 bones/12/scale = Vector3(1.00802, 0.984331, 1.00785)
 bones/13/position = Vector3(-7.92502e-10, 0.306875, 0.00897533)
 bones/13/rotation = Quaternion(0, 1, 0, 7.54979e-08)
-bones/13/scale = Vector3(1, 1, 1)
 bones/14/position = Vector3(0.000705608, 0.00125058, 0.509342)
 bones/15/position = Vector3(-0.309021, 0.00245329, -0.183115)
 bones/15/rotation = Quaternion(-2.41498e-06, -3.49927e-12, -1.44899e-06, 1)
 bones/16/position = Vector3(0.309049, -0.00234768, -0.183115)
 bones/16/rotation = Quaternion(-2.41498e-06, 3.49927e-12, 1.44899e-06, 1)
-bones/16/scale = Vector3(1, 1, 1)
 bones/17/position = Vector3(-0.0126566, 1, 0.343731)
 bones/26/position = Vector3(0.0020411, 5.96046e-08, 3.9373e-10)
 bones/28/position = Vector3(7.64207e-09, 5.96046e-08, -7.15494e-09)
 bones/34/position = Vector3(-0.000587087, 0, 1.41716e-09)
 
 [node name="spooky_jack-o-head" parent="tmg_waldo_2023-11-20 0113 (custom normals)/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.918608, 0.00243418, 0.0121247, 5.73054e-06, 1.10058, -0.150272, -0.0122893, 0.182465, 0.906234, -0.000515292, 0.750429, 0.0173455)
+transform = Transform3D(0.918608, 0.00243417, 0.0121247, 5.73738e-06, 1.10058, -0.150272, -0.0122893, 0.182465, 0.906234, -0.000515293, 0.75043, 0.0173454)
 
 [node name="spooky_jack-o-head" parent="tmg_waldo_2023-11-20 0113 (custom normals)/Armature/Skeleton3D/spooky_jack-o-head" index="0"]
 blend_shapes/Smile_closed = 0.0202816
