@@ -16,6 +16,7 @@ script = ExtResource("1_vdn2u")
 mainScene = "res://Scenes/root.tscn"
 optionsScene = "res://UI/Options.tscn"
 tutorialScene = "res://Scenes/tutorial.tscn"
+creditsScene = "res://UI/Credits.tscn"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="."]
 layout_mode = 1
@@ -56,6 +57,10 @@ text = "Tutorial"
 layout_mode = 2
 text = "Options"
 
+[node name="Credits" type="Button" parent="VSplitContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
 [node name="Quit" type="Button" parent="VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit
@@ -64,4 +69,5 @@ text = "Quit
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Start" to="." method="_OnStartPressed"]
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Tutorial" to="." method="_OnTutorialPressed"]
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Options" to="." method="_OnOptionsPressed"]
+[connection signal="pressed" from="VSplitContainer/VBoxContainer/Credits" to="." method="_OnCreditsPressed"]
 [connection signal="pressed" from="VSplitContainer/VBoxContainer/Quit" to="." method="_OnQuitPressed"]

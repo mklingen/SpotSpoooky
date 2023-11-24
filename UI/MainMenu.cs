@@ -12,6 +12,10 @@ public partial class MainMenu : Control
     [Export(PropertyHint.File, "*.tscn,")]
     private string tutorialScene;
 
+    [Export(PropertyHint.File, "*.tscn,")]
+    private string creditsScene;
+
+
     private Settings settings;
 
     // Called when the node enters the scene tree for the first time.
@@ -51,5 +55,10 @@ public partial class MainMenu : Control
     public void _OnTutorialPressed()
     {
         GetTree().ChangeSceneToFile(tutorialScene);
+    }
+
+    public void _OnCreditsPressed()
+    {
+        GetTree().ChangeSceneToFile(creditsScene);
     }
 }
