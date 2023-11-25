@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwd7kcilp80db"]
+[gd_scene load_steps=10 format=3 uid="uid://dwd7kcilp80db"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_tlxma"]
 [ext_resource type="Script" path="res://UI/GameOver.cs" id="2_snyt0"]
+[ext_resource type="Material" uid="uid://csmodirttdmk3" path="res://UI/scrolling_targets.tres" id="3_4vbq5"]
 [ext_resource type="PackedScene" uid="uid://1hufbowypcgd" path="res://Prefabs/SpookyMeshOnly.tscn" id="3_v5ldx"]
 [ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://Art/sights.png" id="4_er2ew"]
 [ext_resource type="Script" path="res://UI/FakeReticle.cs" id="4_wiw46"]
@@ -37,6 +38,7 @@ winScene = "res://UI/main_menu.tscn"
 nextLevelScene = "res://Scenes/root.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("3_4vbq5")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

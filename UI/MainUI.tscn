@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfckxjuq6ycla"]
+[gd_scene load_steps=9 format=3 uid="uid://cfckxjuq6ycla"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_jv21r"]
 [ext_resource type="Script" path="res://UI/MainUI.cs" id="1_sl8ov"]
 [ext_resource type="LabelSettings" uid="uid://8fjj56d88bp7" path="res://UI/default_label.tres" id="4_nm6vm"]
 [ext_resource type="PackedScene" uid="uid://c3cnx2766ae2k" path="res://UI/alerrt.tscn" id="5_4iy7f"]
 [ext_resource type="PackedScene" uid="uid://xv4j6cb1kqu5" path="res://UI/LoadingScreen.tscn" id="6_c535j"]
+[ext_resource type="Material" uid="uid://csmodirttdmk3" path="res://UI/scrolling_targets.tres" id="7_yd4c4"]
 [ext_resource type="PackedScene" uid="uid://4ih1chmp57tr" path="res://UI/spooky_block.tscn" id="8_ufqnk"]
 
 [sub_resource type="Curve" id="Curve_h4b16"]
@@ -59,4 +60,5 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="LoadingScreen" parent="." instance=ExtResource("6_c535j")]
+material = ExtResource("7_yd4c4")
 layout_mode = 1

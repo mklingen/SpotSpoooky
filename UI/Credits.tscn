@@ -36,7 +36,7 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Zalika - Art"
+text = "ZED Corbett - Character Art "
 label_settings = ExtResource("2_yavkp")
 horizontal_alignment = 1
 vertical_alignment = 1

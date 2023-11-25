@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://5yr2gkdn6au8"]
+[gd_scene load_steps=5 format=3 uid="uid://5yr2gkdn6au8"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_co6hn"]
 [ext_resource type="Script" path="res://UI/MainMenu.cs" id="1_vdn2u"]
-[ext_resource type="LabelSettings" uid="uid://ou7j2mk7ly70" path="res://UI/spooky_biglabel.tres" id="3_koeba"]
+[ext_resource type="Texture2D" uid="uid://0h43ny57hvdy" path="res://Art/logo.png" id="3_2f8lo"]
+[ext_resource type="Material" uid="uid://csmodirttdmk3" path="res://UI/scrolling_targets.tres" id="3_kk4gt"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -18,56 +19,53 @@ optionsScene = "res://UI/Options.tscn"
 tutorialScene = "res://Scenes/tutorial.tscn"
 creditsScene = "res://UI/Credits.tscn"
 
-[node name="VSplitContainer" type="VSplitContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+material = ExtResource("3_kk4gt")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -129.5
-offset_right = 156.0
-offset_bottom = 129.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer"]
+layout_mode = 2
 collapsed = true
 dragger_visibility = 2
 
-[node name="Label" type="Label" parent="VSplitContainer"]
+[node name="Logo" type="TextureRect" parent="PanelContainer/VSplitContainer"]
+texture_filter = 1
 layout_mode = 2
-text = "Spot Spooky!"
-label_settings = ExtResource("3_koeba")
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("3_2f8lo")
+stretch_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Start" type="Button" parent="VSplitContainer/VBoxContainer"]
+[node name="Start" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start"
 
-[node name="Tutorial" type="Button" parent="VSplitContainer/VBoxContainer"]
+[node name="Tutorial" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Tutorial"
 
-[node name="Options" type="Button" parent="VSplitContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="Credits" type="Button" parent="VSplitContainer/VBoxContainer"]
+[node name="Credits" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Credits"
 
-[node name="Quit" type="Button" parent="VSplitContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit
 "
 
-[connection signal="pressed" from="VSplitContainer/VBoxContainer/Start" to="." method="_OnStartPressed"]
-[connection signal="pressed" from="VSplitContainer/VBoxContainer/Tutorial" to="." method="_OnTutorialPressed"]
-[connection signal="pressed" from="VSplitContainer/VBoxContainer/Options" to="." method="_OnOptionsPressed"]
-[connection signal="pressed" from="VSplitContainer/VBoxContainer/Credits" to="." method="_OnCreditsPressed"]
-[connection signal="pressed" from="VSplitContainer/VBoxContainer/Quit" to="." method="_OnQuitPressed"]
+[connection signal="pressed" from="PanelContainer/VSplitContainer/VBoxContainer/Start" to="." method="_OnStartPressed"]
+[connection signal="pressed" from="PanelContainer/VSplitContainer/VBoxContainer/Tutorial" to="." method="_OnTutorialPressed"]
+[connection signal="pressed" from="PanelContainer/VSplitContainer/VBoxContainer/Options" to="." method="_OnOptionsPressed"]
+[connection signal="pressed" from="PanelContainer/VSplitContainer/VBoxContainer/Credits" to="." method="_OnCreditsPressed"]
+[connection signal="pressed" from="PanelContainer/VSplitContainer/VBoxContainer/Quit" to="." method="_OnQuitPressed"]
