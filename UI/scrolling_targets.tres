@@ -1,11 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://csmodirttdmk3"]
 
 [ext_resource type="Shader" path="res://UI/scrolling_background.gdshader" id="1_etfkf"]
-[ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://Art/sights.png" id="2_6ovi0"]
+[ext_resource type="Texture2D" uid="uid://bywnnmtrs0rxj" path="res://Art/head_logo.png" id="2_i8lhm"]
 
 [resource]
 shader = ExtResource("1_etfkf")
 shader_parameter/overlayScrollRate = Vector2(0.1, 0)
-shader_parameter/texColorTint = Vector4(0.3, 0.4, 0.5, 0.3)
+shader_parameter/texColorTint = Vector4(0.2, 0.3, 0.4, 0.2)
 shader_parameter/texScale = Vector2(8, 8)
-shader_parameter/overlayTexture = ExtResource("2_6ovi0")
+shader_parameter/overlayTexture = ExtResource("2_i8lhm")

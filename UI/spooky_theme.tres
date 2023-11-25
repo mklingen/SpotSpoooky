@@ -1,6 +1,25 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cye7uu46jinkn"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://cye7uu46jinkn"]
 
 [ext_resource type="FontFile" uid="uid://jdi2h2sr8g17" path="res://UI/GhoulFriAOE.ttf" id="1_66gim"]
+[ext_resource type="StyleBox" uid="uid://6tcvom3sttcj" path="res://UI/focus_button_theme.tres" id="1_ruanl"]
+[ext_resource type="StyleBox" uid="uid://t6t0c1mgvcv1" path="res://UI/hover_button_theme.tres" id="1_uaose"]
+[ext_resource type="StyleBox" uid="uid://co6oqpnmsap6p" path="res://UI/main_button_style.tres" id="2_wtury"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls4jc"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+border_color = Color(0.192157, 0.192157, 0.192157, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ppqx"]
+bg_color = Color(0.784314, 0.54902, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6s0m0"]
+bg_color = Color(0.768627, 0.560784, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_q54ga"]
+thickness = 9
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rtr0"]
 
@@ -8,6 +27,15 @@
 default_font = ExtResource("1_66gim")
 default_font_size = 18
 Button/font_sizes/font_size = 18
+Button/styles/focus = ExtResource("1_ruanl")
+Button/styles/hover = ExtResource("1_uaose")
+Button/styles/normal = ExtResource("2_wtury")
 CheckBox/font_sizes/font_size = 18
+CheckBox/styles/focus = ExtResource("1_ruanl")
+CheckBox/styles/hover = ExtResource("1_uaose")
+CheckBox/styles/normal = SubResource("StyleBoxFlat_ls4jc")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_6ppqx")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_6s0m0")
+HSlider/styles/slider = SubResource("StyleBoxLine_q54ga")
 Label/font_sizes/font_size = 18
 Label/styles/normal = SubResource("StyleBoxEmpty_8rtr0")

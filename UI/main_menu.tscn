@@ -45,22 +45,27 @@ size_flags_horizontal = 4
 
 [node name="Start" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Start"
 
 [node name="Tutorial" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Tutorial"
 
 [node name="Options" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Options"
 
 [node name="Credits" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Credits"
 
 [node name="Quit" type="Button" parent="PanelContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Quit
 "
 
