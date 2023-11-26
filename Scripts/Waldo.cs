@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 
 public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IOnReticleNearHandler, NPCManager.IOnLoadedHandler
@@ -59,12 +60,36 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 	{
 		public RandomSFXPlayer DieSound;
         public RandomSFXPlayer ScareSound;
+        public RandomSFXPlayer TeleportSound;
+        public AudioStreamPlayer3D HuntSound;
 
 		public AudioManager(Node parent)
 		{
             DieSound = parent.FindChild("DieSound") as RandomSFXPlayer;
             ScareSound = parent.FindChild("ScareSound") as RandomSFXPlayer;
+			TeleportSound = parent.FindChild("TeleportSound") as RandomSFXPlayer;
+			HuntSound = parent.FindChild("HuntSound") as AudioStreamPlayer3D;
         }
+
+		public void PlayHuntSound(float volumePct)
+		{
+			if (HuntSound == null) {
+				return;
+			}
+			if (!HuntSound.Playing) {
+				HuntSound.Playing = true;
+			}
+			HuntSound.VolumeDb = BGMusicManager.Linear2DB(0.1f * volumePct);
+		}
+
+		public void StopHuntSound()
+		{ 
+			if (HuntSound == null) {
+				return;
+			}
+			HuntSound.Playing = false;
+		}
+
 
 	}
 	private AudioManager audioManager;
@@ -154,7 +179,8 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
         switch (huntState) {
 			case HuntState.Idle:
-				if (animationPlayer != null) {
+                audioManager.StopHuntSound();
+                if (animationPlayer != null) {
 					animationPlayer.CurrentAnimation = idleAnimation;
 				}
 				if (!isTutorial) {
@@ -172,6 +198,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 				if (lastNormalizedTurnTime >= proportionTimeIdle + proportionTimeMoving) {
 					TransitionState(HuntState.WarmingUp);
 				}
+				audioManager.PlayHuntSound(lastNormalizedTurnTime * ((float)this.settings.SFXVolume));
 				break;
 			case HuntState.WarmingUp:
                 if (animationPlayer != null) {
@@ -182,8 +209,10 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
                     EatNPC();
                     TransitionState(HuntState.PostHunt);
                 }
+                audioManager.PlayHuntSound(lastNormalizedTurnTime * ((float)this.settings.SFXVolume));
                 break;
 			case HuntState.PostHunt:
+				audioManager.StopHuntSound();
                 EmitSignal(SignalName.OnTurnTimeChanged, 0.0f);
                 if (Root.Timef() - timeTurnEnded > timeBetweenTurns) {
                     TeleportToNewLocation(true);
@@ -242,6 +271,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
             GetTree().CurrentScene.AddChild(instantiate);
             instantiate.GlobalPosition = this.GlobalPosition;
         }
+		if (audioManager.TeleportSound != null) {
+            audioManager.TeleportSound.PlayRandom((float)this.settings.SFXVolume);
+        }
     }
 
 	private void TeleportToNewLocation(bool createEffect)
@@ -251,13 +283,15 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
 		if (npcManager != null) {
 			bool isValid = false;
+			int tries = 0;
 			do {
 				GlobalPosition = npcManager.GetValidSpawnLocation();
 				isValid = !npcManager.IsInKeepOutZone(GlobalPosition) && 
 					       npcManager.CanPlayerSee(GlobalPosition) && 
 						   !npcManager.IsTooCloseToNPC(GlobalPosition)
 						   && !npcManager.IsOnscreenAndZoomed(GlobalPosition);
-			} while (!isValid);
+				tries++;
+			} while (!isValid && tries < 100);
 		}
 
 		if (createEffect) {
