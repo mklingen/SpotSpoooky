@@ -11,6 +11,28 @@ public partial class SpookyBlock : TextureRect
 
     private float currentFillAmount;
 
+    private bool isActive = false;
+
+    public void SetActive(bool active)
+    {
+        isActive = active;
+    }
+
+    public bool IsNearTarget()
+    {
+        return Mathf.Abs(fillAmountTarget - currentFillAmount) < 1e-3;
+    }
+
+    public float GetTargetFillAmount()
+    {
+        return fillAmountTarget;
+    }
+
+    public float GetCurrentDrawnAmount()
+    {
+        return currentFillAmount;
+    }
+
     public void SetColor(Color baseColor)
     {
         shaderMaterial.SetShaderParameter("baseColor", baseColor);
@@ -27,7 +49,9 @@ public partial class SpookyBlock : TextureRect
     public override void _Process(double delta)
     {
         base._Process(delta);
-        setFillAmountInternal(currentFillAmount * 0.9f + fillAmountTarget * 0.1f);
+        if (isActive) {
+            setFillAmountInternal(Mathf.Lerp(currentFillAmount, fillAmountTarget, (float)delta * 10.0f));
+        }
     }
 
     private void setFillAmountInternal(float amount)

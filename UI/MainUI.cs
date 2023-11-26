@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 
 public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHandler, Waldo.ITurnTimeChangedHandler, NPCManager.IOnLoadedHandler
 {
@@ -145,6 +146,38 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
         foreach (SpookyBlock block in blocks) {
 			block.SetColor(isFlashing ? targetColor : prevColor);
 		}
+
+		// Update the blocks so that they fill in a sensible order.
+		float totalCurrentFill = 0;
+		float totalDesiredFill = 0;
+		for (int k = 0; k < blocks.Count; k++) {
+			totalCurrentFill += blocks[k].GetCurrentDrawnAmount();
+			totalDesiredFill += blocks[k].GetTargetFillAmount();
+		}
+		// If we haven't filled the correct number of blocks yet, then set the first block that doesn't have the
+		// correct amount to active. All others to inactive.
+		if (totalCurrentFill < totalDesiredFill) {
+			bool foundBlock = false;
+			foreach (var block in blocks) {
+				if (!block.IsNearTarget() && !foundBlock) {
+					block.SetActive(true);
+					foundBlock = true;
+				} else {
+					block.SetActive(false);
+				}
+			}
+        } else {
+			bool foundBlock = false;
+			// Otherwise, set the first block from the end active.
+			for (int k = blocks.Count - 1; k >= 0; k--) {
+                if (!blocks[k].IsNearTarget() && !foundBlock) {
+					blocks[k].SetActive(true);
+					foundBlock = true;
+                } else {
+					blocks[k].SetActive(false);
+				}
+            }
+        }
 	}
 
 	public void OnLoaded()
@@ -153,4 +186,5 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 			loadingScreen.QueueFree();
 		}
 	}
+
 }

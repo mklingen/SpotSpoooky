@@ -30,6 +30,8 @@ grow_vertical = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 collapsed = true
 dragger_visibility = 2
 

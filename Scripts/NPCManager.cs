@@ -101,12 +101,30 @@ public partial class NPCManager : Node3D
 
     }
 
+	public bool IsOnscreenAndZoomed(Vector3 globalPos)
+	{
+		if (!player.IsZoomed()) {
+			return false;
+		}
+		return IsOnscreen(globalPos);
+	}
+
     public bool IsOnscreen(Vector3 globalPos)
     {
 		return player.IsOnScreen(globalPos);
 
     }
 
+	public bool IsTooCloseToNPC(Vector3 globalPos)
+	{
+		float minDist = 1.0f;
+		foreach (var npc in npcs) {
+			if (npc.GlobalPosition.DistanceSquaredTo(globalPos) < minDist) {
+				return true;
+			}
+		}
+		return false;
+	}
 
     private bool TrySpawnNPC()
     {
