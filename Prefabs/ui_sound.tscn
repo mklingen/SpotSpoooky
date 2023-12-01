@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://cldtr85w41dnb"]
+
+[ext_resource type="AudioStream" uid="uid://2rn31f56fc6o" path="res://Audio/Music/Find_Spooky_Music_4.mp3" id="1_oux6b"]
+[ext_resource type="Script" path="res://Scripts/UISound.cs" id="2_pqx44"]
+[ext_resource type="AudioStream" uid="uid://cbf5023lqxgh2" path="res://Audio/SFX/SFX_UI_SliderLoop.wav" id="3_4xkm6"]
+[ext_resource type="AudioStream" uid="uid://d2y4v6nvryqmv" path="res://Audio/SFX/SFX_UI_ButtonPress.wav" id="4_xkdah"]
+
+[node name="UISound" type="AudioStreamPlayer"]
+stream = ExtResource("1_oux6b")
+autoplay = true
+script = ExtResource("2_pqx44")
+sliderSound = ExtResource("3_4xkm6")
+clickSound = ExtResource("4_xkdah")
