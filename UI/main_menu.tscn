@@ -16,8 +16,6 @@ theme = ExtResource("1_co6hn")
 script = ExtResource("1_vdn2u")
 mainScene = "res://Scenes/root.tscn"
 optionsScene = "res://UI/Options.tscn"
-tutorialScene = "res://Scenes/tutorial.tscn"
-creditsScene = "res://UI/Credits.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 material = ExtResource("3_kk4gt")

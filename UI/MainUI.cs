@@ -138,7 +138,7 @@ public partial class MainUI : Control, Root.IScoreChangedHandler, Root.IAlertHan
 			float alpha = (Root.Timef() - lastFlashTime) / flashFor;
 			if (alpha > 1.0f) {
 				isFlashing = false;
-			} else {
+			} else if (flashCurve != null) {
 				targetColor = targetColor.Lerp(flashColor, flashCurve.Sample(alpha));
 			}
 		}

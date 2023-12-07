@@ -71,7 +71,6 @@ v_offset = 5.0
 far = 250.0
 zoomCurve = SubResource("Curve_ffooi")
 zoomTime = 0.25
-instantZoom = true
 collisionRayMask = 1
 shakeCurve = SubResource("Curve_sq3h4")
 shakeAmount = 5.0
@@ -98,8 +97,17 @@ curve = SubResource("Curve3D_c1lqh")
 
 [node name="Waldo" parent="." instance=ExtResource("7_5nog4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34284, 0, -19.8333)
+walkAnimation = ""
+idleAnimation = ""
+preScareAnimation = ""
+scareAnimation = ""
 
 [node name="MainUI" parent="." instance=ExtResource("8_xr1hy")]
+normalColor = Color(0, 0, 0, 0)
+alertColor = Color(0, 0, 0, 0)
+flashColor = Color(0, 0, 0, 0)
+flashFor = 0.1
+flashCurve = null
 
 [node name="Building5" parent="." instance=ExtResource("10_iyj8e")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 24.6194, 0, -50)

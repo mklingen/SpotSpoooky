@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfckxjuq6ycla"]
+[gd_scene load_steps=8 format=3 uid="uid://cfckxjuq6ycla"]
 
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_jv21r"]
 [ext_resource type="Script" path="res://UI/MainUI.cs" id="1_sl8ov"]
@@ -7,10 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://xv4j6cb1kqu5" path="res://UI/LoadingScreen.tscn" id="6_c535j"]
 [ext_resource type="Material" uid="uid://csmodirttdmk3" path="res://UI/scrolling_targets.tres" id="7_yd4c4"]
 [ext_resource type="PackedScene" uid="uid://4ih1chmp57tr" path="res://UI/spooky_block.tscn" id="8_ufqnk"]
-
-[sub_resource type="Curve" id="Curve_h4b16"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.330422, 0), 0.0, 0.0, 0, 0, Vector2(0.614265, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0315789), 0.0, 0.0, 0, 0]
-point_count = 4
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -23,11 +19,6 @@ theme = ExtResource("1_jv21r")
 script = ExtResource("1_sl8ov")
 alertPrefab = ExtResource("5_4iy7f")
 blockPrefab = ExtResource("8_ufqnk")
-normalColor = Color(0.470588, 0.964706, 0, 1)
-alertColor = Color(0.8, 0, 0.113725, 1)
-flashColor = Color(1, 1, 1, 1)
-flashFor = 0.5
-flashCurve = SubResource("Curve_h4b16")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
