@@ -103,11 +103,6 @@ preScareAnimation = ""
 scareAnimation = ""
 
 [node name="MainUI" parent="." instance=ExtResource("8_xr1hy")]
-normalColor = Color(0, 0, 0, 0)
-alertColor = Color(0, 0, 0, 0)
-flashColor = Color(0, 0, 0, 0)
-flashFor = 0.1
-flashCurve = null
 
 [node name="Building5" parent="." instance=ExtResource("10_iyj8e")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 24.6194, 0, -50)
