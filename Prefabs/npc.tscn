@@ -18,5 +18,5 @@ freezeEffect = ExtResource("3_7ett7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00576, 0)
 shape = SubResource("CylinderShape3D_4qxmt")
 
-[node name="tmg_waldo_2023-10-30 0014 (npc walk animation)" parent="." instance=ExtResource("4_f6auh")]
+[node name="NPCMesh" parent="." instance=ExtResource("4_f6auh")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)

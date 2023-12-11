@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://coc86bur2gfug"
-path="res://.godot/imported/tmg_waldo_2023-10-30 0014 (npc walk animation).glb-169a6c919adf60782188e5a26804affe.scn"
+uid="uid://fsrcwrt7kh4"
+path="res://.godot/imported/spooky.glb-a18ee3c135fd2fb6a1199863a91d3c95.scn"
 
 [deps]
 
-source_file="res://Art/tmg_waldo_2023-10-30 0014 (npc walk animation).glb"
-dest_files=["res://.godot/imported/tmg_waldo_2023-10-30 0014 (npc walk animation).glb-169a6c919adf60782188e5a26804affe.scn"]
+source_file="res://Art/spooky.glb"
+dest_files=["res://.godot/imported/spooky.glb-a18ee3c135fd2fb6a1199863a91d3c95.scn"]
 
 [params]
 
