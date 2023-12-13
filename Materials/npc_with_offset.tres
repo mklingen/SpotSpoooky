@@ -1,13 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bod8f8bwruo0f"]
 
 [ext_resource type="Shader" uid="uid://cn7ku1u8g6yj3" path="res://Materials/npc_uv_offset.tres" id="1_f2tpk"]
-[ext_resource type="Texture2D" uid="uid://kj7ynmrpd70w" path="res://Art/tmg_waldo_2023-10-30 0014 (npc walk animation)_waldo-texture_edited.png" id="2_8e4gx"]
+[ext_resource type="Texture2D" uid="uid://b7ppnklmgkgf6" path="res://Art/npc_waldo-texture_edited.png" id="2_hjfyq"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_f2tpk")
-shader_parameter/Roughness = 0.5
-shader_parameter/AlbedoBoost = 0.5
-shader_parameter/Rim = 0.6
-shader_parameter/Rim_Tint = 0.836
-shader_parameter/Albedo = ExtResource("2_8e4gx")
+shader_parameter/Rim = 0.49
+shader_parameter/Rim_Tint = 0.727
+shader_parameter/Albedo = ExtResource("2_hjfyq")
