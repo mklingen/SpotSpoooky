@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://cn7ku1u8g6yj3"]
 
-[ext_resource type="Texture2D" uid="uid://kj7ynmrpd70w" path="res://Art/tmg_waldo_2023-10-30 0014 (npc walk animation)_waldo-texture_edited.png" id="1_jqngt"]
+[ext_resource type="Texture2D" uid="uid://brawqbhh88ssd" path="res://Art/tmg_waldo_2023-10-30 0014 (npc walk animation)_waldo-texture_edited.png" id="1_jqngt"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_1mfpj"]
 parameter_name = "Rim"
@@ -17,6 +17,7 @@ operator = 2
 parameter_name = "AlbedoBoost"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_phdor"]
+source = 5
 texture = ExtResource("1_jqngt")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1evba"]
@@ -55,7 +56,6 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 instance uniform float OffsetX : hint_range(0, 1);
 instance uniform float OffsetY : hint_range(0, 1);
 uniform sampler2D Albedo : filter_nearest, repeat_enable;
-uniform sampler2D tex_frg_2;
 uniform float Roughness : hint_range(0, 1);
 uniform float AlbedoBoost;
 uniform float Rim : hint_range(0, 1);
@@ -84,8 +84,9 @@ void fragment() {
 	vec2 n_out7p0 = n_out6p0 + n_out3p0;
 
 
+	vec4 n_out2p0;
 // Texture2D:2
-	vec4 n_out2p0 = texture(tex_frg_2, n_out7p0);
+	n_out2p0 = texture(Albedo, n_out7p0);
 
 
 // FloatParameter:9
@@ -119,9 +120,10 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-289.231, 18.582)
 nodes/fragment/0/position = Vector2(520, 200)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_phdor")
-nodes/fragment/2/position = Vector2(200, 120)
+nodes/fragment/2/position = Vector2(180, 100)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_1evba")
 nodes/fragment/3/position = Vector2(-340, 160)
 nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_kshh5")
