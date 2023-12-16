@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cydqwoxor7kqu" path="res://Particles/bullet_particles.tscn" id="2_02mwu"]
 [ext_resource type="Script" path="res://Scripts/Reticle.cs" id="2_2upae"]
 [ext_resource type="Script" path="res://Scripts/RandomSFXPlayer.cs" id="4_bft0m"]
-[ext_resource type="AudioStream" uid="uid://bq46vrta257ue" path="res://Audio/SFX/shot_1.wav" id="5_uq6sr"]
-[ext_resource type="AudioStream" uid="uid://c03qpsunpu2h7" path="res://Audio/SFX/shot_2.wav" id="6_wgl4l"]
-[ext_resource type="AudioStream" uid="uid://c3e4tcfq63o8u" path="res://Audio/SFX/shot_3.wav" id="7_jv72r"]
+[ext_resource type="AudioStream" uid="uid://di2f22djliobf" path="res://Audio/SFX/SFX_Shot_1.wav" id="6_b8e07"]
+[ext_resource type="AudioStream" uid="uid://ktw1gfxy3vso" path="res://Audio/SFX/SFX_Shot_2.wav" id="7_v1veu"]
+[ext_resource type="AudioStream" uid="uid://b13ostmkaerb4" path="res://Audio/SFX/SFX_Shot_3.wav" id="8_o12cj"]
 [ext_resource type="AudioStream" uid="uid://df6qbvflsm4uu" path="res://Audio/SFX/zoom_in.wav" id="8_pro1e"]
 [ext_resource type="AudioStream" uid="uid://bxvxikmvffnm3" path="res://Audio/SFX/zoom_out.wav" id="9_2mro1"]
 
@@ -44,13 +44,16 @@ transform = Transform3D(1, 0, 0, 0, 0.700511, 0.713642, 0, -0.713642, 0.700511, 
 current = true
 
 [node name="ShootSound" type="AudioStreamPlayer3D" parent="Audio"]
+attenuation_model = 3
 script = ExtResource("4_bft0m")
-streams = Array[AudioStream]([ExtResource("5_uq6sr"), ExtResource("6_wgl4l"), ExtResource("7_jv72r")])
+streams = Array[AudioStream]([ExtResource("6_b8e07"), ExtResource("7_v1veu"), ExtResource("8_o12cj")])
 
 [node name="ZoomInSound" type="AudioStreamPlayer3D" parent="Audio"]
+attenuation_model = 3
 script = ExtResource("4_bft0m")
 streams = Array[AudioStream]([ExtResource("9_2mro1")])
 
 [node name="ZoomOutSound" type="AudioStreamPlayer3D" parent="Audio"]
+attenuation_model = 3
 script = ExtResource("4_bft0m")
 streams = Array[AudioStream]([ExtResource("8_pro1e")])

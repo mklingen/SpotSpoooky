@@ -398,4 +398,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		doneLoading = true;
 		TransitionState(HuntState.Idle);
 	}
+
+	public void OnTutorialUpdateShooting()
+	{
+        EmitSignal(SignalName.OnTurnTimeChanged, 0.0f);
+    }
 }

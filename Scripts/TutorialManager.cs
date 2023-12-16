@@ -199,9 +199,11 @@ public partial class TutorialManager : Node3D
     private class ShootWaldoUntilDead : TutorialSegment
     {
         private Root root;
-        public ShootWaldoUntilDead(Root root)
+        private Waldo waldo;
+        public ShootWaldoUntilDead(Root root, Waldo waldo)
         {
             this.root = root;
+            this.waldo = waldo;
         }
 
         public override bool GoToNextSegment()
@@ -216,7 +218,7 @@ public partial class TutorialManager : Node3D
 
         public override void Update(double dt)
         {
-
+            waldo.OnTutorialUpdateShooting();
         }
     }
 
@@ -305,7 +307,7 @@ public partial class TutorialManager : Node3D
             ),
             new StartTutorial(),
             new ShootWaldoTutorial(root),
-            new ShootWaldoUntilDead(root),
+            new ShootWaldoUntilDead(root, waldo),
             new SayThingForTime("All Done!", 2.0f)
 
         };

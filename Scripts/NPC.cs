@@ -29,8 +29,10 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 	[Export] private string[] idleAnimations = { "Idle-01_npc", "Idle-02_npc (happy)" };
 	[Export] private string[] scareAnimations = { "Scared_npc (mid)", "Scared_npc (short)", "Scared_npc (mid-short)" };
 
+	private Settings settings;
 	private string idleAnimation;
 	private string scareAnimation;
+	private RandomSFXPlayer scareSound;
 
     private AnimationPlayer animation;
 
@@ -73,6 +75,14 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
                 animation.Play(scareAnimation);
 			}
         }
+
+		if (scareSound != null) {
+			if (settings == null) {
+				settings = new Settings();
+				settings.LoadSettings();
+			}
+			scareSound.PlayRandom((float)settings.SFXVolume);
+		}
     }
 
     private void MaybeCreateFreezeEffect()
@@ -121,6 +131,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
         if (scareAnimations.Length > 0) {
             scareAnimation = scareAnimations[GD.RandRange(0, scareAnimations.Length - 1)];
         }
+		scareSound = Root.FindNodeRecusive<RandomSFXPlayer>(this);
     }
 	private int frameUpdateOffset = 0;
 	private int updateEveryFrame = 1;
