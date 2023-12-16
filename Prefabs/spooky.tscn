@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwjwp3yhbyjjw"]
+[gd_scene load_steps=4 format=3 uid="uid://4its2vwri7ff"]
 
 [ext_resource type="PackedScene" uid="uid://d2pagb2xqhgi6" path="res://Art/tmg_waldo_2023-10-29 2300 (spooky walk animation).glb" id="1_gookw"]
 [ext_resource type="Material" uid="uid://dwqjc0lf30d6a" path="res://Materials/spooky_glow.tres" id="2_n8n4i"]

@@ -1,52 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj5t3f7tue660"]
+[gd_scene load_steps=2 format=3 uid="uid://bj5t3f7tue660"]
 
-[ext_resource type="PackedScene" uid="uid://brawqbhh88ssd" path="res://Art/tmg_waldo_2023-11-20 0113 (custom normals).glb" id="1_mkue7"]
-[ext_resource type="Material" uid="uid://dl1f8c3c2y2sq" path="res://Materials/npc.tres" id="2_es3iq"]
-[ext_resource type="Material" uid="uid://dwqjc0lf30d6a" path="res://Materials/spooky_glow.tres" id="3_iprkl"]
+[ext_resource type="PackedScene" uid="uid://fsrcwrt7kh4" path="res://Art/spooky.glb" id="1_6uixf"]
 
-[node name="tmg_waldo_2023-11-20 0113 (custom normals)" instance=ExtResource("1_mkue7")]
+[node name="Node3D" type="Node3D"]
 
-[node name="Skeleton3D" parent="Armature" index="0"]
-bones/2/position = Vector3(6.36157e-17, 0.0497277, 0.506841)
-bones/2/rotation = Quaternion(0.580571, 2.53776e-08, 3.55902e-08, 0.81421)
-bones/7/rotation = Quaternion(0.680389, -1.3078e-15, -3.27574e-15, 0.73285)
-bones/7/scale = Vector3(0.996172, 1.00771, 0.996172)
-bones/8/position = Vector3(-6.97425e-11, 0.257411, 0.018945)
-bones/8/rotation = Quaternion(0, 1, 0, -7.54979e-08)
-bones/8/scale = Vector3(0.999999, 1, 0.999999)
-bones/10/rotation = Quaternion(0.483493, -0.515824, 0.479132, 0.520185)
-bones/10/scale = Vector3(1.00091, 0.99826, 1.00084)
-bones/12/rotation = Quaternion(0.479132, -0.520186, 0.483493, 0.515824)
-bones/12/scale = Vector3(1.00091, 0.99826, 1.00084)
-bones/13/position = Vector3(1.66133e-10, 0.307455, 0.0155338)
-bones/13/rotation = Quaternion(-5.90507e-09, 0.997587, -0.0694299, 7.53157e-08)
-bones/14/position = Vector3(6.36157e-17, 0.0497277, 0.506841)
-bones/15/position = Vector3(-0.275209, -0.171575, -0.154358)
-bones/15/rotation = Quaternion(-2.47814e-06, 0.0369082, -1.34547e-06, 0.999319)
-bones/16/position = Vector3(0.273331, -0.171575, -0.151963)
-bones/16/rotation = Quaternion(-2.48478e-06, -0.040905, 1.33414e-06, 0.999163)
-bones/16/scale = Vector3(1, 1, 1)
-bones/17/position = Vector3(6.36157e-17, 1, 0.179046)
-bones/26/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
-bones/28/position = Vector3(0.00225848, 5.96046e-08, 3.09071e-10)
-bones/28/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
-bones/30/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
-bones/34/position = Vector3(-0.00194749, 0, 1.94693e-09)
-bones/34/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
-
-[node name="spooky_jack-o-head" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.91869, 3.08509e-08, -3.45277e-09, -2.51439e-08, 1.05471, -0.299377, -5.01471e-09, 0.363546, 0.86854, -2.34904e-05, 0.741865, 0.105822)
-bone_idx = 5
-
-[node name="spooky_jack-o-head" parent="Armature/Skeleton3D/spooky_jack-o-head" index="0"]
-blend_shapes/Eyes_wide = 0.0189533
-blend_shapes/Frown_closed = 0.0219567
-surface_material_override/0 = ExtResource("2_es3iq")
-surface_material_override/1 = ExtResource("3_iprkl")
-surface_material_override/2 = ExtResource("2_es3iq")
-
-[node name="spooky_body" parent="Armature/Skeleton3D" index="1"]
-surface_material_override/0 = ExtResource("2_es3iq")
-
-[node name="spooky_head-stem" parent="Armature/Skeleton3D" index="2"]
-surface_material_override/0 = ExtResource("2_es3iq")
+[node name="spooky" parent="." instance=ExtResource("1_6uixf")]

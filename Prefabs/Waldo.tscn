@@ -13,9 +13,9 @@
 [ext_resource type="AudioStream" uid="uid://dkyan6u447txx" path="res://Audio/SFX/SFX_Spooky_Teleport_2_A.wav" id="9_60aj8"]
 [ext_resource type="AudioStream" uid="uid://dp52bjkha7vug" path="res://Audio/SFX/SFX_Spooky_TargetFound_3.wav" id="9_x8y32"]
 [ext_resource type="AudioStream" uid="uid://cisvns52mvwe6" path="res://Audio/SFX/SFX_Spooky_Teleport_3.wav" id="10_4r3fb"]
-[ext_resource type="PackedScene" uid="uid://bj5t3f7tue660" path="res://Art/spooky_mesh.tscn" id="10_j4g6f"]
 [ext_resource type="AudioStream" uid="uid://c1irk4ungkkua" path="res://Audio/SFX/SFX_Spooky_HauntTarget_Loop.wav" id="10_s06xb"]
 [ext_resource type="AudioStream" uid="uid://mjyhfk3hftnn" path="res://Audio/SFX/SFX_Spooky_Teleport_3_A.wav" id="11_f2k2g"]
+[ext_resource type="PackedScene" uid="uid://c0ledbyc6yat5" path="res://Art/spooky_glb_with_special_texture.tscn" id="16_ar3bb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_spa4w"]
 height = 2.47129
@@ -34,8 +34,8 @@ teleportEffect = ExtResource("3_5n1xd")
 eatDist = 1.5
 walkAnimation = "WalkCycle_spooky"
 idleAnimation = "Idle_spooky"
-preScareAnimation = "Pre-Attack_spooky"
-scareAnimation = "Attack_spooky"
+preScareAnimation = "Pre-Attack-Large_v3_spooky"
+scareAnimation = "Attack-Large_spooky"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00576, 0)
@@ -66,5 +66,5 @@ stream = ExtResource("10_s06xb")
 unit_size = 100.0
 max_db = 6.0
 
-[node name="spooky_mesh" parent="." instance=ExtResource("10_j4g6f")]
+[node name="spooky" parent="." instance=ExtResource("16_ar3bb")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)

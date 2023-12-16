@@ -26,7 +26,7 @@ public partial class GameOver : Control
 	{
 		animationSpooky = Root.FindNodeRecusive<AnimationPlayer>(this);
 		if (animationSpooky != null) {
-			animationSpooky.CurrentAnimation = animationSpooky.GetAnimationList()[0];
+			animationSpooky.CurrentAnimation = "Attack_spooky";
 			animationSpooky.Play();
         }
         Input.MouseMode = Input.MouseModeEnum.Visible;

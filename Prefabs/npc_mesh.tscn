@@ -14,9 +14,7 @@ MeshNames = ["base_", "accessory_hair"]
 bones/1/position = Vector3(-0.00057872, 0, 0.503843)
 bones/1/rotation = Quaternion(0.707107, -0.000204634, -0.000204634, 0.707107)
 bones/22/rotation = Quaternion(0.707107, -0.000306985, 0.000307032, 0.707107)
-bones/22/scale = Vector3(1, 1, 1)
 bones/23/rotation = Quaternion(0, 1, 0, -7.54979e-08)
-bones/23/scale = Vector3(1, 1, 1)
 bones/25/rotation = Quaternion(0.501794, -0.4982, 0.4982, 0.501794)
 bones/25/scale = Vector3(1.00017, 0.999656, 1.00017)
 bones/27/rotation = Quaternion(0.498212, -0.501782, 0.501782, 0.498212)
@@ -28,112 +26,112 @@ bones/43/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
 bones/47/rotation = Quaternion(-0.707106, 0, 0.707107, 0)
 
 [node name="accessory_hair_000" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 4
 
 [node name="accessory_hair_000" parent="Armature/Skeleton3D/accessory_hair_000" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_001" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 5
 
 [node name="accessory_hair_001" parent="Armature/Skeleton3D/accessory_hair_001" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_002_custom" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23517e-08, 1, 0.00057872, 1.19209e-07, -1.14052e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86262e-08)
 bone_idx = 6
 
 [node name="accessory_hair_002_custom" parent="Armature/Skeleton3D/accessory_hair_002_custom" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_003" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 7
 
 [node name="accessory_hair_003" parent="Armature/Skeleton3D/accessory_hair_003" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_004" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 8
 
 [node name="accessory_hair_004" parent="Armature/Skeleton3D/accessory_hair_004" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_005_custom" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 9
 
 [node name="accessory_hair_005_custom" parent="Armature/Skeleton3D/accessory_hair_005_custom" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_006" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 10
 
 [node name="accessory_hair_006" parent="Armature/Skeleton3D/accessory_hair_006" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_007" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 11
 
 [node name="accessory_hair_007" parent="Armature/Skeleton3D/accessory_hair_007" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_008" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 12
 
 [node name="accessory_hair_008" parent="Armature/Skeleton3D/accessory_hair_008" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_009" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 13
 
 [node name="accessory_hair_009" parent="Armature/Skeleton3D/accessory_hair_009" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_010" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 14
 
 [node name="accessory_hair_010" parent="Armature/Skeleton3D/accessory_hair_010" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_011" parent="Armature/Skeleton3D" index="11"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 15
 
 [node name="accessory_hair_011" parent="Armature/Skeleton3D/accessory_hair_011" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_012" parent="Armature/Skeleton3D" index="12"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 16
 
 [node name="accessory_hair_012" parent="Armature/Skeleton3D/accessory_hair_012" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_013" parent="Armature/Skeleton3D" index="13"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 17
 
 [node name="accessory_hair_013" parent="Armature/Skeleton3D/accessory_hair_013" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="accessory_hair_014" parent="Armature/Skeleton3D" index="14"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_idx = 18
 
 [node name="accessory_hair_014" parent="Armature/Skeleton3D/accessory_hair_014" index="0"]
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="base_eyes" parent="Armature/Skeleton3D" index="15"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_name = "accessory_hair.003"
 bone_idx = 7
 
@@ -142,7 +140,7 @@ transform = Transform3D(1, -8.68432e-08, 7.7831e-08, 8.69354e-08, 0.110307, -0.9
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="base_head" parent="Armature/Skeleton3D" index="16"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23518e-08, 1, 0.00057872, 1.19209e-07, -1.1405e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86264e-08)
 bone_name = "accessory_hair.004"
 bone_idx = 8
 
@@ -150,7 +148,7 @@ bone_idx = 8
 surface_material_override/0 = ExtResource("2_v4o8s")
 
 [node name="base_head_cheeks" parent="Armature/Skeleton3D" index="17"]
-transform = Transform3D(1, 7.33532e-11, -0.000578793, -5.17915e-11, 1, -2.23517e-08, 0.000578793, 2.23517e-08, 1, 0.00057872, 1.19209e-07, -1.14052e-08)
+transform = Transform3D(1, 7.33532e-11, -0.000578792, -5.17915e-11, 1, 3.72529e-08, 0.000578792, -3.72529e-08, 1, 0.00057872, 2.98023e-07, 1.86262e-08)
 bone_idx = 21
 
 [node name="base_head_cheeks" parent="Armature/Skeleton3D/base_head_cheeks" index="0"]
