@@ -318,6 +318,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 		}
 		var diff = targetNPC.GlobalPosition - this.GlobalPosition;
 		if (diff.Length() < eatDist) {
+			targetNPC.StopFollowingPath();
             animationPlayer.CurrentAnimation = preScareAnimation;
             return;
 		}

@@ -84,6 +84,11 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
         }
     }
 
+	public void StopFollowingPath()
+	{
+		pathToFollow = null;
+	}
+
     public void SetPath(Path3D path, float speed, Vector3 offsetRTPath)
 	{
 		pathFollowOffset = offsetRTPath;
