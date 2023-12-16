@@ -97,10 +97,6 @@ curve = SubResource("Curve3D_c1lqh")
 
 [node name="Waldo" parent="." instance=ExtResource("7_5nog4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34284, 0, -19.8333)
-walkAnimation = ""
-idleAnimation = ""
-preScareAnimation = ""
-scareAnimation = ""
 
 [node name="MainUI" parent="." instance=ExtResource("8_xr1hy")]
 

@@ -1,6 +1,4 @@
-[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://cn7ku1u8g6yj3"]
-
-[ext_resource type="Texture2D" uid="uid://brawqbhh88ssd" path="res://Art/tmg_waldo_2023-10-30 0014 (npc walk animation)_waldo-texture_edited.png" id="1_jqngt"]
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://cn7ku1u8g6yj3"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_1mfpj"]
 parameter_name = "Rim"
@@ -22,7 +20,6 @@ constant = Color(0, 0, 0, 1)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_phdor"]
 source = 5
-texture = ExtResource("1_jqngt")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1evba"]
 input_name = "uv"
@@ -110,7 +107,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(175.941, 18.0837)
 nodes/fragment/0/position = Vector2(1100, 100)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_phdor")
 nodes/fragment/2/position = Vector2(320, 80)

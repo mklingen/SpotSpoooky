@@ -14,9 +14,10 @@ public partial class BGMusicManager : AudioStreamPlayer
         base._Ready();
         settings = new Settings();
         settings.LoadSettings();
-        SetVolume(settings.MusicVolume);
         Stream = defaultBackgroundMusic;
-        Play();
+        SetVolume(settings.MusicVolume);
+        
+        Play(0);
 
     }
 

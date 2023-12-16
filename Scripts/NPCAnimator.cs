@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
+// TODO get rid of this. It's the old animations.
 public partial class NPCAnimator : MeshInstance3D
 {
 	[ExportGroup("Bobbing")]

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
@@ -23,7 +24,15 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 
     public bool IsFrozen = false;
 
-	private AnimationPlayer animation;
+	[ExportCategory("Animation")]
+	[Export] private string walkAnimation = "WalkCycle_npc";
+	[Export] private string[] idleAnimations = { "Idle-01_npc", "Idle-02_npc (happy)" };
+	[Export] private string[] scareAnimations = { "Scared_npc (mid)", "Scared_npc (short)", "Scared_npc (mid-short)" };
+
+	private string idleAnimation;
+	private string scareAnimation;
+
+    private AnimationPlayer animation;
 
 	public void Unfreeze()
 	{
@@ -57,6 +66,12 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
         }
         if (animation != null) {
 			animation.Pause();
+			// Play the scare animation.
+			if (scareAnimation.Length > 0) {
+				animation.SpeedScale = 1.0f;
+                animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Idle;
+                animation.Play(scareAnimation);
+			}
         }
     }
 
@@ -95,7 +110,13 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 		animation = Root.FindNodeRecusive<AnimationPlayer>(this);
 
 		frameUpdateOffset = (int)GD.RandRange(0, 3);
-	}
+        if (idleAnimations.Length > 0) {
+            idleAnimation = idleAnimations[GD.RandRange(0, idleAnimations.Length - 1)];
+        }
+        if (scareAnimations.Length > 0) {
+            scareAnimation = scareAnimations[GD.RandRange(0, scareAnimations.Length - 1)];
+        }
+    }
 	private int frameUpdateOffset = 0;
 	private int updateEveryFrame = 1;
 	private int frameCounter = 0;
@@ -113,7 +134,7 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 		}
 		frameCounter++;
 		// Move along the path.
-		if (wasOnScreen && pathToFollow != null && frameCounter % updateEveryFrame == 0) {
+		if (frameCounter % updateEveryFrame == 0) {
             if (Root.FPS() < 40) {
                 updateEveryFrame = 10 - frameUpdateOffset;
             }
@@ -123,32 +144,44 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
             else {
                 updateEveryFrame = 1;
             }
-            currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta ;
-			// Wrap the path (it is supposed to circular, I guess.
-			if (currDistAlongPath > pathLength) {
-				currDistAlongPath = (currDistAlongPath - pathLength);
-			} else if (currDistAlongPath < 0.0f) {
-				currDistAlongPath = pathLength - currDistAlongPath;
-			}
-			// Get the position of the object along the path.
-			Vector3 nextPos = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
-			Vector3 dPos = nextPos - GlobalPosition;
+            if (wasOnScreen && pathToFollow != null) {
+				currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta;
+				// Wrap the path (it is supposed to circular, I guess.
+				if (currDistAlongPath > pathLength) {
+					currDistAlongPath = (currDistAlongPath - pathLength);
+				}
+				else if (currDistAlongPath < 0.0f) {
+					currDistAlongPath = pathLength - currDistAlongPath;
+				}
+				// Get the position of the object along the path.
+				Vector3 nextPos = pathToFollow.ToGlobal(pathToFollow.Curve.SampleBaked(currDistAlongPath) + pathFollowOffset);
+				Vector3 dPos = nextPos - GlobalPosition;
 
-            ConstantLinearVelocity = (dPos) * (1.0f / (float)delta);
-			Vector3 lookTarget = GlobalPosition + dPos * 10;
-			if (lookTarget.DistanceSquaredTo(GlobalPosition) > 1e-3) {
-				LookAt(lookTarget, Vector3.Up);
-			}
-            GlobalPosition = nextPos;
-			if (animation != null && !animation.IsPlaying()) {
-				animation.Play("WalkCycle_npc");
-			}
-			if (animation != null) {
-				animation.SpeedScale = ConstantLinearVelocity.Length();
-				animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Manual;
-				animation.Advance(delta);
-			}
-        }
+				ConstantLinearVelocity = (dPos) * (1.0f / (float)delta);
+				Vector3 lookTarget = GlobalPosition + dPos * 10;
+				if (lookTarget.DistanceSquaredTo(GlobalPosition) > 1e-3) {
+					LookAt(lookTarget, Vector3.Up);
+				}
+				GlobalPosition = nextPos;
+				if (animation != null && !animation.IsPlaying()) {
+					animation.Play(walkAnimation);
+				}
+				if (animation != null) {
+					animation.SpeedScale = ConstantLinearVelocity.Length();
+					animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Manual;
+					animation.Advance(delta);
+				}
+			} else if (wasOnScreen && idleAnimation.Length > 0) {
+                if (animation != null && !animation.IsPlaying()) {
+                    animation.Play(idleAnimation);
+                }
+                if (animation != null) {
+					animation.SpeedScale = 1.0f;
+                    animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Manual;
+                    animation.Advance(delta * updateEveryFrame);
+                }
+            }
+		}
 	}
 
 	// Called when player shot NPC.
