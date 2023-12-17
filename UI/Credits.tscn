@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxisn4qtp41n8"]
+[gd_scene load_steps=6 format=3 uid="uid://cxisn4qtp41n8"]
 
 [ext_resource type="Script" path="res://UI/Credits.cs" id="1_0p43e"]
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_g8yr0"]
 [ext_resource type="Material" uid="uid://csmodirttdmk3" path="res://UI/scrolling_targets.tres" id="2_vvm43"]
 [ext_resource type="LabelSettings" uid="uid://ou7j2mk7ly70" path="res://UI/spooky_biglabel.tres" id="2_yavkp"]
+[ext_resource type="Texture2D" uid="uid://cndeqw7ty0ybj" path="res://Art/tinymassgames_logo_transparent.png" id="5_16vm4"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -64,5 +65,15 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
 text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+texture_filter = 2
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("5_16vm4")
+expand_mode = 1
+stretch_mode = 5
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/BackButton" to="." method="_OnBackButtonPressed"]
