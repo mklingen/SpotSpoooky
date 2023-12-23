@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://cye7uu46jinkn" path="res://UI/spooky_theme.tres" id="1_g8yr0"]
 [ext_resource type="Material" uid="uid://csmodirttdmk3" path="res://UI/scrolling_targets.tres" id="2_vvm43"]
 [ext_resource type="LabelSettings" uid="uid://ou7j2mk7ly70" path="res://UI/spooky_biglabel.tres" id="2_yavkp"]
-[ext_resource type="Texture2D" uid="uid://cndeqw7ty0ybj" path="res://Art/tinymassgames_logo_transparent.png" id="5_16vm4"]
+[ext_resource type="Texture2D" uid="uid://csm1dltkg2ylt" path="res://Art/tinymassgames_logo_transparent.png" id="5_16vm4"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -39,7 +39,7 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "ZED Corbett - Character Art "
+text = "ZED Corbett - Modeling & Animation"
 label_settings = ExtResource("2_yavkp")
 horizontal_alignment = 1
 vertical_alignment = 1
