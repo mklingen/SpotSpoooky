@@ -6,6 +6,8 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_f2tpk")
+shader_parameter/BlockOffset = 2.0
+shader_parameter/TextureSize = 100.0
 shader_parameter/Rim = 0.49
 shader_parameter/Rim_Tint = 0.727
 shader_parameter/Albedo = ExtResource("2_hjfyq")

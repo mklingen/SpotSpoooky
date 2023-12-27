@@ -1,18 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://b65gp2u5e0m0l"]
+[gd_scene load_steps=3 format=3 uid="uid://b65gp2u5e0m0l"]
 
-[ext_resource type="PackedScene" uid="uid://coc86bur2gfug" path="res://Art/npc.glb" id="1_c3ht4"]
 [ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://Prefabs/background.tscn" id="2_omrx3"]
 [ext_resource type="PackedScene" uid="uid://fsiebmyspll5" path="res://Prefabs/npc.tscn" id="3_3nq34"]
 
 [node name="npc_preview" type="Node3D"]
 
-[node name="npc" parent="." instance=ExtResource("1_c3ht4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0967915, 0, 0)
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.947601, 0.319456, 0, -0.319456, 0.947601, -0.217566, 1.74785, 3.16384)
+transform = Transform3D(1, 0, 0, 0, 0.750272, 0.661129, 0, -0.661129, 0.750272, 1.9641, 3.87169, 4.36447)
 
 [node name="Background" parent="." instance=ExtResource("2_omrx3")]
 
 [node name="NPC" parent="." instance=ExtResource("3_3nq34")]
 transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, -1.17519, 0, 0)
+
+[node name="NPC2" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, 0.82479, 0, 0)
+
+[node name="NPC4" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, 2.99038, 0, 0)
+
+[node name="NPC5" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, 4.9834, 0, 0)
+
+[node name="NPC3" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, -3.11038, 0, 0)
+
+[node name="NPC6" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, -1.17519, 0, -3.00317)
+
+[node name="NPC7" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, 0.82479, 0, -3.00317)
+
+[node name="NPC8" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, 2.99038, 0, -3.00317)
+
+[node name="NPC9" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, 4.9834, 0, -3.00317)
+
+[node name="NPC10" parent="." instance=ExtResource("3_3nq34")]
+transform = Transform3D(-0.993514, 0, -0.113706, 0, 1, 0, 0.113706, 0, -0.993514, -3.11038, 0, -3.00317)

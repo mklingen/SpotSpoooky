@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Root : Node3D
+public partial class Root : Node3D, Player.IZoomHandler, Player.IShootHandler
 {
     [ExportGroup("Gameplay")]
     [Export]
@@ -153,6 +153,9 @@ public partial class Root : Node3D
         }
     }
 
+    private bool isZoomed = false;
+    public bool IsZoomed { get { return  isZoomed;  } }
+
 
     public static float LastFrameStartTime = -1.0f;
     public static float SinOfLastFrameTime = -1.0f;
@@ -213,6 +216,11 @@ public partial class Root : Node3D
         foreach (var alertHandler in alertHandlers) {
             OnAlert += (string alert) => alertHandler.OnAlert(alert);
         }
+
+        var gameStats = GameStats.Get(this);
+        if (gameStats != null) {
+            gameStats.OnStartNextLevel();
+        }
     }
 
     public override void _Process(double delta)
@@ -230,12 +238,20 @@ public partial class Root : Node3D
     {
         AddSpooks(1);
         EmitSignal(SignalName.OnAlert, "TOO SLOW!");
+        var gameStats = GameStats.Get(this);
+        if (gameStats != null) {
+            gameStats.OnNPCEaten();
+        }
     }
 
     public void OnNPCGotShot()
     {
         AddSpooks(1);
         EmitSignal(SignalName.OnAlert, "FRIENDLY FIRE!");
+        var gameStats = GameStats.Get(this);
+        if (gameStats != null) {
+            gameStats.OnFriendlyFire();
+        }
 
     }
 
@@ -258,6 +274,10 @@ public partial class Root : Node3D
     {
         AddSpooks(-1);
         EmitSignal(SignalName.OnAlert, "GOT SPOOKY!");
+        var gameStats = GameStats.Get(this);
+        if (gameStats != null) {
+            gameStats.OnShootSpooky();
+        }
     }
 
     public void DoAfterGameOverTimer(float time, Action action)
@@ -278,6 +298,7 @@ public partial class Root : Node3D
             gameStats.didPlayerWinLastGame = false;
             gameStats.levelLost = gameStats.currentLevel;
             gameStats.currentLevel = 1;
+            gameStats.OnEndCurrentLevel();
         }
         GetTree().ChangeSceneToFile(gameOverScene);
     }
@@ -287,8 +308,22 @@ public partial class Root : Node3D
         var gameStats = GameStats.Get(this);
         if (gameStats != null) {
             gameStats.didPlayerWinLastGame = true;
+            gameStats.OnEndCurrentLevel();
             gameStats.currentLevel++;
         }
         GetTree().ChangeSceneToFile(gameOverScene);
+    }
+
+    public void OnZoomChange(bool zoomed)
+    {
+        isZoomed = zoomed;
+    }
+
+    public void OnShoot(Vector3 shootFrom, Vector3 shootTo)
+    {
+        var gameStats = GameStats.Get(this);
+        if (gameStats != null) {
+            gameStats.OnShoot();
+        }
     }
 }

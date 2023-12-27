@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 public partial class GameStats : Node
 {
@@ -11,6 +12,57 @@ public partial class GameStats : Node
     public int maxLevels = 10;
     // The level the player was on when they lost.
     public int levelLost = 0;
+
+    public float TimeLevelStarted = 0.0f;
+    public float TimeLevelFinished = 0.0f;
+    public struct ShotStats
+    {
+        public int TotalNumShots = 0;
+        public int TotalNumFriendlyFire = 0;
+        public int TotalNumSpookyShots = 0;
+        public int TotalNumScaredNPCs = 0;
+
+        public int TotalNumMisses => TotalNumShots - (TotalNumSpookyShots + TotalNumFriendlyFire);
+
+        public ShotStats()
+        {
+        }
+    }
+
+    public ShotStats CurrentLevelShotStats = new ShotStats();
+
+
+    public void OnStartNextLevel()
+    {
+        TimeLevelStarted = Root.Timef();
+        CurrentLevelShotStats = new ShotStats();
+    }
+
+    public void OnEndCurrentLevel()
+    {
+        TimeLevelFinished = Root.Timef();
+    }
+
+    public void OnShoot()
+    {
+        CurrentLevelShotStats.TotalNumShots++;
+    }
+
+    public void OnNPCEaten()
+    {
+        CurrentLevelShotStats.TotalNumScaredNPCs++;
+    }
+
+    public void OnShootSpooky()
+    {
+        CurrentLevelShotStats.TotalNumSpookyShots++;
+    }
+
+    public void OnFriendlyFire()
+    {
+        CurrentLevelShotStats.TotalNumFriendlyFire++;
+    }
+
 
     public static GameStats Get(Node node)
     {

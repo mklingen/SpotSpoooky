@@ -2,21 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca2kuwbsxw6qx"
-path="res://.godot/imported/tmg-waldo_envir_fountain_environment.png-f527334652835b2bc429b6c09d925b1d.ctex"
+uid="uid://cw5tqnqh5yf0i"
+path.s3tc="res://.godot/imported/house3_haunted_house_sheltzy32-32x.png-ef3aae775ad4be40567d74599d3d8994.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={}
 
 [deps]
 
-source_file="res://Art/tmg-waldo_envir_fountain_environment.png"
-dest_files=["res://.godot/imported/tmg-waldo_envir_fountain_environment.png-f527334652835b2bc429b6c09d925b1d.ctex"]
+source_file="res://Art/house3_haunted_house_sheltzy32-32x.png"
+dest_files=["res://.godot/imported/house3_haunted_house_sheltzy32-32x.png-ef3aae775ad4be40567d74599d3d8994.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

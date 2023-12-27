@@ -67,3 +67,4 @@ Zoom={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+limits/global_shader_variables/buffer_size=131072

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkotrgfhc6ly1"]
+
+[ext_resource type="PackedScene" uid="uid://d1j5shgedvwuh" path="res://Art/tmg-waldo_envir_fence-01_spoke-b.glb" id="1_qg1vc"]
+[ext_resource type="Material" uid="uid://cv0ap24v4omf2" path="res://Materials/environment_material.tres" id="2_du6f6"]
+
+[node name="tmg-waldo_envir_fence-01_spoke-b" instance=ExtResource("1_qg1vc")]
+
+[node name="envir_fence-01_spoke-b" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_du6f6")

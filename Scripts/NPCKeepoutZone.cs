@@ -6,10 +6,11 @@ public partial class NPCKeepoutZone : Node3D
     [Export]
 	Aabb keepOutShape;
 
-    // Called when the node enters the scene tree for the first time.
+
     public override void _Ready()
 	{
-
+        // Recenter AAbb because "x,y,w,h" actually refer to lowest point, not center, which is so, so dumb.
+        keepOutShape = new Aabb(keepOutShape.Position - keepOutShape.Size * 0.5f, keepOutShape.Size);
 	}
 
     public bool Query(Vector3 globalPt)

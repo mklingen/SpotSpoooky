@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://boj5pxihstn88"]
+
+[ext_resource type="PackedScene" uid="uid://e3pon000icpd" path="res://Prefabs/building.tscn" id="1_w30n5"]
+[ext_resource type="ArrayMesh" uid="uid://ba72xnmjhpouw" path="res://Art/MeshExports/house3.res" id="2_pd3ya"]
+
+[node name="Building" instance=ExtResource("1_w30n5")]
+
+[node name="MeshInstance3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0.055783, 2.41462)
+mesh = ExtResource("2_pd3ya")
+
+[node name="SpotLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.0639227, 0.997955, 0, -0.997955, -0.0639227, -6, 5.83512, -2.19948)

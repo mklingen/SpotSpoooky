@@ -160,8 +160,13 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
             else {
                 updateEveryFrame = 1;
             }
+			if (pathToFollow == null && updateEveryFrame != 1) {
+				// Idle critters update less.
+				updateEveryFrame *= 2;
+			}
+			bool animationsEnabled = Root.Get(this.GetTree()).IsZoomed && animation != null;
             if (wasOnScreen && pathToFollow != null) {
-				currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta;
+				currDistAlongPath = currDistAlongPath + pathFollowSpeed * (float)delta * updateEveryFrame;
 				// Wrap the path (it is supposed to circular, I guess.
 				if (currDistAlongPath > pathLength) {
 					currDistAlongPath = (currDistAlongPath - pathLength);
@@ -179,19 +184,19 @@ public partial class NPC : AnimatableBody3D, Player.IGotShotHandler, Waldo.IEatH
 					LookAt(lookTarget, Vector3.Up);
 				}
 				GlobalPosition = nextPos;
-				if (animation != null && !animation.IsPlaying()) {
+				if (animationsEnabled && !animation.IsPlaying()) {
 					animation.Play(walkAnimation);
 				}
-				if (animation != null) {
+				if (animationsEnabled) {
 					animation.SpeedScale = ConstantLinearVelocity.Length();
 					animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Manual;
 					animation.Advance(delta);
 				}
 			} else if (wasOnScreen && idleAnimation.Length > 0) {
-                if (animation != null && !animation.IsPlaying()) {
+                if (animationsEnabled && !animation.IsPlaying()) {
                     animation.Play(idleAnimation);
                 }
-                if (animation != null) {
+                if (animationsEnabled) {
 					animation.SpeedScale = 1.0f;
                     animation.PlaybackProcessMode = AnimationPlayer.AnimationProcessCallback.Manual;
                     animation.Advance(delta * updateEveryFrame);

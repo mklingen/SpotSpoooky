@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bystdxnu5fbof"]
+[gd_scene load_steps=17 format=3 uid="uid://bystdxnu5fbof"]
 
 [ext_resource type="Script" path="res://Scripts/Root.cs" id="1_mug17"]
 [ext_resource type="PackedScene" uid="uid://dbh1woged6gth" path="res://Prefabs/background.tscn" id="1_shsoh"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dedp74nucavoo" path="res://Prefabs/Waldo.tscn" id="7_5nog4"]
 [ext_resource type="PackedScene" uid="uid://cfckxjuq6ycla" path="res://UI/MainUI.tscn" id="8_xr1hy"]
 [ext_resource type="PackedScene" uid="uid://djs5lkugcyp8a" path="res://Prefabs/building2.tscn" id="10_iyj8e"]
+[ext_resource type="PackedScene" uid="uid://boj5pxihstn88" path="res://Prefabs/building3.tscn" id="11_7gnvi"]
 [ext_resource type="PackedScene" uid="uid://bdfx7gcr3xulc" path="res://Prefabs/tree.tscn" id="11_tobb2"]
 
 [sub_resource type="Curve" id="Curve_ffooi"]
@@ -60,7 +61,7 @@ transform = Transform3D(-0.999953, -0.000672045, -0.00971546, 0, 0.997616, -0.06
 transform = Transform3D(0.993297, 0, 0.115596, 0, 1, 0, -0.115596, 0, 0.993297, -8.59404, 0, -70.0189)
 
 [node name="Building4" parent="." instance=ExtResource("2_vplhw")]
-transform = Transform3D(-0.045555, 0, 0.998962, 0, 1, 0, -0.998962, 0, -0.045555, -23.4047, 0, -44.4195)
+transform = Transform3D(-0.045555, 0, 0.998962, 0, 1, 0, -0.998962, 0, -0.045555, -76.2832, 0, -44.4195)
 
 [node name="Building8" parent="." instance=ExtResource("2_vplhw")]
 transform = Transform3D(0.0638706, 0, -0.997958, 0, 1, 0, 0.997958, 0, 0.0638706, 67.1875, 0, -31.8249)
@@ -108,6 +109,15 @@ transform = Transform3D(-0.0820081, 0, 0.996632, 0, 1, 0, -0.996632, 0, -0.08200
 
 [node name="Building7" parent="." instance=ExtResource("10_iyj8e")]
 transform = Transform3D(-0.0820081, 0, 0.996632, 0, 1, 0, -0.996632, 0, -0.0820081, -41.083, 0, -94.6319)
+
+[node name="Building2" parent="." instance=ExtResource("11_7gnvi")]
+transform = Transform3D(-0.998948, 0, -0.0458513, 0, 1, 0, 0.0458513, 0, -0.998948, -23.2277, -1.43051e-06, -47.7071)
+
+[node name="Building9" parent="." instance=ExtResource("11_7gnvi")]
+transform = Transform3D(0.117433, 0, 0.993081, 0, 1, 0, -0.993081, 0, 0.117433, 14.7687, -1.43051e-06, -11.3842)
+
+[node name="Building10" parent="." instance=ExtResource("11_7gnvi")]
+transform = Transform3D(0.954199, 0, -0.299174, 0, 1, 0, 0.299174, 0, 0.954199, 67.1977, -1.43051e-06, -63.6254)
 
 [node name="Tree" parent="." instance=ExtResource("11_tobb2")]
 transform = Transform3D(0.591664, 0, 0.822448, 0, 0.490296, 0, -0.591664, 0, 0.822448, -40, 0, -39)

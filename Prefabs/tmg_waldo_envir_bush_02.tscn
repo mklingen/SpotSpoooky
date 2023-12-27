@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqthb31f0pkmk"]
+
+[ext_resource type="PackedScene" uid="uid://dncq38dwi82h5" path="res://Art/tmg-waldo_envir_bush-02.glb" id="1_8qbyp"]
+[ext_resource type="Material" uid="uid://cv0ap24v4omf2" path="res://Materials/environment_material.tres" id="2_fvnke"]
+
+[node name="tmg-waldo_envir_bush-02" instance=ExtResource("1_8qbyp")]
+
+[node name="envir_bush-02" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_fvnke")

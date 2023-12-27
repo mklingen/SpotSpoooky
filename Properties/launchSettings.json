@@ -6,7 +6,7 @@
     },
     "Profile 1": {
       "commandName": "Executable",
-      "executablePath": "C:\\Users\\matth\\Documents\\Godot\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "executablePath": "C:\\Users\\matth\\Desktop\\Projects\\Godot\\Godot_v4.1.2-stable_mono_win64.exe",
       "commandLineArgs": "--path . --verbose",
       "workingDirectory": ".",
       "nativeDebugging": true

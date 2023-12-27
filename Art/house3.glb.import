@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://csm1dltkg2ylt"
-path="res://.godot/imported/tmg-waldo_envir_bush-01.glb-32abd91695d9c9122bd167973185de0c.scn"
+uid="uid://sx6o12lelwvq"
+path="res://.godot/imported/house3.glb-f873874ef995368637a3f3cc164f2ad4.scn"
 
 [deps]
 
-source_file="res://Art/tmg-waldo_envir_bush-01.glb"
-dest_files=["res://.godot/imported/tmg-waldo_envir_bush-01.glb-32abd91695d9c9122bd167973185de0c.scn"]
+source_file="res://Art/house3.glb"
+dest_files=["res://.godot/imported/house3.glb-f873874ef995368637a3f3cc164f2ad4.scn"]
 
 [params]
 
@@ -30,7 +30,7 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "meshes": {
-"tmg-waldo_envir_bush-01_Cube_004": {
+"house3_Cube_001": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
@@ -38,7 +38,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/MeshExports/bush001.res"
+"save_to_file/path": "res://Art/MeshExports/house3.res"
 }
 }
 }

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://s1f1bkwm4dqd"]
+
+[ext_resource type="PackedScene" uid="uid://t1mbg23oen6q" path="res://Art/tmg-waldo_envir_fountain.glb" id="1_lq8rs"]
+[ext_resource type="Material" uid="uid://cv0ap24v4omf2" path="res://Materials/environment_material.tres" id="2_r10r2"]
+[ext_resource type="Script" path="res://Scripts/NPCKeepoutZone.cs" id="3_bxk0f"]
+
+[node name="tmg-waldo_envir_fountain" instance=ExtResource("1_lq8rs")]
+
+[node name="envir_fountain" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_r10r2")
+
+[node name="KeepoutZone" type="Node3D" parent="." index="1"]
+script = ExtResource("3_bxk0f")
+keepOutShape = AABB(0, 0, 0, 6, 20, 6)

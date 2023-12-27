@@ -165,6 +165,8 @@ public partial class Player : Camera3D
 		foreach (var child in GetChildren()) {
 			AddCallbacksRecursive(child);
 		}
+        this.OnZoomChange += Root.Get(GetTree()).OnZoomChange;
+		this.OnShoot += Root.Get(GetTree()).OnShoot;
 		Root.GetInterfaceRecursive<IOnReticleNearHandler>(GetTree().Root, onReticleNearHandlers);
 		foreach (var handler in onReticleNearHandlers) {
 			OnReticleNear += handler.OnReticleNear;

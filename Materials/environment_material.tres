@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cv0ap24v4omf2"]
+
+[ext_resource type="Texture2D" uid="uid://c6r8d8ywsca0r" path="res://Materials/environment_palette.png" id="1_uplk1"]
+[ext_resource type="Texture2D" uid="uid://cx5r6r43ohkms" path="res://Art/sheltzy_glow.png" id="2_r3uhc"]
+
+[resource]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_uplk1")
+roughness = 0.86
+emission = Color(1, 1, 0.0117647, 1)
+emission_energy_multiplier = 6.59
+emission_operator = 1
+emission_texture = ExtResource("2_r3uhc")
+rim_enabled = true
+rim_tint = 1.0
+backlight = Color(0.301961, 0.509804, 1, 1)
+grow_amount = 1.16

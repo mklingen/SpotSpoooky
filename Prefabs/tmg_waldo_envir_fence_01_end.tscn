@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://2pejvev4x1io"]
+
+[ext_resource type="PackedScene" uid="uid://ci443hu7b73jv" path="res://Art/tmg-waldo_envir_fence-01_end.glb" id="1_5akai"]
+[ext_resource type="Material" uid="uid://cv0ap24v4omf2" path="res://Materials/environment_material.tres" id="2_hgkfp"]
+
+[node name="tmg-waldo_envir_fence-01_end" instance=ExtResource("1_5akai")]
+
+[node name="envir_fence-01_end" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_hgkfp")

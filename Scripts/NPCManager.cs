@@ -141,7 +141,7 @@ public partial class NPCManager : Node3D
 
         foreach (var path in paths) {
 			if (path.ToGlobal(path.Curve.GetClosestPoint(path.ToLocal(spawnedNPC.GlobalPosition))).DistanceTo(spawnedNPC.GlobalPosition) < 5) {
-				spawnedNPC.SetPath(path, (float)GD.RandRange(-5.0, 5.0), new Vector3((float)GD.RandRange(-2.0f, 2.0f), 0.0f, (float)GD.RandRange(-2.0f, 2.0f)));
+				spawnedNPC.SetPath(path, (float)GD.RandRange(-2.0, 2.0), new Vector3((float)GD.RandRange(-2.0f, 2.0f), 0.0f, (float)GD.RandRange(-2.0f, 2.0f)));
 				break;
 			}
 		}

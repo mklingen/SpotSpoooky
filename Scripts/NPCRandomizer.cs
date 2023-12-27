@@ -2,17 +2,112 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-
 public partial class NPCRandomizer : Node3D
 {
 
 	[ExportGroup("Offsets")]
 	[Export]
 	Array<string> MeshNames = new Array<string>();
-	[Export]
-	Array<Array<Vector2>> Offsets = new Array<Array<Vector2>>();
 
+	private static AnimationOffsets[] Offsets = new AnimationOffsets[]{
+		new AnimationOffsets {
+			Pattern = "base_head",
+            OtherPatterns = new string[] { "base_hands", "base_head_cheeks"},
+			Offsets = new AnimationOffsets.Offset[] {
+				new AnimationOffsets.Offset {
+					X = 0,
+					Y = 0,
+					Frequency = 1
+				},
+				new AnimationOffsets.Offset
+				{
+					X = -1,
+					Y = -2,
+					Frequency = 1
+				},
+				new AnimationOffsets.Offset
+				{
+                    X = -1,
+                    Y = -0,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = 1,
+                    Y = -0,
+                    Frequency = 1
+                }
+            }
+		},
+        new AnimationOffsets {
+            Pattern = "base_body",
+            Offsets = new AnimationOffsets.Offset[] {
+                new AnimationOffsets.Offset {
+                    X = 0,
+                    Y = 0,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = -8,
+                    Y = -8,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = 8,
+                    Y = 0,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = 8,
+                    Y = 8,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = 0,
+                    Y = 8,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = 0,
+                    Y = -8,
+                    Frequency = 1
+                }
+            }
+        },
+        new AnimationOffsets {
+            Pattern = "accessory_hair",
+            Offsets = new AnimationOffsets.Offset[] {
+                new AnimationOffsets.Offset {
+                    X = 0,
+                    Y = 0,
+                    Frequency = 10
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = -26,
+                    Y = -3,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = 1,
+                    Y = -3,
+                    Frequency = 1
+                },
+                new AnimationOffsets.Offset
+                {
+                    X = -10,
+                    Y = -2,
+                    Frequency = 2
+                },
+            }
+        }
+    };
 
 	enum MeshType
 	{
@@ -72,13 +167,19 @@ public partial class NPCRandomizer : Node3D
 		}
 
         // Offset all meshes.
-        for (int i = 0; i < MeshNames.Count; i++) {
-            var meshes = FindChildren(MeshNames[i] + "*", "MeshInstance3D");
+        foreach (var offsets in Offsets) {
+            var meshes = FindChildren(offsets.Pattern + "*", "MeshInstance3D");
             if (meshes.Count == 0) {
-                GD.PrintErr($"Couldn't find mesh {MeshNames[i]}");
+                GD.PrintErr($"Couldn't find mesh {offsets.Pattern}");
                 continue;
             }
 
+            if (offsets.OtherPatterns != null) {
+                foreach (string pattern in offsets.OtherPatterns) {
+                    meshes.AddRange(FindChildren(pattern + "*", "MeshInstance3D"));
+                }
+            }
+            var offset = offsets.GetRandomOffset();
             foreach (var obj in meshes) {
 				if (obj.IsQueuedForDeletion()) {
 					continue;
@@ -87,16 +188,8 @@ public partial class NPCRandomizer : Node3D
                 if (mesh == null) {
                     continue;
                 }
-				if (Offsets.Count == 0) {
-                    mesh.SetInstanceShaderParameter("OffsetX", GD.Randf());
-                    mesh.SetInstanceShaderParameter("OffsetY", 0.0f);
-                }
-				else {
-
-					var offset = Offsets[i][GD.RandRange(0, Offsets[i].Count - 1)];
-					mesh.SetInstanceShaderParameter("OffsetX", offset.X + GD.Randf());
-					mesh.SetInstanceShaderParameter("OffsetY", offset.Y);
-				}
+                mesh.SetInstanceShaderParameter("OffsetX", offset.X);
+                mesh.SetInstanceShaderParameter("OffsetY", offset.Y);
             }
         }
     }
