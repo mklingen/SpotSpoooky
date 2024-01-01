@@ -244,12 +244,12 @@ class NPCColorOffsets
                 new AnimationOffsets.Offset {
                     X = 40,
                     Y = 0,
-                    Frequency = 2
+                    Frequency = 3
                 },
-                new AnimationOffsets.Offset {
+                new AnimationOffsets.Offset { // striped shirt, blue pants
                     X = 42,
                     Y = 0,
-                    Frequency = 4
+                    Frequency = 7
                 },
 
                 // Group 2 (green pants)
@@ -358,7 +358,7 @@ class NPCColorOffsets
                     Y = 5,
                     Frequency = 2
                 },
-                new AnimationOffsets.Offset {
+                new AnimationOffsets.Offset { // striped shirt, green pants
                     X = 42,
                     Y = 5,
                     Frequency = 5
@@ -470,120 +470,10 @@ class NPCColorOffsets
                     Y = 10,
                     Frequency = 2
                 },
-                new AnimationOffsets.Offset {
+                new AnimationOffsets.Offset { // striped shirt, maroon pants
                     X = 42,
                     Y = 10,
-                    Frequency = 2
-                },
-                new AnimationOffsets.Offset {
-                    X = 0,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 2,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 4,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 6,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 8,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 10,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 12,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 14,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 16,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 18,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 20,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 22,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 24,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 26,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 28,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 30,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 32,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 34,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 36,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 38,
-                    Y = 10,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset {
-                    X = 40,
-                    Y = 10,
-                    Frequency = 2
-                },
-                new AnimationOffsets.Offset {
-                    X = 42,
-                    Y = 10,
-                    Frequency = 3
+                    Frequency = 4
                 }
             }
         },
@@ -756,7 +646,7 @@ class NPCColorOffsets
                 new AnimationOffsets.Offset {
                     X = 0,
                     Y = 1,
-                    Frequency = 6
+                    Frequency = 10
                 },
                 new AnimationOffsets.Offset {
                     X = 1,
@@ -1401,10 +1291,10 @@ class NPCColorOffsets
                 },
 
                 // Row 2
-                new AnimationOffsets.Offset {
+                new AnimationOffsets.Offset { // orange hair
                     X = 0,
                     Y = 1,
-                    Frequency = 5
+                    Frequency = 9
                 },
                 new AnimationOffsets.Offset {
                     X = 1,
@@ -1562,7 +1452,7 @@ class NPCColorOffsets
                     Frequency = 4
                 },
 
-                // Row 3
+                // Row 3 (dark hair)
                 new AnimationOffsets.Offset {
                     X = 0,
                     Y = 3,
@@ -1571,52 +1461,52 @@ class NPCColorOffsets
                 new AnimationOffsets.Offset {
                     X = 1,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 2,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 3,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 4,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 5,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 6,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 7,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 8,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 9,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 10,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 11,
@@ -1626,27 +1516,27 @@ class NPCColorOffsets
                 new AnimationOffsets.Offset {
                     X = 12,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 13,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 14,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 15,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 16,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 },
                 new AnimationOffsets.Offset {
                     X = 17,
@@ -1721,7 +1611,7 @@ class NPCColorOffsets
                 new AnimationOffsets.Offset {
                     X = 31,
                     Y = 3,
-                    Frequency = 4
+                    Frequency = 2
                 }
             }
         }
