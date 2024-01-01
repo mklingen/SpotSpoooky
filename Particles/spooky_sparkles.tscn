@@ -12,15 +12,19 @@ point_count = 2
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 material_override = ExtResource("1_g6c56")
+lifetime = 2.0
+lifetime_randomness = 0.1
 mesh = SubResource("BoxMesh_oi0ri")
 emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3(0, 1, 0)
 spread = 25.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, -1, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 5.0
-scale_amount_min = 0.1
-scale_amount_max = 0.2
+damping_min = 0.1
+damping_max = 0.5
+scale_amount_min = 0.25
+scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_c1qe7")
 color = Color(1, 0.196078, 1, 1)
