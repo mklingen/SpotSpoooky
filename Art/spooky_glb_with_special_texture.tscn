@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0ledbyc6yat5"]
 
 [ext_resource type="PackedScene" uid="uid://fsrcwrt7kh4" path="res://Art/spooky.glb" id="1_4t4dg"]
-[ext_resource type="Material" uid="uid://dwqjc0lf30d6a" path="res://Materials/spooky_glow.tres" id="2_6i10y"]
+[ext_resource type="Material" uid="uid://cibpjobdswxxm" path="res://Materials/spooky_glow.tres" id="2_6i10y"]
 [ext_resource type="Material" uid="uid://dl1f8c3c2y2sq" path="res://Materials/npc.tres" id="3_nk3rq"]
 
 [node name="spooky" instance=ExtResource("1_4t4dg")]

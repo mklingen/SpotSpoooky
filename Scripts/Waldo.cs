@@ -135,6 +135,9 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
 
 	private AnimationPlayer animationPlayer;
 
+
+	private CpuParticles3D sparkles;
+
     public interface IEatHandler
     {
         abstract void GotEaten(NPC eaten);
@@ -162,6 +165,7 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
         }
 		audioManager = new AudioManager(this);
         globalPosBeforeMoving = GlobalPosition;
+		sparkles = Root.FindNodeRecusive < CpuParticles3D > (this);
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -338,7 +342,10 @@ public partial class Waldo : AnimatableBody3D, Player.IGotShotHandler, Player.IO
         }
 		huntState = newState;
 		stateChangeTime = Root.Timef();
-	}
+        if (sparkles != null) {
+            sparkles.Emitting = newState == HuntState.WarmingUp || newState == HuntState.MovingToTarget;
+        }
+    }
 
 	public void GotShot()
 	{

@@ -54,11 +54,8 @@ transform = Transform3D(-0.775351, 0.530518, -0.34261, 0.21449, 0.731475, 0.6472
 [node name="Ground" parent="Background/GroundBody" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301328, 0, 0)
 
-[node name="Building" parent="." instance=ExtResource("2_vplhw")]
-transform = Transform3D(-0.999953, -0.000672045, -0.00971546, 0, 0.997616, -0.0690078, 0.00973868, -0.0690045, -0.997569, 24.2667, 0, 19.4074)
-
 [node name="Building3" parent="." instance=ExtResource("2_vplhw")]
-transform = Transform3D(0.993297, 0, 0.115596, 0, 1, 0, -0.115596, 0, 0.993297, -8.59404, 0, -70.0189)
+transform = Transform3D(0.999122, -0.00617312, -0.0414572, 0.00617843, 0.999981, 0, 0.0414564, -0.00025614, 0.999141, 6.07449, 0.109196, -93.8017)
 
 [node name="Building4" parent="." instance=ExtResource("2_vplhw")]
 transform = Transform3D(-0.045555, 0, 0.998962, 0, 1, 0, -0.998962, 0, -0.045555, -76.2832, 0, -44.4195)
@@ -146,7 +143,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -90)
 [node name="Tree7" parent="." instance=ExtResource("11_tobb2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 0, -6)
 
+[node name="Tree11" parent="." instance=ExtResource("11_tobb2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9669, 0, 34.3755)
+
 [node name="Tree8" parent="." instance=ExtResource("11_tobb2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 17)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 36.8235)
 
 [editable path="Background"]

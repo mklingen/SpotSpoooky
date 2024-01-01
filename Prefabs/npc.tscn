@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://fsiebmyspll5"]
 
 [ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_l5pwi"]
-[ext_resource type="Material" path="res://Materials/frozen_NPC.tres" id="2_85kqq"]
+[ext_resource type="Material" uid="uid://d25deheq2ldga" path="res://Materials/frozen_NPC.tres" id="2_85kqq"]
 [ext_resource type="PackedScene" uid="uid://b2snap84cn0kk" path="res://Particles/npc_frozen.tscn" id="3_7ett7"]
 [ext_resource type="PackedScene" uid="uid://f7jklnwwn6hi" path="res://Prefabs/npc_mesh.tscn" id="4_f6auh"]
 [ext_resource type="Script" path="res://Scripts/RandomSFXPlayer.cs" id="5_sd40i"]

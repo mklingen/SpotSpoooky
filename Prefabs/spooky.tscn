@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4its2vwri7ff"]
 
 [ext_resource type="PackedScene" uid="uid://d2pagb2xqhgi6" path="res://Art/tmg_waldo_2023-10-29 2300 (spooky walk animation).glb" id="1_gookw"]
-[ext_resource type="Material" uid="uid://dwqjc0lf30d6a" path="res://Materials/spooky_glow.tres" id="2_n8n4i"]
+[ext_resource type="Material" uid="uid://cibpjobdswxxm" path="res://Materials/spooky_glow.tres" id="2_n8n4i"]
 [ext_resource type="Material" uid="uid://dl1f8c3c2y2sq" path="res://Materials/npc.tres" id="3_hjxjp"]
 
 [node name="tmg_waldo_2023-10-29 2300 (spooky walk animation)" instance=ExtResource("1_gookw")]
