@@ -9,107 +9,7 @@ public partial class NPCRandomizer : Node3D
 	[Export]
 	Array<string> MeshNames = new Array<string>();
 
-	private static AnimationOffsets[] Offsets = new AnimationOffsets[]{
-		new AnimationOffsets {
-			Pattern = "base_head",
-            OtherPatterns = new string[] { "base_hands", "base_head_cheeks"},
-			Offsets = new AnimationOffsets.Offset[] {
-				new AnimationOffsets.Offset {
-					X = 0,
-					Y = 0,
-					Frequency = 1
-				},
-				new AnimationOffsets.Offset
-				{
-					X = -1,
-					Y = -2,
-					Frequency = 1
-				},
-				new AnimationOffsets.Offset
-				{
-                    X = -1,
-                    Y = -0,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = 1,
-                    Y = -0,
-                    Frequency = 1
-                }
-            }
-		},
-        new AnimationOffsets {
-            Pattern = "base_body",
-            Offsets = new AnimationOffsets.Offset[] {
-                new AnimationOffsets.Offset {
-                    X = 0,
-                    Y = 0,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = -8,
-                    Y = -8,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = 8,
-                    Y = 0,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = 8,
-                    Y = 8,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = 0,
-                    Y = 8,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = 0,
-                    Y = -8,
-                    Frequency = 1
-                }
-            }
-        },
-        new AnimationOffsets {
-            Pattern = "accessory_hair",
-            Offsets = new AnimationOffsets.Offset[] {
-                new AnimationOffsets.Offset {
-                    X = 0,
-                    Y = 0,
-                    Frequency = 10
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = -26,
-                    Y = -3,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = 1,
-                    Y = -3,
-                    Frequency = 1
-                },
-                new AnimationOffsets.Offset
-                {
-                    X = -10,
-                    Y = -2,
-                    Frequency = 2
-                },
-            }
-        }
-    };
-
-	enum MeshType
+    enum MeshType
 	{
 		Base,
 		Accessory
@@ -167,7 +67,7 @@ public partial class NPCRandomizer : Node3D
 		}
 
         // Offset all meshes.
-        foreach (var offsets in Offsets) {
+        foreach (var offsets in NPCColorOffsets.Offsets) {
             var meshes = FindChildren(offsets.Pattern + "*", "MeshInstance3D");
             if (meshes.Count == 0) {
                 GD.PrintErr($"Couldn't find mesh {offsets.Pattern}");

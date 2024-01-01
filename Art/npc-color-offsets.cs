@@ -1,13 +1,15 @@
-	private static AnimationOffsets[] Offsets = new AnimationOffsets[]{
-		new AnimationOffsets {
-			Pattern = "base_head",
+class NPCColorOffsets
+{
+    public static AnimationOffsets[] Offsets = new AnimationOffsets[]{
+        new AnimationOffsets {
+            Pattern = "base_head",
             OtherPatterns = new string[] { "base_hands", "base_head_cheeks"},
-			Offsets = new AnimationOffsets.Offset[] {
-				new AnimationOffsets.Offset {
-					X = 0,
+            Offsets = new AnimationOffsets.Offset[] {
+                new AnimationOffsets.Offset {
+                    X = 0,
                     Y = 0,
                     Frequency = 1
-				},
+                },
                 new AnimationOffsets.Offset {
                     X = 1,
                     Y = 0,
@@ -134,7 +136,7 @@
                     Frequency = 1
                 }
             }
-		},
+        },
         new AnimationOffsets {
             Pattern = "base_body",
             Offsets = new AnimationOffsets.Offset[] {
@@ -1724,3 +1726,4 @@
             }
         }
     };
+}

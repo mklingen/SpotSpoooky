@@ -7,6 +7,7 @@
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.750272, 0.661129, 0, -0.661129, 0.750272, 1.9641, 3.87169, 4.36447)
+current = true
 
 [node name="Background" parent="." instance=ExtResource("2_omrx3")]
 

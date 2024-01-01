@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cgqt187av1kdx"
-path="res://.godot/imported/tmg_waldo_2023-12-07 0240 (npc w accessories).glb-39f65b423c2721252d0c7b6d3ee526ad.scn"
+uid="uid://bhi7gut76eyy8"
+path="res://.godot/imported/other.glb-ffe2111cea5895c9f8d1f165b57dfd05.scn"
 
 [deps]
 
-source_file="res://Art/tmg_waldo_2023-12-07 0240 (npc w accessories).glb"
-dest_files=["res://.godot/imported/tmg_waldo_2023-12-07 0240 (npc w accessories).glb-39f65b423c2721252d0c7b6d3ee526ad.scn"]
+source_file="res://Art/other.glb"
+dest_files=["res://.godot/imported/other.glb-ffe2111cea5895c9f8d1f165b57dfd05.scn"]
 
 [params]
 
