@@ -1,12 +1,14 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bod8f8bwruo0f"]
 
 [ext_resource type="Shader" uid="uid://cn7ku1u8g6yj3" path="res://Materials/npc_uv_offset.tres" id="1_f2tpk"]
-[ext_resource type="Texture2D" uid="uid://bkwt0tmmwiuyp" path="res://Materials/npc_texture.tres" id="2_t5a2r"]
+[ext_resource type="Texture2D" uid="uid://b11cksfo34kqm" path="res://Art/npc-texture_all.png" id="2_7ye0g"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_f2tpk")
+shader_parameter/BlockOffset = 1.0
+shader_parameter/TextureSize = Vector2(46, 24)
 shader_parameter/Roughness = 0.956
-shader_parameter/Rim = 0.49
-shader_parameter/Rim_Tint = 0.727
-shader_parameter/Albedo = ExtResource("2_t5a2r")
+shader_parameter/Rim = 0.75
+shader_parameter/Rim_Tint = 0.35
+shader_parameter/Albedo = ExtResource("2_7ye0g")

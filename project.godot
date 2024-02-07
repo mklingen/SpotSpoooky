@@ -13,10 +13,13 @@ config_version=5
 config/name="Spot Spooky"
 config/description="Spot Spooky video game."
 run/main_scene="res://UI/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="SpotSpooky"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0.242188, 0.609375, 0.542969, 1)
 boot_splash/image="res://Art/tinymassgames_logo_transparent.png"
-config/icon="res://icon.svg"
+config/icon="res://Art/head_logo.png"
+config/windows_native_icon="res://Art/head_logo.ico"
 boot_splash/minimum_display_time=2000
 
 [autoload]

@@ -9,8 +9,8 @@ public partial class Settings : Resource
     public bool InvertVerticalAxis { get; set; } = false;
     public bool InstantZoom { get; set; } = false;
 
-    public double MusicVolume { get; set; } = 0.0;
-    public double SFXVolume { get; set; } = 0.0;
+    public double MusicVolume { get; set; } = 0.5;
+    public double SFXVolume { get; set; } = 0.5;
 
     public void SaveSettings()
     {

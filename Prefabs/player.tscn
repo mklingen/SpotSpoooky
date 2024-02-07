@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dobjhwbg0l1od"]
+[gd_scene load_steps=13 format=3 uid="uid://dobjhwbg0l1od"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_8l21n"]
 [ext_resource type="Texture2D" uid="uid://dtmvitdrkijfr" path="res://Art/sights.png" id="1_gl7ge"]
@@ -10,6 +10,16 @@
 [ext_resource type="AudioStream" uid="uid://b13ostmkaerb4" path="res://Audio/SFX/SFX_Shot_3.wav" id="8_o12cj"]
 [ext_resource type="AudioStream" uid="uid://df6qbvflsm4uu" path="res://Audio/SFX/zoom_in.wav" id="8_pro1e"]
 [ext_resource type="AudioStream" uid="uid://bxvxikmvffnm3" path="res://Audio/SFX/zoom_out.wav" id="9_2mro1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gou8q"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_gl7ge")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 10.0
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_27xeq"]
 _data = [Vector2(0.00184502, 0), 0.0, 0.0, 0, 0, Vector2(0.0387454, 1), 1.46707, 1.46707, 0, 0, Vector2(1, 0.0315789), 0.0, 0.0, 0, 0]
@@ -25,7 +35,9 @@ far = 500.0
 script = ExtResource("1_8l21n")
 
 [node name="Reticle" type="Sprite3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 7.62939e-06, -1.58621)
+transform = Transform3D(20, 0, 0, 0, 20, 9.53674e-07, 0, -9.53674e-07, 20, 0, 7.62939e-06, -1.58621)
+material_override = SubResource("StandardMaterial3D_gou8q")
+gi_mode = 0
 no_depth_test = true
 alpha_cut = 1
 texture_filter = 0
@@ -34,6 +46,12 @@ script = ExtResource("2_2upae")
 shakeCurve = SubResource("Curve_27xeq")
 shakeAmount = 2.0
 shakeTime = 0.25
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Reticle"]
+light_color = Color(0.788235, 0.482353, 0.0784314, 1)
+light_energy = 20.0
+spot_range = 350.0
+spot_angle = 2.0
 
 [node name="BulletParticles" parent="." instance=ExtResource("2_02mwu")]
 

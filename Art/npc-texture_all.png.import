@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b11cksfo34kqm"
-path.s3tc="res://.godot/imported/npc-texture_all.png-0349429b1b138e26c6e8b8beba21346b.s3tc.ctex"
+path.bptc="res://.godot/imported/npc-texture_all.png-0349429b1b138e26c6e8b8beba21346b.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,14 +12,14 @@ metadata={
 [deps]
 
 source_file="res://Art/npc-texture_all.png"
-dest_files=["res://.godot/imported/npc-texture_all.png-0349429b1b138e26c6e8b8beba21346b.s3tc.ctex"]
+dest_files=["res://.godot/imported/npc-texture_all.png-0349429b1b138e26c6e8b8beba21346b.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
-compress/hdr_compression=1
+compress/hdr_compression=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

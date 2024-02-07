@@ -39,6 +39,7 @@ transform = Transform3D(1, 2.77556e-08, -3.91448e-09, -2.75032e-08, 0.944629, -0
 bone_idx = 4
 
 [node name="spooky_eye-holes_v2" parent="Armature/Skeleton3D/spooky_eye-holes_v2" index="0"]
+gi_mode = 0
 surface_material_override/0 = ExtResource("2_6i10y")
 
 [node name="spooky_jack-o-head" parent="Armature/Skeleton3D" index="1"]
@@ -46,14 +47,17 @@ transform = Transform3D(0.91869, 3.10719e-08, -3.52794e-09, -2.53283e-08, 1.0538
 bone_idx = 5
 
 [node name="spooky_jack-o-head" parent="Armature/Skeleton3D/spooky_jack-o-head" index="0"]
+gi_mode = 0
 surface_material_override/0 = ExtResource("3_nk3rq")
 surface_material_override/1 = ExtResource("2_6i10y")
 surface_material_override/2 = ExtResource("2_6i10y")
 
 [node name="spooky_body" parent="Armature/Skeleton3D" index="2"]
+gi_mode = 0
 surface_material_override/0 = ExtResource("3_nk3rq")
 
 [node name="spooky_head-stem" parent="Armature/Skeleton3D" index="3"]
+gi_mode = 0
 surface_material_override/0 = ExtResource("3_nk3rq")
 
 [node name="AnimationPlayer" parent="." index="1"]
